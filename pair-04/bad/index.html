@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宇智波佐助外传 · 残月之痕 — 忍者世界原创视觉故事</title>
+<meta name="description" content="战争结束后，仍有一些伤痕留在黑暗之中。宇智波佐助巡游忍界，追查被抹去名字的村庄『蚀之里』——一部原创视觉小说。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ 残月之痕 · 设计系统 ============ */
+:root{
+  --ink:#07090f;
+  --ink2:#0a0e1a;
+  --ink3:#0d1322;
+  --panel:#111827;
+  --panel2:#151d31;
+  --line:rgba(148,163,200,.14);
+  --line2:rgba(205,210,230,.22);
+  --moon:#dbe4f2;
+  --moon-dim:#9aa7bd;
+  --paper:#e7e2d8;
+  --muted:#8d97ab;
+  --red:#e0434e;
+  --red-deep:#8f1d2b;
+  --red-glow:rgba(224,67,78,.55);
+  --ember:#ff7a59;
+  --blue:#7fd4ff;
+  --blue-dim:#3f6f8f;
+  --violet:#6a5cff;
+  --violet-soft:#8b7cff;
+  --shadow:#000;
+  --sans:"Noto Sans SC",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Noto Serif SC",serif;
+  --jp:"Shippori Mincho","Noto Serif SC",serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--moon);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:2;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--red);color:#fff}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:900;line-height:1.3;letter-spacing:.02em}
+.wrap{width:min(1180px,92%);margin:0 auto;position:relative;z-index:2}
+.sec-pad{padding:120px 0}
+.center{text-align:center}
+
+/* —— 滚动进度 —— */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--red),var(--ember));z-index:120;box-shadow:0 0 12px var(--red-glow)}
+
+/* —— 导航 —— */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(6,7,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:34px;height:34px;flex:0 0 auto}
+.brand-name{font-family:var(--jp);font-weight:700;letter-spacing:.12em;font-size:.86rem;color:var(--paper);line-height:1.2}
+.brand-name small{display:block;font-family:var(--sans);font-weight:400;font-size:.56rem;letter-spacing:.42em;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:34px;list-style:none}
+.nav-links a{font-size:.8rem;letter-spacing:.18em;color:var(--muted);transition:color .3s;position:relative;padding:4px 0}
+.nav-links a:hover{color:var(--moon)}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--red);transition:width .35s var(--ease)}
+.nav-links a:hover::after{width:100%}
+.nav-burger{display:none;background:none;border:1px solid var(--line2);color:var(--moon);width:42px;height:42px;border-radius:8px;cursor:pointer;font-size:1.1rem;line-height:1}
+.nav-mobile{display:none;flex-direction:column;background:rgba(6,7,12,.97);border-bottom:1px solid var(--line);padding:10px 6vw 22px;gap:2px}
+.nav-mobile.open{display:flex}
+.nav-mobile a{padding:12px 4px;color:var(--muted);font-size:.85rem;letter-spacing:.2em;border-bottom:1px solid rgba(148,163,200,.07);transition:color .3s}
+.nav-mobile a:hover{color:var(--red)}
+@media(max-width:900px){.nav-links{display:none}.nav-burger{display:block}}
+
+/* —— 通用滚动显现（默认可见，仅作为增强）—— */
+html.js .reveal{opacity:0;transform:translateY(28px)}
+html.js .reveal.in{animation:rise 1s var(--ease) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+}
+
+/* —— 电影黑边 —— */
+.cinema::before,.cinema::after{content:"";position:fixed;left:0;right:0;height:6px;background:#000;z-index:110;pointer-events:none}
+.cinema::before{top:0}
+.cinema::after{bottom:0}
+@media(max-width:700px){.cinema::before,.cinema::after{height:4px}}
+
+/* ============ 首屏 HERO ============ */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(180deg,#04050b 0%,#060816 38%,#0a1020 72%,#10162b 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(1200px 500px at 72% 18%,rgba(90,110,190,.14),transparent 60%),
+  radial-gradient(900px 600px at 20% 85%,rgba(140,40,60,.10),transparent 60%)}
+.scene-svg{position:absolute;inset:0;width:100%;height:100%}
+.scene-svg .moon{animation:moonbreath 7s ease-in-out infinite}
+@keyframes moonbreath{0%,100%{filter:drop-shadow(0 0 26px rgba(219,228,242,.25))}50%{filter:drop-shadow(0 0 46px rgba(219,228,242,.4))}}
+.crows{position:absolute;inset:0;pointer-events:none}
+.crow{position:absolute;color:#0a0d16;animation:fly linear infinite;opacity:.9}
+.crow svg{width:26px;height:auto}
+@keyframes fly{0%{transform:translate3d(-4vw,-8px,0) rotate(-4deg)}50%{transform:translate3d(48vw,-46px,0) rotate(2deg)}100%{transform:translate3d(104vw,-14px,0) rotate(-3deg)}}
+.fog{position:absolute;left:-20%;right:-20%;bottom:0;height:40%;background:linear-gradient(180deg,transparent,rgba(4,5,11,.65) 78%,rgba(3,4,8,.9));pointer-events:none}
+.hero-content{position:relative;z-index:5;text-align:center;padding:110px 0 70px}
+.hero-kicker{display:inline-flex;align-items:center;gap:14px;font-size:.72rem;letter-spacing:.52em;color:var(--muted);text-indent:.52em;margin-bottom:34px}
+.hero-kicker::before,.hero-kicker::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--red));}
+.hero-kicker::after{background:linear-gradient(90deg,var(--red),transparent)}
+.hero-ver{position:absolute;left:3.4vw;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:var(--jp);letter-spacing:.6em;font-size:.72rem;color:rgba(219,228,242,.4);text-shadow:0 0 18px rgba(219,228,242,.15)}
+.hero-title{font-size:clamp(3rem,9vw,6.4rem);font-weight:900;letter-spacing:.08em;line-height:1.12;color:var(--paper)}
+.hero-title .sub-line{display:block;font-size:.32em;font-weight:600;letter-spacing:.62em;margin-bottom:.3em;color:var(--muted);text-indent:.62em}
+.hero-title em{font-style:normal;color:transparent;background:linear-gradient(160deg,#ffe9ec,#e0434e 55%,#7a1220);-webkit-background-clip:text;background-clip:text;animation:blood 6s ease-in-out infinite}
+@keyframes blood{0%,100%{filter:drop-shadow(0 0 2px rgba(224,67,78,.25))}50%{filter:drop-shadow(0 0 22px rgba(224,67,78,.5))}}
+.hero-sub{margin:34px auto 0;max-width:640px;color:var(--muted);font-size:clamp(.92rem,1.6vw,1.06rem);letter-spacing:.14em;line-height:2.1}
+.hero-sub b{color:var(--moon);font-weight:500}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 34px;margin-top:30px;font-size:.72rem;letter-spacing:.3em;color:var(--muted)}
+.hero-meta i{font-style:normal;color:var(--red);margin-right:6px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin-top:52px}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 44px;font-family:var(--sans);font-size:.86rem;letter-spacing:.34em;text-indent:.34em;border:1px solid transparent;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s,background .35s,border-color .35s;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(135deg,#c8303c,#8f1d2b);color:#ffe9ea;box-shadow:0 10px 34px -10px var(--red-glow)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 46px -12px var(--red-glow)}
+.btn-ghost{border-color:var(--line2);color:var(--moon);background:rgba(219,228,242,.03)}
+.btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-3px)}
+.hero-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:.62rem;letter-spacing:.5em;text-indent:.5em}
+.hero-scroll .rod{width:1px;height:52px;background:linear-gradient(180deg,var(--muted),transparent);position:relative;overflow:hidden}
+.hero-scroll .rod::after{content:"";position:absolute;top:-30%;left:0;width:100%;height:30%;background:var(--red);animation:rod 2.2s ease-in-out infinite}
+@keyframes rod{0%{top:-30%}100%{top:110%}}
+.hero-haiku{position:absolute;right:3.4vw;bottom:64px;writing-mode:vertical-rl;font-family:var(--jp);font-size:.8rem;letter-spacing:.44em;line-height:2.2;color:rgba(219,228,242,.5);text-align:left}
+.hero-haiku i{font-style:normal;color:var(--red)}
+
+/* —— 通用章节标题系统 —— */
+.chap-title-card{position:relative;padding:70px 0;background:var(--ink);overflow:hidden;text-align:center}
+.chap-title-card::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 200px at 50% 0%,rgba(224,67,78,.07),transparent 70%)}
+.chap-no{font-family:var(--jp);font-size:.82rem;letter-spacing:.9em;text-indent:.9em;color:var(--red);margin-bottom:10px;text-shadow:0 0 22px var(--red-glow)}
+.chap-title{font-size:clamp(1.7rem,4.6vw,3rem);color:var(--paper);letter-spacing:.16em}
+.chap-title .jp{display:block;font-family:var(--jp);font-weight:600;font-size:.42em;letter-spacing:.7em;color:var(--muted);margin-top:14px;text-indent:.7em}
+.chap-rule{width:80px;height:1px;margin:26px auto 0;background:linear-gradient(90deg,transparent,var(--red),transparent)}
+.ghost{position:absolute;user-select:none;pointer-events:none;color:rgba(219,228,242,.028);font-family:var(--jp);font-weight:700;line-height:1;z-index:0}
+
+/* 竖排引用 */
+.vertic{writing-mode:vertical-rl;font-family:var(--jp)}
+.quote-line{font-family:var(--serif);font-weight:600;letter-spacing:.3em;line-height:2.4;color:var(--paper)}
+
+/* —— 叙事正文 —— */
+.prose p{margin:1.6em 0;color:#b7c0d1;font-size:1rem;letter-spacing:.06em}
+.prose p.lead{color:var(--paper);font-size:1.08rem;font-weight:400}
+.prose p.drop::first-letter{font-family:var(--serif);font-size:3.1em;float:left;line-height:.9;padding-right:14px;color:var(--red);font-weight:900}
+.say{margin:1.9em 0;padding-left:20px;border-left:2px solid var(--red);color:#cdd4e1}
+.say .who{display:block;font-size:.7rem;letter-spacing:.3em;color:var(--red);margin-bottom:2px}
+.say .txt{font-family:var(--serif);font-size:1.02rem;letter-spacing:.08em}
+.nar{color:var(--muted);font-size:.92rem;letter-spacing:.12em;margin:1.5em 0}
+.nar .k{color:var(--red);font-size:.7rem;letter-spacing:.3em;margin-right:8px}
+
+/* ============ 序章 ============ */
+.prologue{position:relative;background:var(--ink2);overflow:hidden}
+.prologue .ghost{font-size:clamp(10rem,28vw,26rem);top:-2rem;right:-2rem}
+.prologue-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.prologue-letter{position:relative;background:linear-gradient(160deg,rgba(219,228,242,.05),rgba(219,228,242,.015));border:1px solid var(--line);padding:44px 40px}
+.prologue-letter::before{content:"";position:absolute;top:-1px;left:-1px;width:70px;height:70px;border-top:2px solid var(--red);border-left:2px solid var(--red);opacity:.7}
+.prologue-letter .seal{position:absolute;top:34px;right:34px;width:56px;height:56px;color:var(--red);opacity:.85}
+.letter-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:16px;border-bottom:1px dashed var(--line2)}
+.letter-head .l1{font-size:.68rem;letter-spacing:.34em;color:var(--muted)}
+.letter-head .l2{font-size:.68rem;letter-spacing:.2em;color:var(--red)}
+.prologue-letter p{color:#aeb8cc;font-size:.94rem;letter-spacing:.08em;margin:.9em 0}
+.prologue-letter .sign{text-align:right;font-family:var(--jp);letter-spacing:.3em;color:var(--paper);font-size:.9rem}
+.route{position:relative;padding:30px 0 10px}
+.route svg{width:100%;height:auto}
+.route-label{position:absolute;font-size:.6rem;letter-spacing:.3em;color:var(--muted)}
+.stamp{display:inline-block;font-family:var(--serif);color:var(--red);border:1px solid var(--red);padding:2px 12px;font-size:.7rem;letter-spacing:.3em;transform:rotate(-6deg);opacity:.8;margin-left:10px}
+</style>
+</head>
+<body class="cinema">
+<div id="progress"></div>
+
+<!-- ================= 导航 ================= -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 L38 13 L38 27 L20 38 L2 27 L2 13 Z" fill="none" stroke="#e0434e" stroke-width="1.4" opacity=".9"/><path d="M20 10 L29 15.5 L29 24.5 L20 30 L11 24.5 L11 15.5 Z" fill="#e0434e" opacity=".92"/><circle cx="20" cy="20" r="2.1" fill="#07090f"/></svg>
+      <span class="brand-name">残月之痕<small>UCHIHA GAIDEN</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#prologue">序章</a></li>
+      <li><a href="#ch1">第一章</a></li>
+      <li><a href="#ch2">第二章</a></li>
+      <li><a href="#ch3">第三章</a></li>
+      <li><a href="#ch4">第四章</a></li>
+      <li><a href="#cast">人物</a></li>
+      <li><a href="#ch6">终战</a></li>
+      <li><a href="#ending">终章</a></li>
+    </ul>
+    <button class="nav-burger" id="burger" aria-label="菜单" aria-expanded="false"><span>☰</span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#prologue">序章 · 旅人</a>
+    <a href="#ch1">第一章 · 蚀之里</a>
+    <a href="#ch2">第二章 · 雨夜瞳火</a>
+    <a href="#ch3">第三章 · 镜湖遗构</a>
+    <a href="#ch4">第四章 · 团扇遗刻</a>
+    <a href="#cast">幕间 · 登场者</a>
+    <a href="#ch5">第五章 · 亡灵之丘</a>
+    <a href="#ch6">第六章 · 残月之战</a>
+    <a href="#ending">终章 · 黎明</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <!-- 夜空手绘场景：残月 · 崩塔 · 飞鸦 · 流云 -->
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id="moonG" cx="50%" cy="46%" r="50%">
+        <stop offset="0%" stop-color="#f4f7fd"/><stop offset="46%" stop-color="#d4ddef"/><stop offset="78%" stop-color="#9aa7c4"/><stop offset="100%" stop-color="#5c6682"/>
+      </radialGradient>
+      <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#04050b"/><stop offset="45%" stop-color="#0a0f1e"/><stop offset="100%" stop-color="#141c34"/>
+      </linearGradient>
+      <filter id="soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="softer" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>
+    </defs>
+    <rect width="1600" height="900" fill="url(#skyG)"/>
+    <!-- 星 -->
+    <g fill="#cfd8ea" opacity=".8">
+      <circle cx="90" cy="120" r="1.3"/><circle cx="240" cy="70" r="1"/><circle cx="420" cy="150" r="1.5"/>
+      <circle cx="560" cy="60" r="1"/><circle cx="720" cy="180" r="1.2"/><circle cx="990" cy="90" r="1.4"/>
+      <circle cx="1200" cy="60" r="1"/><circle cx="1400" cy="140" r="1.6"/><circle cx="1500" cy="60" r="1"/>
+      <circle cx="150" cy="300" r=".9"/><circle cx="330" cy="240" r="1.1"/><circle cx="660" cy="300" r=".8"/>
+      <circle cx="880" cy="220" r="1"/><circle cx="1120" cy="270" r="1.2"/><circle cx="1330" cy="320" r=".9"/>
+      <circle cx="70" cy="420" r="1"/><circle cx="1520" cy="380" r="1.2"/><circle cx="1470" cy="240" r=".8"/>
+    </g>
+    <!-- 月亮 -->
+    <g class="moon">
+      <circle cx="1160" cy="220" r="150" fill="url(#moonG)"/>
+      <g fill="#8692b0" opacity=".5">
+        <ellipse cx="1110" cy="180" rx="26" ry="20" transform="rotate(-18 1110 180)"/>
+        <ellipse cx="1215" cy="260" rx="20" ry="14" transform="rotate(12 1215 260)"/>
+        <ellipse cx="1175" cy="150" rx="13" ry="17" transform="rotate(-30 1175 150)"/>
+        <ellipse cx="1085" cy="250" rx="12" ry="9"/>
+        <ellipse cx="1230" cy="180" rx="8" ry="11"/>
+      </g>
+      <!-- 缺口 · 残月之痕 -->
+      <path d="M1190 90 a150 150 0 0 1 0 260 a118 118 0 0 1 0 -260 z" fill="#04050b" opacity=".92"/>
+      <path d="M1138 96 a150 150 0 0 0 0 248 a60 60 0 0 0 0 -248 z" fill="#0a0f1e" opacity=".5" filter="url(#soft)"/>
+    </g>
+    <!-- 云 -->
+    <g fill="#141b31" opacity=".9">
+      <path d="M-60 240 q80 -40 170 -6 q80 -46 170 0 q70 -24 150 6 l0 40 l-490 0 z"/>
+      <path d="M1120 380 q90 -44 190 -8 q70 -30 150 2 l0 34 l-340 0 z"/>
+    </g>
+    <g fill="#0d1426" opacity=".7">
+      <path d="M420 330 q90 -36 180 -4 q60 -26 150 -2 l0 30 l-330 0 z"/>
+    </g>
+    <!-- 远山与废墟 -->
+    <g fill="#080b14">
+      <path d="M0 620 l120 -110 90 60 130 -140 120 90 150 -70 90 46 120 -84 180 120 130 -70 160 96 110 -40 100 60 0 90 l-1500 0 z"/>
+    </g>
+    <g fill="#0b0f1c">
+      <path d="M0 700 l100 -60 90 30 120 -80 170 60 110 -50 160 70 130 -40 120 40 150 -60 90 40 110 -30 90 40 60 -20 0 130 l-1500 0 z"/>
+    </g>
+    <!-- 崩毁塔影 -->
+    <g fill="#0a0e1a">
+      <path d="M180 640 h70 v-120 l-14 -60 -14 60 z"/>
+      <path d="M176 700 h78 v-48 h-78 z"/>
+      <path d="M300 700 h-6 v-150 l-12 30 8 40 -8 34 10 26 v20 h8 z" opacity=".9"/>
+    </g>
+    <g fill="#0d1322">
+      <path d="M1330 660 h80 l-14 -170 -52 130 z"/>
+      <path d="M1340 700 h60 v-46 h-60 z"/>
+      <path d="M1260 700 h40 v-90 q-12 -8 -26 -2 l-14 40 z"/>
+    </g>
+    <!-- 地面剪影与树木 -->
+    <g fill="#06070d">
+      <rect x="0" y="806" width="1600" height="94"/>
+      <path d="M0 806 q200 -46 420 -16 q220 30 440 -20 q260 -60 480 -10 q180 34 260 8 l0 40 l-1600 0 z" fill="#080b14"/>
+    </g>
+    <g fill="#05060b">
+      <path d="M120 760 q18 -90 34 -150 q8 60 26 140 z"/>
+      <path d="M1250 780 q16 -70 30 -120 q8 50 24 110 z"/>
+      <path d="M1420 740 q20 -100 38 -170 q8 70 26 158 z"/>
+      <path d="M520 780 q14 -56 24 -92 q7 40 20 86 z"/>
+    </g>
+    <g stroke="#10162a" stroke-width="2" opacity=".8">
+      <path d="M600 806 q0 -40 -10 -80 M600 806 q0 -30 -26 -60 M600 806 q0 -26 20 -52"/>
+    </g>
+    <!-- 月光在废墟上的微光 -->
+    <g stroke="#c9d4ea" stroke-width="1.4" opacity=".3" filter="url(#soft)">
+      <path d="M1120 640 v120"/><path d="M1150 620 v60"/><path d="M1106 700 v90"/>
+      <path d="M1090 806 l70 -40"/>
+    </g>
+    <!-- 远方灯火 -->
+    <g fill="#ff9d7a" opacity=".85">
+      <circle cx="1370" cy="600" r="1.6"/><circle cx="1382" cy="612" r="1.3"/><circle cx="1356" cy="614" r="1"/>
+      <circle cx="210" cy="610" r="1.4"/><circle cx="222" cy="620" r="1.1"/><circle cx="196" cy="622" r=".9"/>
+    </g>
+  </svg>
+
+  <!-- 飞鸦（CSS 动画） -->
+  <div class="crows" aria-hidden="true">
+    <span class="crow" style="top:16%;animation-duration:21s;animation-delay:-3s">
+      <svg viewBox="0 0 40 24"><path d="M2 14 Q14 2 20 12 Q24 4 38 10 Q26 6 20 16 Q16 22 10 20 Q5 24 2 14 Z" fill="#0c0f19"/></svg>
+    </span>
+    <span class="crow" style="top:28%;animation-duration:26s;animation-delay:-12s">
+      <svg viewBox="0 0 40 24"><path d="M2 14 Q14 2 20 12 Q24 4 38 10 Q26 6 20 16 Q16 22 10 20 Q5 24 2 14 Z" fill="#0c0f19"/></svg>
+    </span>
+    <span class="crow" style="top:9%;animation-duration:33s;animation-delay:-21s;transform:scale(.7)">
+      <svg viewBox="0 0 40 24"><path d="M2 14 Q14 2 20 12 Q24 4 38 10 Q26 6 20 16 Q16 22 10 20 Q5 24 2 14 Z" fill="#0b0e17"/></svg>
+    </span>
+  </div>
+  <div class="fog" aria-hidden="true"></div>
+
+  <span class="hero-ver" aria-hidden="true">戦争は終わった、それでも——</span>
+
+  <div class="hero-content">
+    <div class="hero-kicker reveal">忍者世界外传 · 原创同人视觉小说</div>
+    <h1 class="hero-title reveal">
+      <span class="sub-line">さすけがいでん</span>
+      宇智波佐助外传：<em>残月之痕</em>
+    </h1>
+    <p class="hero-sub reveal">战争结束了，但有些伤痕仍然留在黑暗之中。<br>他独自离开木叶，走在无人知晓的路上——<br>直到那个<b>三年没有天亮</b>的村子，出现在他的视野尽头。</p>
+    <div class="hero-meta reveal">
+      <span><i>◆</i>战后第二年</span>
+      <span><i>◆</i>蚀之里 · 月读川上游</span>
+      <span><i>◆</i>全七章</span>
+    </div>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="#prologue">开始阅读<span>→</span></a>
+      <a class="btn btn-ghost" href="#ch6">直接前往 · 残月之战</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true"><span class="rod"></span><span>向下滚动</span></div>
+  <div class="hero-haiku" aria-hidden="true">月は欠けても<br>夜は歩みを止めない——<br>ただ、<i>残痕のように</i></div>
+</header>
+<!-- ================= 章节索引条 ================= -->
+<div class="chap-rail" id="rail">
+  <div class="wrap rail-in">
+    <span class="rail-cap">目 录</span>
+    <ol class="rail-list" id="railList"></ol>
+  </div>
+</div>
+<style>
+.chap-rail{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(8,10,17,.7);position:relative}
+.rail-in{display:flex;align-items:center;gap:26px;padding:14px 0;overflow-x:auto;scrollbar-width:none}
+.rail-in::-webkit-scrollbar{display:none}
+.rail-cap{flex:0 0 auto;font-family:var(--jp);font-size:.68rem;letter-spacing:.4em;color:var(--red)}
+.rail-list{list-style:none;display:flex;gap:6px 4px;flex:1;white-space:nowrap}
+.rail-list a{display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;font-size:.72rem;letter-spacing:.12em;color:var(--muted);border:1px solid transparent;transition:all .3s}
+.rail-list a i{font-style:normal;font-family:var(--jp);font-size:.62rem;color:var(--red-deep);transition:color .3s}
+.rail-list a:hover{color:var(--moon);border-color:var(--line2)}
+.rail-list a:hover i{color:var(--red)}
+</style>
+
+<!-- ================= 序章 · 旅人 ================= -->
+<section class="prologue sec-pad" id="prologue">
+  <span class="ghost" aria-hidden="true">旅</span>
+  <div class="wrap">
+    <div class="chap-title-card" style="padding-top:0">
+      <div class="chap-no">序 章 · 第零夜</div>
+      <h2 class="chap-title">旅人<span class="jp">TABIBITO — ひとり、夜道をゆく</span></h2>
+      <div class="chap-rule"></div>
+    </div>
+    <div class="prologue-grid">
+      <div class="reveal">
+        <div class="prologue-letter">
+          <svg class="seal" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 3 L57 16.5 L57 43.5 L30 57 L3 43.5 L3 16.5 Z" fill="none" stroke="#8f1d2b" stroke-width="1.6"/><path d="M30 14 L44 21.5 L44 38.5 L30 46 L16 38.5 L16 21.5 Z" fill="#e0434e" opacity=".85"/><circle cx="30" cy="30" r="2.6" fill="#111827"/></svg>
+          <div class="letter-head">
+            <span class="l1">木叶隐 · 战后文书</span>
+            <span class="l2">火影直辖 · 机密</span>
+          </div>
+          <p>佐助：</p>
+          <p>月读川上游的「蚀之里」，三年来与外界断绝一切往来。暗部两度潜入，均回报：<b style="color:#e7e2d8">那里只有废墟，没有人。</b></p>
+          <p>可派去的联络忍一个也没有回来。情报班在最后一次传讯里只留下半句——</p>
+          <p style="color:#e0434e;font-weight:500">「……月亮。他们头顶的月亮，是红色的——」</p>
+          <p>你不必回来。但这件事，大概只有你的眼睛看得见。</p>
+          <p class="sign">—— 木叶 · 故人</p>
+        </div>
+        <div class="stamp" style="margin-top:18px">已阅 · 独自出发</div>
+      </div>
+      <div class="reveal">
+        <div class="route">
+          <svg viewBox="0 0 480 260" aria-hidden="true" style="border:1px solid var(--line);background:linear-gradient(160deg,#0b101f,#0a0c15);padding:10px">
+            <defs>
+              <pattern id="hash" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="7" stroke="#232c44" stroke-width="1.4"/>
+              </pattern>
+              <linearGradient id="river" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#2d4665"/><stop offset="100%" stop-color="#5d8fb5"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="480" height="260" fill="url(#hash)" opacity=".4"/>
+            <!-- 月读川 -->
+            <path d="M18 150 Q90 120 150 148 T300 138 T462 158" fill="none" stroke="url(#river)" stroke-width="7" opacity=".6"/>
+            <path d="M18 158 Q90 128 150 156 T300 146 T462 166" fill="none" stroke="#1a2b42" stroke-width="10" opacity=".5"/>
+            <!-- 山路 -->
+            <path d="M60 210 Q150 160 210 190 T360 200" fill="none" stroke="#3a4458" stroke-width="1.6" stroke-dasharray="5 5"/>
+            <!-- 木叶 -->
+            <circle cx="52" cy="56" r="13" fill="#1c273c" stroke="#7c8db0" stroke-width="1"/>
+            <text x="52" y="46" text-anchor="middle" fill="#8d97ab" font-size="11" font-family="Noto Serif SC,serif">木叶</text>
+            <text x="52" y="84" text-anchor="middle" fill="#55617c" font-size="8.5" letter-spacing="2">—— 出发</text>
+            <!-- 雨之驿站 -->
+            <circle cx="235" cy="52" r="9" fill="#141b2e" stroke="#6b5f8f" stroke-width="1"/>
+            <text x="235" y="76" text-anchor="middle" fill="#8d97ab" font-size="9" font-family="Noto Serif SC,serif">雨驿站</text>
+            <!-- 蚀之里 -->
+            <circle cx="398" cy="118" r="16" fill="#57151e" stroke="#e0434e" stroke-width="1.6"/>
+            <circle cx="398" cy="118" r="5.4" fill="#e0434e" opacity=".9"/>
+            <text x="398" y="154" text-anchor="middle" fill="#e0434e" font-size="11" font-family="Noto Serif SC,serif">蚀之里</text>
+            <text x="398" y="170" text-anchor="middle" fill="#8d97ab" font-size="8" letter-spacing="1.5">月读川上游</text>
+            <!-- 路线虚线 -->
+            <path d="M62 66 Q140 70 220 58 T340 96 T384 116" fill="none" stroke="#c8303c" stroke-width="1.5" stroke-dasharray="3 4" marker-end="url(#arrow)"/>
+            <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#c8303c"/></marker></defs>
+            <!-- 断裂标记 -->
+            <g stroke="#8f1d2b" stroke-width="1.6" opacity=".9">
+              <line x1="352" y1="96" x2="360" y2="108"/><line x1="356" y1="96" x2="364" y2="108"/>
+            </g>
+            <text x="318" y="120" fill="#a0373f" font-size="8" letter-spacing="1">—— 通讯中断 ——</text>
+          </svg>
+          <div class="route-label" style="top:-2px;right:0">月读川 · 上游流域</div>
+        </div>
+      </div>
+    </div>
+    <div class="prose" style="max-width:820px;margin:70px auto 0">
+      <p class="lead reveal">那是战后第二年，深秋。</p>
+      <p class="drop reveal">宇智波佐助已经习惯了独自赶路。衣领竖起，斗笠压低，雨从雨之国一路跟到川之国，又从川之国追进这片无名的山地——仿佛连天气都在试探他的耐心。他没有换衣，没有停步，只在驿站用一枚苦无换了一袋干粮和一封早已过期的情报。</p>
+      <p class="reveal">情报上说，蚀之里原本有四百余口人。村子以制墨为生，墨色深黑，据说掺了月读川上游的石粉，写出来的字在月光下微微发亮，被称为「月墨」。战争最烈时，它偏居一隅，不曾被战火烧到门前。</p>
+      <p class="reveal">然后某一天，它就安静地——消失了。</p>
+      <p class="nar reveal"><span class="k">◆</span>不是被毁。是被「抹掉」。像有人在纸上，把那个名字连同它脚下的一小块土地，一起涂成了夜色。</p>
+      <p class="reveal">佐助停下脚步时，天色将暗。山道尽头，他看见第一根倾斜的屋梁。再往前，是成片坍塌的屋檐，蒙着经年的灰，寂静得像一座被遗忘的墓碑群。他解开斗笠，月色正从云缝里漏下来，把废墟镀成一片苍白。</p>
+      <p class="say reveal"><span class="who">佐助</span><span class="txt">「……果然，是幻术。」</span></p>
+      <p class="reveal">写轮眼倒映出废墟——在猩红的视野里，屋舍完好、街巷完整，连晾衣绳上的和服都还在风里轻轻摆动。可那些「完好」的屋舍里，没有一盏灯，没有一个人影。</p>
+      <p class="reveal">他蹲下身，指尖拂过地面。灰烬之下，石板温热——像是什么巨大的东西，刚刚还从这里经过。</p>
+      <p class="nar reveal"><span class="k">◆</span>村子的表象之下，另有黑暗在呼吸。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 第一章 · 蚀之里 ================= -->
+<section class="ch-sec" id="ch1">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 一 章</div>
+    <h2 class="chap-title">蚀之里<span class="jp">KUISHI NO SATO — 消えた村</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 全幅场景：荒村剪影 + 巨大红月投影 -->
+  <div class="scene-fs" aria-hidden="true">
+    <svg class="scene-fs-svg" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="redmoon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff7a84"/><stop offset="55%" stop-color="#d02436"/><stop offset="100%" stop-color="#5c0d18"/>
+        </radialGradient>
+        <linearGradient id="dust" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a0d18"/><stop offset="100%" stop-color="#160f1c"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="620" fill="url(#dust)"/>
+      <circle cx="800" cy="230" r="150" fill="url(#redmoon)" opacity=".9"/>
+      <g fill="none" stroke="#3d0f18" stroke-width="1" opacity=".7">
+        <circle cx="800" cy="230" r="182"/><circle cx="800" cy="230" r="214"/>
+      </g>
+      <g fill="#0d101d" opacity=".55">
+        <path d="M0 470 l140 -80 120 40 130 -90 150 60 120 -70 140 80 130 -50 160 70 130 -40 100 30 80 -20 0 60 l-1500 0 z"/>
+      </g>
+      <g fill="#0a0d17">
+        <path d="M0 520 l160 -60 120 40 150 -70 140 60 130 -40 160 60 150 -60 120 40 130 -30 90 20 0 50 l-1500 0 z"/>
+      </g>
+      <!-- 废屋剪影 -->
+      <g fill="#070910">
+        <path d="M140 620 l-6 -150 l60 -34 58 34 -4 150 z"/>
+        <path d="M148 470 l52 -30 50 30 z"/>
+        <path d="M300 620 l-4 -120 l-40 -22 0 -30 l46 26 52 -26 0 30 -44 22 4 120 z"/>
+        <path d="M960 620 l-5 -170 l-70 -38 0 -36 l80 44 86 -44 0 36 -76 38 5 170 z"/>
+        <path d="M1170 620 l-3 -110 52 -26 50 24 -3 112 z"/>
+        <path d="M1290 620 l-5 -140 l-54 -30 0 -28 l60 32 64 -30 0 28 -54 28 3 140 z"/>
+      </g>
+      <!-- 斜木与荒草 -->
+      <g stroke="#141a2b" stroke-width="3" opacity=".9">
+        <line x1="700" y1="520" x2="672" y2="588"/><line x1="710" y1="520" x2="742" y2="590"/>
+        <line x1="430" y1="560" x2="416" y2="606"/><line x1="1340" y1="560" x2="1360" y2="610"/>
+      </g>
+      <!-- 红月光束 -->
+      <g fill="#d02436" opacity=".05">
+        <polygon points="800,230 620,620 660,620"/><polygon points="800,230 940,620 1000,620"/>
+      </g>
+      <!-- 飘浮的纸片（村民最后的生活痕迹） -->
+      <g fill="#cfc7b4" opacity=".5">
+        <rect x="430" y="420" width="12" height="15" transform="rotate(12 436 427)"/>
+        <rect x="1060" y="380" width="12" height="15" transform="rotate(-18 1066 387)"/>
+        <rect x="560" y="350" width="9" height="12" transform="rotate(34 564 356)"/>
+      </g>
+      <g fill="#5c0d18" opacity=".8">
+        <circle cx="800" cy="94" r="2"/><circle cx="760" cy="80" r="1.4"/><circle cx="846" cy="86" r="1.6"/><circle cx="806" cy="64" r="1.2"/>
+      </g>
+    </svg>
+    <div class="scene-caption">蚀之里 · 三年来被同一个月亮照着</div>
+  </div>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">午夜，他在村子中央的广场上找到了他们。</p>
+    <p class="drop reveal">四百余人横七竖八地躺在石板地上——不对。准确地说，是「维持着」三年前的姿态：有人还攥着没缝完的衣裳，有人臂弯里护着一只空竹篮，有个孩子趴在井沿，手指垂进干涸的井口。所有人都闭着眼，呼吸平缓，像是在做什么漫长的梦。</p>
+    <p class="nar reveal"><span class="k">◆</span>活着。却不在这个世界里。</p>
+    <div class="manga-grid reveal">
+      <div class="cell cell-w">
+        <p>佐助用写轮眼扫过广场。他看见每个人的查克拉都顺着一条极细的线，流向天空——流向那轮悬在废墟正上方的、暗红色的月亮。</p>
+      </div>
+      <div class="cell cell-x">
+        <div class="eye-zoom" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#1a0b0f"/><circle cx="60" cy="60" r="46" fill="#8f1d2b"/><circle cx="60" cy="60" r="30" fill="#e0434e"/><circle cx="60" cy="60" r="17" fill="#1a0b0f"/><path d="M60 14 a46 46 0 0 1 0 92" fill="none" stroke="#1a0b0f" stroke-width="5"/><path d="M60 14 a46 46 0 0 1 0 92" fill="none" stroke="#c8303c" stroke-width="2"/><circle cx="60" cy="60" r="5.6" fill="#0b0d18"/></svg>
+          <span>谁的「瞳」在看着这里</span>
+        </div>
+        <p class="cell-cap">那孩子指尖垂进井口——井里映出的，不是夜空，而是一只缓缓转动的眼睛。</p>
+      </div>
+      <div class="cell">
+        <p>「……不是尾兽，也不是禁术。」他低语，仰头望向那轮红月，「是几百只写轮眼，被强行并联在一起——像一面巨大的镜子。」</p>
+      </div>
+      <div class="cell">
+        <p>镜子映照的，是三年前战争最后一夜的这个村子。村民们的意识被困在里面，一夜一夜，重复同一天。</p>
+      </div>
+    </div>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「把活人做成镜子的人，我不记得忍界有过这样的流派。」</span></p>
+    <p class="reveal">话音未落，广场边缘的一间屋里传来木屐声。一个披着蓑衣的男人走出来，腰间没有佩刀，手上却缠满了封印符。他隔着雨丝看向佐助，眼神在佐助的护额与那双黑瞳之间来回。</p>
+    <p class="say reveal"><span class="who">男人</span><span class="txt">「……你是宇智波。这村子的事，不是你该来的地方。走吧——趁那只眼睛还没发现你。」</span></p>
+    <p class="nar reveal"><span class="k">◆</span>他话音未落，天上的红月，忽然朝这个方向，转动了一下。</p>
+  </div>
+</section>
+
+<style>
+/* —— 章节通用场景 —— */
+.scene-fs{position:relative;height:min(62vh,640px);overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0a0d18}
+.scene-fs-svg{position:absolute;inset:0;width:100%;height:100%}
+.scene-caption{position:absolute;right:4vw;bottom:18px;font-size:.66rem;letter-spacing:.3em;color:rgba(219,228,242,.55);background:rgba(5,6,10,.6);padding:6px 14px;border:1px solid var(--line)}
+.prose-narrow{max-width:820px;margin:0 auto;padding:70px 0 100px}
+/* 漫画分镜 */
+.manga-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin:40px 0}
+.manga-grid .cell{background:linear-gradient(165deg,rgba(219,228,242,.045),rgba(219,228,242,.012));border:1px solid var(--line);padding:22px 22px 18px;position:relative}
+.manga-grid .cell p{font-size:.92rem;letter-spacing:.06em;color:#aeb8cc;line-height:1.95;margin:0}
+.manga-grid .cell::before{content:"";position:absolute;left:-1px;top:-1px;width:26px;height:26px;border-top:1px solid var(--red);border-left:1px solid var(--red);opacity:.75}
+.cell-w{grid-column:span 2}
+.cell-cap{font-size:.72rem!important;color:var(--muted)!important;margin-top:10px!important;font-family:var(--sans)}
+@media(max-width:760px){.manga-grid{grid-template-columns:1fr}.cell-w{grid-column:span 1}}
+.eye-zoom{display:flex;flex-direction:column;align-items:center;gap:8px;margin:0 auto 6px;max-width:180px}
+.eye-zoom svg{width:112px;height:112px;animation:eyePulse 4s ease-in-out infinite}
+@keyframes eyePulse{0%,100%{filter:drop-shadow(0 0 4px rgba(224,67,78,.35))}50%{filter:drop-shadow(0 0 20px rgba(224,67,78,.7))}}
+.eye-zoom span{font-size:.6rem;letter-spacing:.26em;color:var(--muted);text-align:center}
+/* 分镜小格 */
+.frame-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:40px 0}
+.frame-2 .f{padding:20px;border:1px solid var(--line);background:rgba(219,228,242,.03)}
+.frame-2 .f .lab{font-family:var(--jp);font-size:.6rem;letter-spacing:.34em;color:var(--red);margin-bottom:8px}
+.frame-2 .f p{font-size:.9rem;color:#aeb8cc;margin:0;line-height:2}
+@media(max-width:760px){.frame-2{grid-template-columns:1fr}}
+/* 黑屏转场 */
+.black-gap{height:60px;background:linear-gradient(180deg,transparent,#000 20%,#000 80%,transparent)}
+.black-gap.tall{height:110px}
+/* 章节幕间题字 */
+.interlude{position:relative;background:linear-gradient(180deg,#000,#0a0d18 40%,#0d0f1a 60%,#000);padding:110px 0;text-align:center;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.interlude .vertic{position:absolute;right:6vw;top:50%;transform:translateY(-50%);font-size:2.4rem;color:rgba(224,67,78,.14);line-height:1.5}
+.interlude h3{font-size:clamp(1.3rem,3vw,1.9rem);letter-spacing:.5em;color:var(--paper);margin-bottom:14px;text-indent:.5em}
+.interlude .sub{color:var(--muted);font-size:.8rem;letter-spacing:.34em}
+.interlude .sub em{font-style:normal;color:var(--red)}
+/* 竖排剧词 */
+.quote-scene{display:flex;gap:60px;justify-content:center;align-items:center;padding:26px 0}
+.quote-scene .vertic{font-size:1.05rem;color:#cdd4e1;letter-spacing:.34em;line-height:2.4}
+.quote-scene .side{max-width:300px;font-size:.88rem;color:var(--muted);letter-spacing:.08em;line-height:2}
+@media(max-width:700px){.quote-scene{flex-direction:column;gap:26px}}
+</style>
+
+<!-- ================= 第二章 · 雨夜瞳火 ================= -->
+<section class="ch-sec" id="ch2">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 二 章</div>
+    <h2 class="chap-title">雨夜瞳火<span class="jp">AMAYO NO HITOMI — 翳る眼</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 全幅雨夜场景 -->
+  <div class="rain-scene" aria-hidden="true">
+    <svg class="rain-bg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#060a16"/><stop offset="60%" stop-color="#0b1222"/><stop offset="100%" stop-color="#05070c"/>
+        </linearGradient>
+      </defs>
+      <rect width="1600" height="600" fill="url(#night)"/>
+      <!-- 湿漉的反光地面 -->
+      <rect x="0" y="470" width="1600" height="130" fill="#04060a"/>
+      <g stroke="#1b263d" stroke-width="2.4" opacity=".9">
+        <path d="M0 500 q80 -14 160 2 t160 -2 160 6 160 -8 160 4 160 -6 160 8 160 -4 160 2 160 -6 0 14 l-1600 0 z"/>
+      </g>
+      <!-- 两道身影（对峙剪影） -->
+      <g fill="#06080f">
+        <ellipse cx="680" cy="540" rx="150" ry="16" opacity=".6"/>
+        <ellipse cx="1010" cy="540" rx="150" ry="16" opacity=".6"/>
+      </g>
+      <g transform="translate(600,330)">
+        <ellipse cx="0" cy="210" rx="34" ry="8" fill="#04050a"/>
+        <rect x="-22" y="24" width="44" height="120" rx="20" fill="#080b15"/>
+        <circle cx="0" cy="-10" r="30" fill="#0b0e1a"/>
+        <path d="M-16 -44 l0 -34 l32 0 l0 34 z" fill="#0d1120"/>
+      </g>
+      <g transform="translate(1000,330) scale(-1,1)">
+        <ellipse cx="0" cy="210" rx="34" ry="8" fill="#04050a"/>
+        <rect x="-24" y="24" width="48" height="126" rx="20" fill="#080b15"/>
+        <circle cx="0" cy="-10" r="32" fill="#0b0e1a"/>
+        <path d="M-18 -46 l-6 -30 l30 -6 l12 24 z" fill="#0d1120"/>
+        <path d="M6 -70 l14 -26 l22 8 l-4 26 z" fill="#0d1120" opacity=".8"/>
+      </g>
+      <!-- 对峙者眼中的猩红 -->
+      <g>
+        <circle cx="590" cy="350" r="3" fill="#e0434e" opacity=".9"/>
+        <circle cx="612" cy="350" r="3" fill="#e0434e" opacity=".9"/>
+        <circle cx="995" cy="348" r="2.6" fill="#ff7a59" opacity=".85"/>
+        <circle cx="1008" cy="348" r="2.6" fill="#ff7a59" opacity=".85"/>
+      </g>
+    </svg>
+    <!-- 雨丝层 -->
+    <div class="rain-layer"></div>
+    <div class="rain-layer rain-fast"></div>
+    <!-- 闪电 -->
+    <div class="bolt" aria-hidden="true">
+      <svg viewBox="0 0 200 420" preserveAspectRatio="none">
+        <path d="M110 0 L74 180 L118 168 L66 420 L150 150 L102 162 L148 0 Z" fill="#dbe4f2" opacity=".8"/>
+      </svg>
+    </div>
+    <div class="scene-caption">驿站旧址 · 雷雨初歇的瞬间</div>
+  </div>
+  <style>
+  .rain-scene{position:relative;height:min(58vh,600px);overflow:hidden;background:#060a16}
+  .rain-bg{position:absolute;inset:0;width:100%;height:100%}
+  .rain-layer{position:absolute;inset:-40px 0 0;pointer-events:none;background-image:
+    repeating-linear-gradient(115deg,transparent 0 38px,rgba(200,215,245,.14) 38px 39px,transparent 39px 78px);
+    animation:rainFall .9s linear infinite;opacity:.75}
+  .rain-layer.rain-fast{background-image:repeating-linear-gradient(115deg,transparent 0 22px,rgba(200,215,245,.1) 22px 23px,transparent 23px 46px);animation-duration:.55s;opacity:.5}
+  @keyframes rainFall{0%{transform:translateY(-80px)}100%{transform:translateY(120px)}}
+  .bolt{position:absolute;top:0;left:46%;width:200px;height:420px;opacity:0;pointer-events:none;filter:drop-shadow(0 0 24px rgba(219,228,242,.8))}
+  .bolt svg{width:100%;height:100%}
+  body.flash .bolt{animation:blitz 3.6s steps(1) infinite}
+  @keyframes blitz{0%,86%{opacity:0}87%{opacity:.95}88%{opacity:.05}89%{opacity:.8}90%,100%{opacity:0}}
+  body.flash{animation:skyflash 3.6s steps(1) infinite}
+  @keyframes skyflash{0%,86%{filter:none}87%{filter:brightness(1.5)}89%{filter:none}90%,100%{filter:none}}
+  @media(max-width:760px){.bolt{left:30%;width:120px;height:280px}}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">雨下到第二夜，他们在驿站遗址里短暂对峙。</p>
+    <p class="drop reveal">蓑衣男人自称「御堂」，是蚀之里的医师。他说，三年前那场战争快结束时，一支溃败的残军退进山里，为首的伤员浑身缠满绷带，唯独露出的那只眼睛——是写轮眼。那不是宇智波的眼睛。那是被人生生挖出、再装进他眼眶里的眼睛。</p>
+    <p class="nar reveal"><span class="k">◆</span>「他自称『影向』。他说，他要替所有在战争里失去眼睛的人，建一座『看得见和平』的祠堂。」</p>
+    <p class="reveal">雨声里，佐助听见御堂的呼吸停了一瞬。</p>
+    <div class="frame-2 reveal">
+      <div class="f"><span class="lab">—— 医师 · 御堂</span><p>「影向收留了附近村子的战争孤儿。他教他们用那只眼睛『替死者守夜』——起初，只是让睡不着的孩子安睡。直到他把全村人请进那个梦里，说那里没有战争，没有墓碑。」</p></div>
+      <div class="f"><span class="lab">—— 佐助</span><p>「所以蚀之里的四百人，是他请进去的『客人』。而三年来每一个走进村子的外人——」他顿了顿，「是被请去当『燃料』的。」</p></div>
+    </div>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「镜子里总要有光才能照出人来。他需要的，是活人的眼睛——用来喂那面镜子。」</span></p>
+    <p class="reveal">话音未落，雨幕忽然静止。天地之间所有水珠悬在半空，像被谁按住了时间的开关。御堂脸色骤白，猛地回头——驿站深处，那口枯井里传来一声极轻的、婴儿似的呜咽。</p>
+    <div class="quote-scene reveal">
+      <span class="vertic">雨は、人の<em>眼</em>を選ぶ——</span>
+      <p class="side">御堂低声道：「影向说过一句话：雨会选择人的眼睛。被雨选中的人，从此再也分不清——自己在看，还是被看。」</p>
+    </div>
+    <p class="nar reveal"><span class="k">◆</span>写轮眼骤然亮起。这一次，佐助看见的不是幻术——井底蜷着一团被绷带裹住的、还在微微起伏的影子。那影子的额头上，嵌着一颗血红的、缓缓转动的眼。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「……你也曾被『选中』过。」</span></p>
+  </div>
+</section>
+
+<div class="black-gap tall" aria-hidden="true"></div>
+
+<!-- ================= 幕间一 · 写在黑屏之后 ================= -->
+<div class="interlude reveal">
+  <span class="vertic" aria-hidden="true">眼は嘘をつかない。ただ、誰の眼か。</span>
+  <h3>月读川的水声</h3>
+  <p class="sub">第<em>一</em>夜的伤口，到第<em>三</em>夜才开始真正渗血。</p>
+</div>
+<div class="black-gap" aria-hidden="true"></div>
+
+<!-- ================= 第三章 · 镜湖遗构 ================= -->
+<section class="ch-sec" id="ch3">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 三 章</div>
+    <h2 class="chap-title">镜湖遗构<span class="jp">KYOUKO NO IKOU — 水下の眼</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 镜像分镜：一半正常一半倒影 -->
+  <div class="mirror-panel reveal" aria-hidden="true">
+    <div class="mirror-half mh-a">
+      <div class="mirror-text">
+        <p>沿井而下，地底不是土——是水。</p>
+        <p>一面埋在地下的湖。湖面平得像镜，映着倒悬的穹顶。</p>
+        <p>穹顶上，画满了眼睛。</p>
+      </div>
+    </div>
+    <div class="mirror-half mh-b">
+      <div class="mirror-eyes">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <g fill="#8f1d2b" opacity=".9">
+            <path d="M60 90 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="82" cy="90" r="13" fill="#c8303c"/><circle cx="82" cy="90" r="6" fill="#1a0b0f"/><circle cx="82" cy="90" r="2.4" fill="#0b0d18"/>
+            <path d="M160 60 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="182" cy="60" r="13" fill="#c8303c"/><circle cx="182" cy="60" r="6" fill="#1a0b0f"/><circle cx="182" cy="60" r="2.4" fill="#0b0d18"/>
+            <path d="M300 80 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="322" cy="80" r="13" fill="#c8303c"/><circle cx="322" cy="80" r="6" fill="#1a0b0f"/><circle cx="322" cy="80" r="2.4" fill="#0b0d18"/>
+            <path d="M120 160 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="142" cy="160" r="11" fill="#b0353f"/><circle cx="142" cy="160" r="5" fill="#1a0b0f"/><circle cx="142" cy="160" r="2" fill="#0b0d18"/>
+            <path d="M240 140 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="262" cy="140" r="13" fill="#d02436"/><circle cx="262" cy="140" r="6" fill="#1a0b0f"/><circle cx="262" cy="140" r="2.4" fill="#0b0d18"/>
+            <path d="M350 170 q16 -22 36 0 q-20 22 -36 0 z"/><circle cx="368" cy="170" r="9" fill="#8f1d2b"/><circle cx="368" cy="170" r="4" fill="#1a0b0f"/>
+            <path d="M60 230 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="82" cy="230" r="12" fill="#b0353f"/><circle cx="82" cy="230" r="5.5" fill="#1a0b0f"/><circle cx="82" cy="230" r="2" fill="#0b0d18"/>
+            <path d="M210 240 q20 -26 44 0 q-24 26 -44 0 z"/><circle cx="232" cy="240" r="14" fill="#e0434e"/><circle cx="232" cy="240" r="6.5" fill="#1a0b0f"/><circle cx="232" cy="240" r="2.6" fill="#0b0d18"/>
+            <path d="M330 250 q18 -24 40 0 q-22 24 -40 0 z"/><circle cx="350" cy="250" r="10" fill="#c8303c"/><circle cx="350" cy="250" r="4.6" fill="#1a0b0f"/>
+          </g>
+        </svg>
+        <span>穹顶壁画 · 眼睛阵列</span>
+      </div>
+    </div>
+  </div>
+  <style>
+  .mirror-panel{display:grid;grid-template-columns:1fr 1fr;min-height:420px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:#070b14}
+  .mirror-half{position:relative;display:flex;align-items:center;padding:clamp(24px,5vw,64px)}
+  .mh-a{background:linear-gradient(135deg,#0a1220,#070b14);color:#b7c0d1}
+  .mh-b{background:linear-gradient(135deg,#0d0a14,#150a12);border-left:1px solid var(--line);transform:scaleY(-1);filter:brightness(.8)}
+  .mh-b::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(224,67,78,.12),transparent 40%)}
+  .mirror-text p{font-size:clamp(.9rem,1.5vw,1.05rem);letter-spacing:.12em;line-height:2.2;margin:.8em 0}
+  .mirror-eyes{width:100%;text-align:center}
+  .mirror-eyes svg{width:min(340px,86%);margin:0 auto}
+  .mirror-eyes span{font-size:.62rem;letter-spacing:.3em;color:var(--muted)}
+  .mirror-eyes span,.mirror-text p{transform:scaleY(-1)}
+  @media(max-width:760px){.mirror-panel{grid-template-columns:1fr}.mh-b{border-left:none;border-top:1px solid var(--line)}}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">水下有什么东西在发光——不是查克拉。是「记忆」。</p>
+    <p class="drop reveal">佐助闭目，将写轮眼沉入那片水面。光景自湖底翻涌而上，他看见的不是这个村子，而是很多年前的另一个地方：一片燃烧的营帐，一群蒙着眼的孩子被按在地上，有人在他们的眼眶里放入滚烫的、不属于自己的东西。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「……第三次忍界大战的『回收部队』。我听说过。战败者的眼睛被挖出来，当作战利品统一封存——直到战后，被某个人全部偷走。」</span></p>
+    <p class="reveal">他在记忆的尽头看见一双手——修长、干净，戴着医师的白手套，一具一具地打开那些封存的木箱，把数百只眼睛排成阵列，像在摆弄某种乐器。那双手的主人抬起头来。</p>
+    <p class="nar reveal"><span class="k">◆</span>那不是影向的脸。那是御堂的脸——比现在年轻许多，眼神却一样温和。温和得，令人发冷。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「原来如此。你才是第一个『点灯的人』。」</span></p>
+    <p class="reveal">身后传来木屐声。御堂不知何时已站在水边，蓑衣上还挂着雨，脸上挂着那副温和得几乎可以称得上慈悲的神情。他手里捧着一盏纸灯，灯里没有火——只有一只缓缓转动的眼。</p>
+    <div class="frame-2 reveal">
+      <div class="f"><span class="lab">—— 医师 · 御堂</span><p>「你看见了？很好。省得我解释。那些眼睛不是战利品——它们是遗言。每只眼睛里，都留着一个死者最后看见的东西。我花了二十年，才学会听懂它们。」</p></div>
+      <div class="f"><span class="lab">—— 佐助</span><p>「所以你把『遗言』喂给活人，让他们替你翻译死者的话——蚀之里的四百人，是你的听众。」</p></div>
+    </div>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「那影向是谁？你放在井底、还在呼吸的那具『影子』——才是真正的你吧，御堂。」</span></p>
+    <p class="reveal">御堂的笑第一次裂开一条缝。纸灯落地，灯纸烧尽，露出里面那只眼睛——猩红如血，勾玉飞旋。它直直地望着佐助，像一整个战场在望着他。</p>
+    <p class="nar reveal"><span class="k">◆</span>「我替死者保管眼睛，你却替活人守着过去——」御堂低语，「我们本是同一种人，佐助。只是你运气好，还留着那双自己的眼。」</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「……不对。我早就不是用自己的眼睛在看这世界了。」</span></p>
+  </div>
+</section>
+
+<div class="black-gap tall" aria-hidden="true"></div>
+
+<!-- ================= 第四章 · 团扇遗刻 ================= -->
+<section class="ch-sec" id="ch4">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 四 章</div>
+    <h2 class="chap-title">团扇遗刻<span class="jp">UCHIWA NO ITOKUKI — 残された刻印</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 地底祠堂场景 -->
+  <div class="shrine-scene" aria-hidden="true">
+    <svg class="shrine-bg" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="underg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#05070d"/><stop offset="55%" stop-color="#0a0d16"/><stop offset="100%" stop-color="#030409"/>
+        </linearGradient>
+        <radialGradient id="torchg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff9d7a" stop-opacity=".5"/><stop offset="100%" stop-color="#ff9d7a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="620" fill="url(#underg)"/>
+      <!-- 岩壁与石阶 -->
+      <path d="M0 120 L400 40 L700 90 L1200 30 L1600 100 L1600 620 L0 620 Z" fill="#070a12"/>
+      <path d="M0 200 L300 130 L620 190 L1080 120 L1600 210 L1600 620 L0 620 Z" fill="#0a0e18"/>
+      <g stroke="#131b2e" stroke-width="2" opacity=".7">
+        <path d="M0 260 L360 190 M200 620 L520 240 M700 620 L980 270 M1600 260 L1180 190"/>
+        <path d="M60 620 L140 470 M1450 620 L1520 480"/>
+      </g>
+      <!-- 中央石碑 -->
+      <g>
+        <rect x="700" y="190" width="200" height="300" rx="4" fill="#0d1424" stroke="#31405f" stroke-width="2"/>
+        <rect x="720" y="210" width="160" height="260" fill="#0a0f1c" stroke="#232e49" stroke-width="1"/>
+        <!-- 团扇纹样 -->
+        <path d="M790 250 a60 60 0 0 1 0 120 a48 48 0 0 1 0 -120 z" fill="none" stroke="#e0434e" stroke-width="5"/>
+        <circle cx="790" cy="310" r="22" fill="#e0434e"/>
+        <circle cx="790" cy="310" r="9" fill="#0a0f1c"/>
+        <path d="M790 290 a22 22 0 0 1 0 40 z" fill="#0a0f1c" opacity=".4"/>
+        <text x="790" y="494" text-anchor="middle" fill="#e0434e" font-size="13" letter-spacing="4" font-family="Noto Serif SC,serif">宇智波 · 禁地</text>
+      </g>
+      <!-- 火把 -->
+      <g>
+        <rect x="622" y="180" width="10" height="110" fill="#1b2436"/>
+        <circle cx="627" cy="170" r="26" fill="url(#torchg)"/>
+        <path d="M627 152 q-8 14 -4 22 q8 -4 4 -22 z" fill="#ffb98f" opacity=".95"/>
+        <path d="M627 158 q-4 8 -2 13 q4 -3 2 -13 z" fill="#ffe9d8"/>
+        <rect x="1068" y="170" width="10" height="110" fill="#1b2436"/>
+        <circle cx="1073" cy="160" r="26" fill="url(#torchg)"/>
+        <path d="M1073 142 q-8 14 -4 22 q8 -4 4 -22 z" fill="#ffb98f" opacity=".95"/>
+      </g>
+      <!-- 地面勾玉刻痕 -->
+      <g fill="none" stroke="#8f1d2b" stroke-width="2" opacity=".5">
+        <circle cx="800" cy="470" r="42"/>
+        <circle cx="800" cy="470" r="26"/>
+        <path d="M800 506 a42 42 0 0 1 0 -72 z"/>
+      </g>
+      <g stroke="#e0434e" stroke-width="1.6" opacity=".6">
+        <path d="M560 470 h-120 M1200 470 h120"/>
+      </g>
+    </svg>
+    <div class="scene-caption">镜湖之下 · 不存在的祠堂</div>
+    <!-- 火焰摆动 -->
+    <div class="flame-flick" aria-hidden="true"></div>
+  </div>
+  <style>
+  .shrine-scene{position:relative;height:min(56vh,560px);overflow:hidden;background:#05070d;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .shrine-bg{position:absolute;inset:0;width:100%;height:100%}
+  .flame-flick{position:absolute;left:50%;top:36%;width:110px;height:140px;transform:translateX(-50%);background:radial-gradient(60% 45% at 50% 78%,rgba(255,157,122,.28),transparent 70%);mix-blend-mode:screen;animation:flick 1.8s ease-in-out infinite;pointer-events:none}
+  @keyframes flick{0%,100%{opacity:.5}50%{opacity:.85}}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">湖底祠堂的门上没有锁。只有一枚凹槽——团扇的形状。</p>
+    <p class="drop reveal">佐助按住凹槽时，掌心传来一阵灼烫。写轮眼不受控制地浮现，勾玉飞旋。祠堂深处随之响起齿轮转动的轰鸣，六面石壁次第亮起——每一面石壁上，都刻着一只完整的、属于宇智波一族的眼睛，瞳术的名字被以古代文字刻在下方，佐助一眼认出其中几枚：天照、月读、须佐能乎、神威、别天神……以及一排他从未见过、也没有名字的眼睛。</p>
+    <div class="clan-code reveal" aria-hidden="true">
+      <div class="code-row">
+        <span class="code-kanji">天照</span><span class="code-dots"><i></i><i></i><i></i></span><span class="code-means">将看见之物，烧至虚无</span>
+      </div>
+      <div class="code-row">
+        <span class="code-kanji">月读</span><span class="code-dots"><i></i><i></i></span><span class="code-means">将时间，交予梦境</span>
+      </div>
+      <div class="code-row">
+        <span class="code-kanji">须佐能乎</span><span class="code-dots"><i></i><i></i><i></i><i></i></span><span class="code-means">将孤独，化为铠甲</span>
+      </div>
+      <div class="code-row">
+        <span class="code-kanji">???</span><span class="code-dots"><i style="background:transparent;border:1px dashed #8f1d2b"></i><i style="background:transparent;border:1px dashed #8f1d2b"></i></span><span class="code-means">「将逝者，归还于生者」—— 被抹去的瞳术</span>
+      </div>
+    </div>
+    <style>
+    .clan-code{margin:36px 0;border:1px solid var(--line);border-left:3px solid var(--red);background:linear-gradient(120deg,rgba(219,228,242,.03),transparent);padding:26px 30px;display:flex;flex-direction:column;gap:14px}
+    .code-row{display:grid;grid-template-columns:130px 90px 1fr;align-items:center;gap:14px}
+    .code-kanji{font-family:var(--jp);color:#e7d9a8;letter-spacing:.24em;font-size:.95rem}
+    .code-dots{display:flex;gap:7px;align-items:center}
+    .code-dots i{width:13px;height:13px;border-radius:50%;background:var(--red);display:block;box-shadow:0 0 10px rgba(224,67,78,.6)}
+    .code-means{font-size:.82rem;color:var(--muted);letter-spacing:.1em}
+    @media(max-width:620px){.code-row{grid-template-columns:1fr}.code-means{grid-column:1/-1}}
+    </style>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「……『将逝者，归还于生者』。这就是御堂想做的事——他用收集来的眼睛拼成这面镜子，想复活的不只是某个人。他想复活的是——『所有他没能救下的人』。」</span></p>
+    <p class="reveal">佐助忽然想起一件事。宇智波一族被灭族的那一夜，他七岁，跪在满街的尸体中间。如果那时候有人告诉他：只要你拥有一只足够强的眼睛，就可以让哥哥回来——他会毫不犹豫地剜下自己的眼。</p>
+    <div class="frame-2 reveal">
+      <div class="f"><span class="lab">内心 · 佐助</span><p>「我差一点就走上同一条路。复仇者与救世者，在『想逆转死亡』这一点上，原是同一类人。」</p></div>
+      <div class="f"><span class="lab">石板新刻</span><p>石壁最底层，刻着一行几乎被风蚀尽的字——「献给未能守住之物。致还活着的宇智波。」落款是一枚不完整的团扇纹，只有一半，像是刻到一半便断了手。</p></div>
+    </div>
+    <p class="nar reveal"><span class="k">◆</span>那一夜，佐助第一次觉得：宇智波的历史，也许不只有憎恨与鲜血。这间祠堂本身，就是一封写给后人的信——只是送信的人，死在写完之前。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「御堂。你偷走的不只是眼睛。你偷走了这间祠堂里，本该有人读完的——」</span></p>
+    <p class="reveal">他没能说完。祠堂中央的那枚凹槽忽然自行转动，发出机关合拢的脆响。整座湖在头顶震颤，石壁上的眼睛一瞬之间全部睁开，齐齐望向祠堂门口——那里站着的不再是御堂。而是一个披着白衣、双眼紧闭、面容平静如同沉睡的年轻人。</p>
+    <p class="say reveal"><span class="who">年轻人</span><span class="txt">「你好。宇智波佐助——」</span></p>
+    <p class="say reveal"><span class="who">年轻人</span><span class="txt">「我是这间祠堂『本该存在』的主人。你可以叫我——影向。」</span></p>
+  </div>
+</section>
+
+<div class="black-gap" aria-hidden="true"></div>
+
+<!-- ================= 幕间 · 登场者 ================= -->
+<section class="cast-sec" id="cast">
+  <div class="chap-title-card reveal" style="background:transparent">
+    <div class="chap-no">幕 间 · 登 场 者</div>
+    <h2 class="chap-title">月光下的影子<span class="jp">KAGENI TATSU MONO — 登場人物</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+  <div class="cast-grid">
+    <!-- 佐助档案卡（大卡） -->
+    <article class="cast-card cast-main reveal">
+      <div class="cast-char" aria-hidden="true">
+        <svg viewBox="0 0 240 300" class="char-svg">
+          <defs><linearGradient id="coat" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#161e31"/><stop offset="100%" stop-color="#0a0e1a"/></linearGradient></defs>
+          <ellipse cx="120" cy="282" rx="74" ry="12" fill="#000" opacity=".5"/>
+          <!-- 外套 -->
+          <path d="M66 150 q0 70 18 118 q24 -16 72 -14 q30 2 44 12 q-2 -110 6 -130 q-30 -26 -72 -26 q-44 0 -68 40 z" fill="url(#coat)"/>
+          <path d="M66 150 q6 44 8 84 M174 152 q-8 52 -8 92" stroke="#2a3652" stroke-width="2" fill="none"/>
+          <!-- 高领 -->
+          <path d="M96 96 q24 30 48 0 q22 28 46 -2 l-8 22 q-30 20 -40 26 q-16 -10 -38 -22 z" fill="#0d1322"/>
+          <!-- 头部 -->
+          <circle cx="120" cy="64" r="38" fill="#c9b59a"/>
+          <!-- 头发 -->
+          <path d="M80 62 q0 -52 42 -54 q48 -2 42 56 q-2 14 -8 22 q-14 -16 -30 -10 q-20 8 -40 -2 q-8 -6 -6 -12 z" fill="#06080f"/>
+          <path d="M84 66 q-4 -30 10 -46 q-6 24 4 38 z" fill="#05060a"/>
+          <path d="M156 64 q2 -34 -14 -50 q8 28 -2 44 z" fill="#05060a"/>
+          <!-- 写轮眼 -->
+          <circle cx="106" cy="62" r="7.5" fill="#e0434e"/><circle cx="106" cy="62" r="3.4" fill="#1a0b0f"/>
+          <circle cx="106" cy="62" r="1.6" fill="#0b0d18"/>
+          <circle cx="138" cy="60" r="7.5" fill="#e0434e"/><circle cx="138" cy="60" r="3.4" fill="#1a0b0f"/>
+          <circle cx="138" cy="60" r="1.6" fill="#0b0d18"/>
+          <!-- 轮回眼细节右眼 -->
+          <circle cx="138" cy="60" r="9" fill="none" stroke="#b98fff" stroke-width="1" opacity=".6"/>
+          <!-- 嘴线 -->
+          <path d="M112 86 q8 5 16 0" stroke="#7a5a44" stroke-width="1.6" fill="none"/>
+        </svg>
+      </div>
+      <div class="cast-info">
+        <span class="cast-tag tag-main">旅人 · 宇智波</span>
+        <h3>宇智波佐助</h3>
+        <p class="cast-role">巡游忍界的引路人 —— 本作视角</p>
+        <p class="cast-bio">战争结束后的第二年，他把自己放逐在木叶之外。身上带着两样东西：一封故人来信，和一双见过太多离别的眼睛。他此行的目的，起初只是「去看看」，后来变成「想亲眼确认——那些被战争留在原地的人，是不是真的有人去接他们」。</p>
+        <ul class="cast-fact">
+          <li><i>眼</i>写轮眼 · 永恒万花筒 · 轮回眼</li>
+          <li><i>术</i>千鸟流 · 天照 · 须佐能乎</li>
+          <li><i>信</i>「……我不需要被原谅。我只需要，让错误到此为止。」</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 御堂 -->
+    <article class="cast-card reveal">
+      <div class="cast-char" aria-hidden="true">
+        <svg viewBox="0 0 220 260" class="char-svg">
+          <ellipse cx="110" cy="246" rx="66" ry="10" fill="#000" opacity=".5"/>
+          <path d="M60 132 q0 66 14 102 q36 -20 78 -12 q20 6 28 12 q-6 -108 8 -130 q-24 -30 -68 -30 q-36 0 -60 42 z" fill="#121a2e"/>
+          <path d="M60 132 q8 40 10 74 M160 134 q-6 48 -6 82" stroke="#263452" stroke-width="2" fill="none"/>
+          <path d="M92 98 q28 26 56 0 q22 22 42 -2 l-8 18 q-28 18 -42 22 q-14 -8 -40 -20 z" fill="#0d1422"/>
+          <circle cx="110" cy="64" r="34" fill="#c2b095"/>
+          <path d="M74 60 q-2 -48 38 -50 q44 -2 40 52 q0 16 -10 22 q-12 -16 -30 -10 q-18 8 -34 -2 q-6 -8 -4 -12 z" fill="#141d31"/>
+          <!-- 医师斗笠 -->
+          <path d="M70 40 q40 -34 84 0 q-42 -8 -84 0 z" fill="#1a2438" opacity=".6"/>
+          <path d="M60 74 q50 10 104 0" stroke="#1a2438" stroke-width="3" fill="none" opacity=".6"/>
+          <circle cx="96" cy="62" r="6.4" fill="#3a4a6e"/>
+          <circle cx="124" cy="60" r="6.4" fill="#3a4a6e"/>
+          <circle cx="96" cy="62" r="2.8" fill="#0d1422"/>
+          <circle cx="124" cy="60" r="2.8" fill="#0d1422"/>
+        </svg>
+      </div>
+      <div class="cast-info">
+        <span class="cast-tag tag-enemy">蚀之里 · 医师</span>
+        <h3>御堂 <small>みどう</small></h3>
+        <p class="cast-role">收集「遗言」的点灯人 —— 序章至第三章</p>
+        <p class="cast-bio">曾经的战场医师，战后在蚀之里行医。温和、耐心、受人爱戴——直到有人发现，他藏在地下的不是药，而是一面由数百只眼睛拼成的镜子。他相信死者应该「被听见」。</p>
+        <ul class="cast-fact">
+          <li><i>眼</i>无瞳术 · 却看得懂一切瞳术</li>
+          <li><i>术</i>封印术 · 医疗忍术 · 五感封锁</li>
+          <li><i>信</i>「救人若救不了心，便只是延长痛苦。」</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 雨女 时雨 -->
+    <article class="cast-card reveal">
+      <div class="cast-char" aria-hidden="true">
+        <svg viewBox="0 0 220 260" class="char-svg">
+          <ellipse cx="110" cy="246" rx="62" ry="10" fill="#000" opacity=".5"/>
+          <!-- 和服 -->
+          <path d="M62 130 q0 70 12 112 l-16 8 q-2 -70 4 -120 z" fill="#1a2438"/>
+          <path d="M158 130 q0 70 -12 112 l16 8 q2 -70 -4 -120 z" fill="#1a2438"/>
+          <path d="M78 96 q30 20 64 0 q30 18 44 0 l-4 52 q-24 20 -40 22 q-16 -2 -40 -22 z" fill="#232f4d"/>
+          <path d="M96 116 q14 30 28 0 q10 26 18 0" stroke="#8f1d2b" stroke-width="2.6" fill="none" opacity=".85"/>
+          <path d="M110 146 l0 30 M110 176 q0 26 -4 42" stroke="#8f1d2b" stroke-width="1.4" fill="none"/>
+          <circle cx="110" cy="58" r="31" fill="#cbb8a0"/>
+          <path d="M78 56 q-2 -46 34 -48 q40 -2 36 50 q0 14 -9 20 q-12 -14 -28 -8 q-16 6 -30 -2 q-5 -8 -3 -12 z" fill="#1b110e"/>
+          <!-- 发饰 -->
+          <circle cx="142" cy="52" r="8" fill="#3a4a6e"/>
+          <path d="M134 40 l14 -12 M148 42 l12 -8" stroke="#3a4a6e" stroke-width="2" opacity=".7"/>
+          <circle cx="96" cy="56" r="6" fill="#3a4a6e"/><circle cx="124" cy="54" r="6" fill="#3a4a6e"/>
+          <path d="M104 78 q6 6 12 0" stroke="#8a6a52" stroke-width="1.4" fill="none"/>
+        </svg>
+      </div>
+      <div class="cast-info">
+        <span class="cast-tag tag-ally">雨之驿站 · 孤儿</span>
+        <h3>时雨 <small>しぐれ</small></h3>
+        <p class="cast-role">被雨「选中」的少女 —— 第二至六章</p>
+        <p class="cast-bio">蚀之里被「请入梦境」的三年前，时雨是村里唯一没有被邀请的孩子——因为影向说，她的眼睛「太亮」，会照破镜子的谎言。她靠着这一双眼睛活下来，在废墟里等了三年，等一个能看见她的人。</p>
+        <ul class="cast-fact">
+          <li><i>眼</i>天生的「见破」之眼（非血继）</li>
+          <li><i>术</i>无 —— 只擅长逃跑与等待</li>
+          <li><i>信</i>「大哥哥，你眼里住着一个很累的人。让他歇一歇，好不好？」</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 冬真 -->
+    <article class="cast-card reveal">
+      <div class="cast-char" aria-hidden="true">
+        <svg viewBox="0 0 220 260" class="char-svg">
+          <ellipse cx="110" cy="246" rx="62" ry="10" fill="#000" opacity=".5"/>
+          <path d="M64 130 q0 70 14 106 q30 -18 66 -12 q24 6 34 14 q-4 -110 4 -130 q-26 -30 -66 -26 q-38 4 -52 48 z" fill="#101624"/>
+          <path d="M64 130 q8 36 10 72 M156 132 q-6 44 -6 80" stroke="#222c44" stroke-width="2" fill="none"/>
+          <circle cx="110" cy="62" r="33" fill="#c0ad93"/>
+          <path d="M76 60 q-2 -46 34 -48 q40 -2 36 48 q0 16 -10 22 q-14 -16 -30 -10 q-18 8 -32 -2 q-5 -7 -3 -10 z" fill="#1c110c"/>
+          <circle cx="97" cy="60" r="5.8" fill="#5b3f30"/><circle cx="124" cy="60" r="5.8" fill="#5b3f30"/>
+          <circle cx="97" cy="60" r="2.6" fill="#0a0e1a"/><circle cx="124" cy="60" r="2.6" fill="#0a0e1a"/>
+          <!-- 伤痕 -->
+          <path d="M96 34 l6 14" stroke="#c0ad93" stroke-width="2.4" opacity=".6"/>
+          <path d="M112 78 q8 4 16 0" stroke="#7a5a44" stroke-width="1.4" fill="none"/>
+        </svg>
+      </div>
+      <div class="cast-info">
+        <span class="cast-tag tag-ally">风之国 · 下忍</span>
+        <h3>风见 冬真 <small>かざみ ふうま</small></h3>
+        <p class="cast-role">护送「最后一封信」的少年 —— 第五至六章</p>
+        <p class="cast-bio">砂隐派往川之国的信使。他的父亲死在第三次忍界大战的回收部队里——不是战死，而是「没能交出一封信」。冬真沿着父亲未走完的路，把信送到蚀之里，遇见了佐助。他固执地相信：信件必须抵达，否则死去的人就无法真正离开。</p>
+        <ul class="cast-fact">
+          <li><i>眼</i>普通 · 却什么也不回避</li>
+          <li><i>术</i>风遁 · 瞬身 · 送信（自称「S级忍术」）</li>
+          <li><i>信</i>「忍者不是工具。忍者的命，是用来把话说完的。」</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 影向 -->
+    <article class="cast-card cast-villain reveal">
+      <div class="cast-char" aria-hidden="true">
+        <svg viewBox="0 0 220 260" class="char-svg">
+          <ellipse cx="110" cy="246" rx="64" ry="10" fill="#000" opacity=".6"/>
+          <path d="M64 126 q0 72 16 112 q30 -22 66 -14 q24 4 34 12 q-6 -112 6 -132 q-26 -30 -68 -26 q-40 4 -54 48 z" fill="#0e1420"/>
+          <path d="M64 126 q10 38 12 74 M156 128 q-6 44 -8 82" stroke="#1e2940" stroke-width="2" fill="none"/>
+          <path d="M96 100 q26 22 52 0 q20 16 38 -2 l-6 18 q-26 16 -40 20 q-14 -6 -38 -18 z" fill="#0b101c"/>
+          <circle cx="110" cy="62" r="34" fill="#d8cbb8"/>
+          <path d="M74 60 q-2 -48 38 -50 q46 -2 42 52 q0 16 -10 22 q-14 -18 -32 -12 q-18 6 -34 -2 q-6 -8 -4 -12 z" fill="#e8e2d4"/>
+          <!-- 绷带遮眼 -->
+          <path d="M78 60 q-2 -40 32 -42 q40 -2 38 44 q0 10 -8 14 q-4 -18 -22 -16 q-14 0 -18 14 q-10 -2 -16 -14 z" fill="#d8d3c4"/>
+          <path d="M80 56 l16 2 M136 56 l-14 2" stroke="#a89f8c" stroke-width="1.6"/>
+          <!-- 绷带下猩红一点 -->
+          <circle cx="110" cy="58" r="4.6" fill="#e0434e"/>
+          <circle cx="110" cy="58" r="2" fill="#1a0b0f"/>
+          <!-- 裂嘴 -->
+          <path d="M98 88 q12 12 24 0" stroke="#8a5a3c" stroke-width="1.6" fill="none"/>
+          <path d="M102 88 q8 4 16 -2" stroke="#c2413f" stroke-width="1.4" fill="none"/>
+        </svg>
+      </div>
+      <div class="cast-info">
+        <span class="cast-tag tag-boss">夜阴众 · 首领</span>
+        <h3>影向 <small>かげむこう</small></h3>
+        <p class="cast-role">「没有名字的眼睛」的保管者 —— 第四至六章</p>
+        <p class="cast-bio">没有人知道他的真名、来历、甚至他是否「曾经活过」。他是从回收部队的焚化坑里爬出来的最后一具「尸体」——被灌入一只无名写轮眼后，他不再记得自己是谁，只记得一个模糊的愿望：让所有死于战争的死者，「再看一次月亮」。</p>
+        <ul class="cast-fact">
+          <li><i>眼</i>无名写轮眼 × 数百（以「镜」操控）</li>
+          <li><i>术</i>镜界 · 遗言回响 · 御灵</li>
+          <li><i>信</i>「我不过是想替死者，看完他们没看完的月亮——这也算罪吗？」</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+  <style>
+  .cast-sec{background:linear-gradient(180deg,#000,#0a0d18 30%,#000);padding:60px 0 110px;position:relative;overflow:hidden}
+  .cast-sec::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 400px at 50% 0%,rgba(224,67,78,.06),transparent 60%)}
+  .cast-grid{width:min(1180px,92%);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .cast-card{position:relative;display:grid;grid-template-columns:170px 1fr;gap:22px;border:1px solid var(--line);background:linear-gradient(155deg,rgba(219,228,242,.04),rgba(219,228,242,.008) 60%);padding:26px;transition:border-color .4s,transform .4s var(--ease),box-shadow .4s;overflow:hidden}
+  .cast-card:hover{border-color:rgba(224,67,78,.45);transform:translateY(-4px);box-shadow:0 24px 60px -30px rgba(0,0,0,.9)}
+  .cast-card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(224,67,78,.5),transparent)}
+  .cast-main{grid-column:span 2;grid-template-columns:220px 1fr;background:linear-gradient(155deg,rgba(160,50,60,.1),rgba(219,228,242,.03) 55%);border-color:rgba(224,67,78,.3)}
+  .cast-villain{border-color:rgba(180,120,220,.18)}
+  .cast-villain::before{background:linear-gradient(90deg,transparent,rgba(180,120,220,.5),transparent)}
+  .cast-char{display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(80% 60% at 50% 100%,rgba(90,110,180,.12),transparent 70%);border:1px solid var(--line);min-height:230px}
+  .cast-main .cast-char{min-height:300px}
+  .char-svg{width:100%;height:auto;max-height:290px}
+  .cast-info h3{font-size:1.45rem;color:var(--paper);letter-spacing:.12em;margin:2px 0 4px}
+  .cast-info h3 small{font-family:var(--jp);font-size:.62em;color:var(--muted);font-weight:600;letter-spacing:.3em}
+  .cast-role{font-size:.72rem;letter-spacing:.22em;color:var(--red);margin-bottom:12px}
+  .cast-bio{font-size:.86rem;color:#aeb8cc;letter-spacing:.05em;line-height:2;margin-bottom:14px}
+  .cast-fact{list-style:none;display:flex;flex-direction:column;gap:7px;margin:0}
+  .cast-fact li{font-size:.76rem;color:var(--muted);letter-spacing:.06em}
+  .cast-fact i{font-style:normal;display:inline-block;width:30px;color:var(--red);font-family:var(--jp);font-size:.62rem;letter-spacing:.2em}
+  .cast-tag{display:inline-block;font-size:.6rem;letter-spacing:.28em;color:var(--muted);border:1px solid var(--line2);padding:2px 12px 2px 16px;text-indent:.2em}
+  .tag-main{color:#ffc9ce;border-color:rgba(224,67,78,.5);background:rgba(224,67,78,.08)}
+  .tag-ally{color:#b8e4ff;border-color:rgba(127,212,255,.4);background:rgba(127,212,255,.06)}
+  .tag-enemy{color:#e6b49b;border-color:rgba(255,122,89,.4);background:rgba(255,122,89,.06)}
+  .tag-boss{color:#cfc0f5;border-color:rgba(180,120,220,.5);background:rgba(180,120,220,.08)}
+  @media(max-width:960px){.cast-grid{grid-template-columns:1fr}.cast-main{grid-column:span 1}}
+  @media(max-width:640px){.cast-card{grid-template-columns:1fr}.cast-char{min-height:180px}.cast-main .cast-char{min-height:220px}.cast-main{grid-template-columns:1fr}}
+  </style>
+</section>
+
+<!-- ================= 第五章 · 亡灵之丘 ================= -->
+<section class="ch-sec" id="ch5">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 五 章</div>
+    <h2 class="chap-title">亡灵之丘<span class="jp">MOURYOU NO OKA — 帰らない者たち</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 暗紫战场 -->
+  <div class="ghost-scene" aria-hidden="true">
+    <svg class="ghost-bg" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="ghg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0a0714"/><stop offset="55%" stop-color="#150d24"/><stop offset="100%" stop-color="#07050c"/>
+        </linearGradient>
+        <radialGradient id="ghglow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#6a5cff" stop-opacity=".5"/><stop offset="100%" stop-color="#6a5cff" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="620" fill="url(#ghg)"/>
+      <!-- 亡灵之丘 -->
+      <path d="M0 470 q300 -120 600 -60 q220 40 420 -20 q180 -30 320 30 q160 44 260 -10 l0 210 l-1600 0 z" fill="#0b0816"/>
+      <path d="M0 510 q340 -90 680 -30 q200 34 380 -16 q200 -54 540 30 l0 96 l-1600 0 z" fill="#0e0a1b"/>
+      <!-- 树立的刀剑与白幡 -->
+      <g stroke="#8f86a8" stroke-width="2.4" opacity=".85">
+        <line x1="380" y1="440" x2="380" y2="600"/><line x1="700" y1="400" x2="700" y2="610"/><line x1="1010" y1="430" x2="1010" y2="615"/><line x1="1260" y1="470" x2="1260" y2="610"/>
+      </g>
+      <g stroke="#6a5cff" stroke-width="1.4" opacity=".55">
+        <path d="M380 520 q-30 -20 -58 -8"/><path d="M700 500 q-40 -26 -74 -10"/>
+      </g>
+      <!-- 磷火 -->
+      <g fill="#8b7cff">
+        <circle cx="520" cy="560" r="2.6" opacity=".8"><animate attributeName="opacity" values=".3;1;.3" dur="2.6s" repeatCount="indefinite"/></circle>
+        <circle cx="880" cy="580" r="2" opacity=".6"><animate attributeName="opacity" values="1;.3;1" dur="3.1s" repeatCount="indefinite"/></circle>
+        <circle cx="1140" cy="545" r="2.2" opacity=".7"><animate attributeName="opacity" values=".4;1;.4" dur="2.2s" repeatCount="indefinite"/></circle>
+        <circle cx="560" cy="430" r="1.8" opacity=".5"><animate attributeName="opacity" values=".5;1;.5" dur="3.6s" repeatCount="indefinite"/></circle>
+      </g>
+      <!-- 紫色雾 -->
+      <ellipse cx="900" cy="560" rx="700" ry="60" fill="#6a5cff" opacity=".07"/>
+      <ellipse cx="400" cy="590" rx="520" ry="46" fill="#8b7cff" opacity=".05"/>
+      <!-- 幽影人群 -->
+      <g fill="#120d22" opacity=".8">
+        <path d="M240 620 q-6 -40 -18 -70 q20 6 26 30 q8 -30 4 -60 q16 20 8 100 z"/>
+        <path d="M1560 620 q-10 -34 -22 -58 q20 2 30 22 q6 -26 2 -50 q14 18 6 86 z"/>
+        <path d="M1460 620 q-6 -30 -14 -54 q16 2 22 20 q4 -20 0 -42 q10 14 4 76 z"/>
+      </g>
+    </svg>
+    <div class="scene-caption">蚀之里以西 · 战殁者之丘</div>
+    <div class="ghost-fog" aria-hidden="true"></div>
+  </div>
+  <style>
+  .ghost-scene{position:relative;height:min(56vh,560px);overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0a0714}
+  .ghost-bg{position:absolute;inset:0;width:100%;height:100%}
+  .ghost-fog{position:absolute;left:-10%;right:-10%;bottom:-6%;height:44%;background:radial-gradient(400px 60px at 30% 70%,rgba(138,123,255,.12),transparent 70%),radial-gradient(500px 70px at 70% 60%,rgba(138,123,255,.1),transparent 70%);filter:blur(4px);animation:ghostDrift 12s ease-in-out infinite alternate;pointer-events:none}
+  @keyframes ghostDrift{0%{transform:translateX(-2%)}100%{transform:translateX(2%)}}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">冬真的信，是一张被雨水泡胀的纸。上面只有一句话。</p>
+    <div class="letter-tear reveal">
+      <p>「父亲：你托我送的信，我送到了。蚀之里没有收到你的信——是有人替你收了。那个人说，<b style="color:#e0434e">死者不该记得路</b>。可我记得。我把你的信缝进冬真的衣领里，让他替我走完剩下的路。」</p>
+      <span>—— 无法署名的寄信人</span>
+    </div>
+    <style>
+    .letter-tear{margin:30px 0 36px;border:1px dashed rgba(224,67,78,.4);background:rgba(224,67,78,.05);padding:30px 34px;position:relative;font-family:var(--serif);color:#cdd4e1;letter-spacing:.12em;line-height:2.1}
+    .letter-tear::before{content:"封印 · 战后十年之约";position:absolute;top:-11px;left:24px;background:var(--ink2);padding:0 12px;font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;color:var(--red)}
+    .letter-tear span{display:block;text-align:right;margin-top:12px;font-size:.72rem;color:var(--muted);letter-spacing:.2em}
+    </style>
+    <p class="drop reveal">时雨说，影向的「镜」需要不断有人「供血」——战争遗孤、退役忍者、无处可去的伤兵。他把他们收进蚀之里，说是「替死者守夜」。可守夜的人不知道：每过一夜，他们就会忘记一段属于自己的过去，转而记起一段不属于自己的「遗言」。等一个人彻底忘记自己是谁——他就成了影向的一部分。</p>
+    <p class="say reveal"><span class="who">时雨</span><span class="txt">「村子里的叔叔婶婶们，其实早就死了。三年前死掉的是他们的身体——后来每天夜里，死掉一点点的，是他们的『名字』。」</span></p>
+    <div class="frame-2 reveal">
+      <div class="f"><span class="lab">夜阴众 · 教义</span><p>「死者不忘，生者不归。」——影向在战后废墟里收留流亡者时，只说这一句话。最初，他是真的在帮他们。只是帮到后来，他分不清：自己是在收留活人，还是在收集死者。</p></div>
+      <div class="f"><span class="lab">佐助的推断</span><p>「那些被『回收部队』挖去眼睛的人——他们的身体死了，可眼睛还活着。影向要让几百只眼睛同时『回忆』起战场的最后一夜。当它们想起同一件事——那一夜，就会在现实里重演。」</p></div>
+    </div>
+    <p class="nar reveal"><span class="k">◆</span>丘上的磷火忽然同时熄灭。雾里浮出无数身影——不是幽灵，是夜阴众的信徒。他们穿着回收部队的旧军服，脸上戴着没有眼洞的面具，每张面具的眉心，都嵌着一只不属于自己的、猩红的眼。</p>
+    <p class="say reveal"><span class="who">影向（雾中传来）</span><span class="txt">「你来得正好，宇智波。今夜，月亮会为所有死者而亮——你那双眼睛，将是最后一块镜子。」</span></p>
+    <p class="nar reveal"><span class="k">◆</span>雨，停了。写轮眼，亮起。</p>
+  </div>
+</section>
+
+<div class="black-gap tall" aria-hidden="true"></div>
+
+<!-- ================= 第六章 · 残月之战 ================= -->
+<section class="ch-sec battle-sec" id="ch6">
+  <div class="chap-title-card reveal">
+    <div class="chap-no">第 六 章 · 终 夜</div>
+    <h2 class="chap-title">残月之战<span class="jp">ZANGETSU NO TATAKAI — 欠けた月の下で</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 战斗序 —— 两行对白 -->
+  <div class="battle-quote reveal">
+    <p class="bq-a">「让死者安息的方法，不是让他们再看一次月亮——」</p>
+    <p class="bq-b">「……而是让活着的人，替他们把月亮看下去。」</p>
+  </div>
+  <style>
+  .battle-quote{text-align:center;padding:20px 20px 40px}
+  .battle-quote p{font-family:var(--serif);font-size:clamp(1rem,2.2vw,1.35rem);letter-spacing:.2em;color:var(--paper);line-height:2.2;margin:10px 0}
+  .battle-quote .bq-b{color:var(--red)}
+  </style>
+
+  <!-- 战斗分镜 1：千鸟撕开夜色 -->
+  <div class="fight-frame fight-a reveal">
+    <div class="fight-visual" aria-hidden="true">
+      <div class="bolt-core">
+        <svg viewBox="0 0 200 320"><path d="M100 10 L66 180 L116 168 L70 320 L150 130 L102 150 L150 10 Z" fill="#bde4ff" opacity=".95"/><path d="M100 10 L84 120 L112 112 L92 240" stroke="#ffffff" stroke-width="5" fill="none" opacity=".85"/></svg>
+      </div>
+      <div class="spark spark-a"></div><div class="spark spark-b"></div>
+    </div>
+    <div class="fight-text">
+      <span class="fight-lab">千鸟 · 第一击</span>
+      <p>「——千鸟流！」千百道雷光自佐助掌心奔涌而出，如蛇群扑向夜阴众。雷电照亮他的侧脸，写轮眼中勾玉飞旋，映出每一个戴着面具的敌人——他们的动作，全部慢了半拍。仿佛他们使用的不是自己的手脚，而是借来的、别人的回忆。</p>
+    </div>
+  </div>
+  <style>
+  .fight-frame{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;width:min(1180px,92%);margin:0 auto 60px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(219,228,242,.035),rgba(219,228,242,.008));overflow:hidden}
+  .fight-frame .fight-visual{min-height:340px;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(70% 70% at 50% 50%,rgba(60,90,140,.16),transparent 75%)}
+  .fight-frame .fight-text{padding:30px 36px 30px 0}
+  .fight-frame .fight-text p{color:#b7c0d1;letter-spacing:.07em;line-height:2.2;font-size:.95rem;margin:0}
+  .fight-lab{display:inline-block;font-family:var(--jp);font-size:.68rem;letter-spacing:.4em;color:var(--blue);border-left:3px solid var(--blue);padding-left:14px;margin-bottom:16px}
+  .bolt-core svg{width:150px;height:auto;filter:drop-shadow(0 0 34px rgba(189,228,255,.9));animation:thunder 1.6s ease-in-out infinite}
+  @keyframes thunder{0%,100%{opacity:1;transform:scale(1)}8%{opacity:.6}10%{opacity:1}55%{opacity:.85}}
+  .spark{position:absolute;width:6px;height:6px;border-radius:50%;background:#d6f2ff;box-shadow:0 0 16px 4px rgba(189,228,255,.9);opacity:0}
+  .spark-a{animation:sparkfly 1.1s linear infinite}
+  .spark-b{animation:sparkfly 1.5s linear infinite .5s}
+  @keyframes sparkfly{0%{transform:translate(0,0) scale(1);opacity:0}12%{opacity:1}100%{transform:translate(-90px,130px) scale(.2);opacity:0}}
+  @media(max-width:860px){.fight-frame{grid-template-columns:1fr}.fight-frame .fight-text{padding:0 26px 30px}.fight-frame .fight-visual{min-height:260px}}
+  </style>
+
+  <!-- 战斗分镜 2：写轮眼交锋 / 瞳术对镜 -->
+  <div class="clash-panel reveal" aria-hidden="true">
+    <div class="clash-eye ce-l"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="66" fill="#14070a"/><circle cx="70" cy="70" r="50" fill="#a31a28"/><path d="M70 20 a50 50 0 0 1 0 100 z" fill="#e0434e"/><circle cx="70" cy="70" r="34" fill="#14070a"/><path d="M70 36 a34 34 0 0 1 0 68" fill="none" stroke="#e0434e" stroke-width="7"/><path d="M70 36 a34 34 0 0 1 0 68" fill="none" stroke="#ff8f98" stroke-width="2"/><circle cx="70" cy="70" r="10" fill="#0b0d18"/></svg></div>
+    <div class="clash-line"><span>万花筒</span><i></i><b>vs</b><i></i><span>无名之瞳</span></div>
+    <div class="clash-eye ce-r"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="66" fill="#0b0714"/><circle cx="70" cy="70" r="50" fill="#24104a"/><path d="M70 20 a50 50 0 0 1 0 100 z" fill="#6a5cff" opacity=".7"/><circle cx="70" cy="70" r="34" fill="#0b0714"/><path d="M70 36 a34 34 0 0 1 0 68" fill="none" stroke="#8b7cff" stroke-width="7"/><path d="M70 36 a34 34 0 0 1 0 68" fill="none" stroke="#cfc0f5" stroke-width="2"/><circle cx="70" cy="70" r="10" fill="#0b0714"/></svg></div>
+    <style>
+    .clash-panel{display:flex;align-items:center;justify-content:center;gap:clamp(16px,4vw,64px);padding:70px 6vw;background:radial-gradient(1000px 500px at 50% 50%,rgba(90,30,60,.14),transparent 70%);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    .clash-eye{animation:clashBreath 3.4s ease-in-out infinite}
+    .clash-eye svg{width:clamp(90px,15vw,150px);height:auto}
+    .ce-l{filter:drop-shadow(0 0 26px rgba(224,67,78,.65))}
+    .ce-r{animation-delay:-1.7s;filter:drop-shadow(0 0 26px rgba(138,123,255,.6))}
+    @keyframes clashBreath{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+    .clash-line{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);font-size:.66rem;letter-spacing:.4em;white-space:nowrap}
+    .clash-line span{color:var(--red);font-family:var(--jp);font-size:.8rem;letter-spacing:.5em}
+    .clash-line span:last-child{color:#9f8ff2}
+    .clash-line i{width:1px;height:26px;background:linear-gradient(180deg,var(--red),var(--violet));opacity:.5}
+    .clash-line b{font-size:.8rem;color:var(--muted);font-weight:300}
+    </style>
+  </div>
+
+  <div class="wrap prose-narrow">
+    <p class="drop reveal">瞳术相交的瞬间，佐助看见了影向的「全部」。</p>
+    <p class="reveal">那不是一个记忆——是一整个坟场。无数双眼睛沉在黑暗里，每一双都在说同一句话：「带我回去。带我回去。让我再看看——」可它们不记得自己要看什么。它们只记得「看」这个动作本身，像一盏盏不知道为谁而点的灯。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「你连他们想看什么都忘了。你只是在让那些眼睛——重复『看』这个动作。」</span></p>
+    <p class="say reveal"><span class="who">影向</span><span class="txt">「那又怎样？！至少他们还在看！而你们这些活着的人——连看都不愿意看！你们把死者埋进土里，转头就忘了他们长什么样！」</span></p>
+  </div>
+
+  <!-- 战斗分镜 3：须佐能乎显现 -->
+  <div class="susanoo reveal" aria-hidden="true">
+    <div class="sus-wrap">
+      <svg viewBox="0 0 900 560" class="sus-svg">
+        <defs>
+          <linearGradient id="susg" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#20060b"/><stop offset="60%" stop-color="#7a1626"/><stop offset="100%" stop-color="#ff6a7a" stop-opacity=".5"/></linearGradient>
+          <filter id="susglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="16"/></filter>
+        </defs>
+        <g filter="url(#susglow)" opacity=".7">
+          <path d="M450 40 L620 210 L540 240 L620 420 L450 350 L400 520 L360 360 L220 460 L300 270 L180 210 L340 140 L450 40 Z" fill="#a31a28" opacity=".6"/>
+        </g>
+        <g opacity=".35">
+          <path d="M450 40 L620 210 L540 240 L620 420 L450 350 L400 520 L360 360 L220 460 L300 270 L180 210 L340 140 L450 40 Z" fill="#ff8f98"/>
+          <path d="M450 90 L560 210 L500 225 L555 360 L450 310 L420 440 L395 330 L290 400 L340 260 L260 215 L360 165 L450 90 Z" fill="none" stroke="#ffb8c2" stroke-width="3"/>
+        </g>
+        <g fill="none" stroke="#ffb8c2" stroke-width="1.6" opacity=".5">
+          <path d="M450 30 L470 120 L510 210 L470 300 L430 380 L450 460"/>
+          <path d="M410 120 L330 190 L300 260 L330 340 L360 400 L380 440"/>
+          <path d="M490 120 L560 190 L590 260 L570 340 L540 400 L520 440"/>
+        </g>
+        <circle cx="450" cy="150" r="34" fill="#14070a" stroke="#ffb8c2" stroke-width="2" opacity=".8"/>
+        <path d="M420 150 a30 30 0 0 1 60 0 a24 24 0 0 1 -60 0 z" fill="#e0434e" opacity=".75"/>
+        <circle cx="450" cy="150" r="10" fill="#0b0d18"/>
+      </svg>
+      <span class="sus-cap">须佐能乎 · 不完全体 —「保护该保护的东西，就够了」</span>
+    </div>
+    <style>
+    .susanoo{padding:70px 0;background:radial-gradient(1100px 700px at 50% 50%,rgba(120,20,40,.16),transparent 72%);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    .sus-wrap{width:min(980px,94%);margin:0 auto;position:relative}
+    .sus-svg{width:100%;height:auto;animation:susBreath 6s ease-in-out infinite}
+    @keyframes susBreath{0%,100%{opacity:.85}50%{opacity:1}}
+    .sus-cap{display:block;text-align:center;font-size:.7rem;letter-spacing:.4em;color:rgba(255,150,160,.75);margin-top:8px;text-indent:.4em}
+    </style>
+  </div>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">影向的「镜界」在须佐能乎面前崩碎——数百只眼睛同时尖叫着「看见」了火焰。</p>
+    <p class="drop reveal">佐助没有立刻反击。他闭眼，写轮眼切换为轮回眼，瞳力如潮水般漫过整片丘地。他不是在看影向——他是在「听」那些眼睛。每一只眼睛里，都封着一个死者最后的心愿：有人想再看一眼故乡的河，有人想对儿子说一句「别恨他」，有人只是想看看战后第一个春天的花。</p>
+    <div class="quote-scene reveal">
+      <span class="vertic" style="color:#ffb8c2">天照は、<em>憎しみ</em>だけが灯す火ではない</span>
+      <p class="side">佐助的指尖凝出一缕黑炎——却迟迟没有放出。他说：「天照的火焰，会烧尽我看见的一切。可这一次，我不想烧掉任何人。」</p>
+    </div>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「影向——你说你在替死者守夜。可你守的不是他们的月亮。你守的是你自己的执念。」</span></p>
+    <p class="say reveal"><span class="who">影向</span><span class="txt">「住口——！你懂什么！你杀过自己的哥哥，你比谁都清楚——有些遗憾，是活人永远还不了的债！」</span></p>
+    <p class="reveal">佐助没有反驳。他垂下眼帘，沉默了很久。</p>
+  </div>
+
+  <!-- 战斗分镜 4：终结 —— 红月沉落 -->
+  <div class="finale-scene reveal" aria-hidden="true">
+    <svg class="finale-svg" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="fmg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffb8c2"/><stop offset="40%" stop-color="#d02436"/><stop offset="100%" stop-color="#400810"/></radialGradient>
+        <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a0510"/><stop offset="60%" stop-color="#1a0a18"/><stop offset="100%" stop-color="#2a0f1e"/></linearGradient>
+      </defs>
+      <rect width="1600" height="620" fill="url(#fsky)"/>
+      <circle cx="800" cy="200" r="190" fill="url(#fmg)">
+        <animate attributeName="r" values="190;205;190" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <g opacity=".5">
+        <circle cx="800" cy="200" r="150" fill="none" stroke="#e0434e" stroke-width="1" stroke-dasharray="4 10"><animateTransform attributeName="transform" type="rotate" from="0 800 200" to="360 800 200" dur="40s" repeatCount="indefinite"/></circle>
+        <circle cx="800" cy="200" r="210" fill="none" stroke="#e0434e" stroke-width="1" stroke-dasharray="2 14" opacity=".6"><animateTransform attributeName="transform" type="rotate" from="360 800 200" to="0 800 200" dur="60s" repeatCount="indefinite"/></circle>
+      </g>
+      <!-- 碎裂的红月 -->
+      <g fill="#e0434e" opacity=".6">
+        <path d="M660 120 l34 -20 -8 38 z"/><path d="M940 110 l-26 -18 26 4 z"/>
+      </g>
+      <path d="M0 430 q400 -120 800 -50 q360 60 800 -40 l0 280 l-1600 0 z" fill="#0c0512"/>
+      <g fill="#140a18"><ellipse cx="800" cy="560" rx="420" ry="50"/></g>
+      <!-- 天照黑炎的残影 -->
+      <g fill="#1a0b0f" opacity=".85">
+        <path d="M300 500 q20 -40 46 -20 q-4 30 -30 34 z"/>
+        <path d="M1250 470 q16 -36 40 -16 q-6 26 -30 26 z"/>
+      </g>
+      <g fill="#ff9d7a" opacity=".9">
+        <circle cx="520" cy="586" r="2.6"/><circle cx="532" cy="594" r="1.8"/><circle cx="1240" cy="580" r="2.2"/>
+      </g>
+    </svg>
+    <div class="scene-caption">天照 · 不是烧毁，而是「归还」</div>
+  </div>
+  <style>
+  .finale-scene{position:relative;height:min(58vh,560px);overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0a0510}
+  .finale-svg{position:absolute;inset:0;width:100%;height:100%}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="drop reveal">他放下的不是天照。是轮回眼的一缕瞳力——「人间道」的引渡。</p>
+    <p class="reveal">黑炎没有烧向影向。它化作数百只漆黑的鸦，穿过每一名夜阴众信徒的胸口，衔起他们眉心那只不属于自己的眼，振翅飞向天上的红月。红月在鸦群中剧烈震颤——那不是毁灭，是「归还」。每一只眼睛，都被送回它真正的主人身边：有的落入废墟，有的飞向远方，有的在半空化作一缕烟，像是终于合上了。</p>
+    <div class="manga-grid reveal">
+      <div class="cell cell-w"><p>信徒们一个接一个倒下。面具碎裂，露出下面一张张疲惫的、像是终于能睡着的脸。他们没有被杀——只是第一次，不再被「遗言」驱动。</p></div>
+      <div class="cell"><p>影向跪在丘顶。他眼眶里那颗无名写轮眼正在剥落，像一片枯叶。他抬起头，第一次——用一双普通的、属于某个无名之人的眼睛，看向天空。</p></div>
+      <div class="cell"><p>那轮红月正在退色。月光一点一点地，变回它本该有的、清冷的白。</p></div>
+    </div>
+    <p class="say reveal"><span class="who">影向</span><span class="txt">「……原来，月亮是白色的。」</span></p>
+    <p class="reveal">他愣愣地看着那轮月亮，忽然笑了——笑得很轻，像终于想起什么。他说：「我好像想起来了。我叫……弥生。岩隐的医疗忍者。我有个妹妹，叫弥惠。战争那年，她十四岁，被回收部队带走。我找了她十年——后来有人说，她早就死了，死的时候，眼睛被人取走了。」</p>
+    <p class="nar reveal"><span class="k">◆</span>「所以我挖开焚化坑，找到所有被丢弃的眼睛。我想……万一其中一双是她的呢？我只要找到她的眼睛，让她再看一次月亮——她就会想起回家的路。可我等了太久。久到……我把每一双眼睛，都当成了她的。」</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「……你找的不是她。你找的是『能原谅自己的办法』。」</span></p>
+    <p class="reveal">弥生没有回答。他望着月亮，眼睛一眨不眨，像怕错过什么。过了很久，他轻轻说了一句：「妹妹。哥来接你了。这一次——哥不挖你的眼睛了。哥带你去看海。」</p>
+    <p class="nar reveal"><span class="k">◆</span>风起。弥生闭上了眼。他眉心的眼窝空空如也——可他的脸上，第一次没有痛苦。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「（……我没有杀他。他只是太累了，终于睡着了。）」</span></p>
+  </div>
+</section>
+
+<!-- ================= 终章 · 黎明 ================= -->
+<section class="ending-sec" id="ending">
+  <div class="chap-title-card reveal" style="background:transparent">
+    <div class="chap-no">终 章 · 第 七 夜</div>
+    <h2 class="chap-title">黎明<span class="jp">REIMEI — 月のあとに</span></h2>
+    <div class="chap-rule"></div>
+  </div>
+
+  <!-- 黎明场景 -->
+  <div class="dawn-scene" aria-hidden="true">
+    <svg class="dawn-svg" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="dawn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#141028"/><stop offset="42%" stop-color="#3c2a4e"/><stop offset="72%" stop-color="#c46a58"/><stop offset="100%" stop-color="#e8b98a"/>
+        </linearGradient>
+        <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffe9c9"/><stop offset="100%" stop-color="#ffb276"/></linearGradient>
+      </defs>
+      <rect width="1600" height="600" fill="url(#dawn)"/>
+      <circle cx="1160" cy="330" r="70" fill="url(#sun)">
+        <animate attributeName="opacity" values=".3;1;1" dur="8s" repeatCount="indefinite"/>
+      </circle>
+      <g fill="#1c1430" opacity=".9">
+        <path d="M0 380 q250 -90 480 -40 q200 44 400 -30 q180 -60 320 10 l0 240 l-1200 0 z"/>
+      </g>
+      <g fill="#241a38" opacity=".95">
+        <path d="M0 440 q300 -70 560 -10 q180 40 360 -20 q220 -66 680 30 l0 140 l-1600 0 z"/>
+      </g>
+      <g fill="#160f24">
+        <path d="M100 470 l-4 -130 54 -30 52 28 -4 132 z"/>
+        <path d="M420 460 l-3 -100 46 -26 48 24 -3 102 z"/>
+        <path d="M1280 440 l-5 -140 60 -34 58 32 -5 142 z"/>
+      </g>
+      <g stroke="#ffd9b0" stroke-width="1.6" opacity=".35">
+        <path d="M1180 300 q-8 46 4 84"/>
+      </g>
+      <!-- 树与路 -->
+      <g stroke="#120c1e" stroke-width="3">
+        <path d="M520 470 q0 -50 8 -92 M520 440 q-30 -30 -56 -48 M520 440 q34 -28 62 -46"/>
+      </g>
+      <path d="M0 560 q300 20 800 -10 q400 -14 800 6 l0 44 l-1600 0 z" fill="#0f0a1a"/>
+      <!-- 晨光 -->
+      <g fill="#ffca90" opacity=".25">
+        <polygon points="1160,330 900,600 1000,600"/><polygon points="1160,330 1320,600 1420,600"/>
+      </g>
+    </svg>
+    <div class="scene-caption">蚀之里 · 三年来第一个清晨</div>
+  </div>
+  <style>
+  .dawn-scene{position:relative;height:min(58vh,560px);overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .dawn-svg{position:absolute;inset:0;width:100%;height:100%}
+  </style>
+
+  <div class="wrap prose-narrow">
+    <p class="lead reveal">天亮之前，佐助做了一件事。</p>
+    <p class="drop reveal">他把弥生的尸体抱到丘顶，面朝东方，用千鸟在地上刻了一行小字：「弥生与弥惠，眠于此。」没有写「墓」，也没有写任何忍者的名号。他站了一会儿，忽然想起什么，把随身带着的半块饭团放在碑前——那是时雨塞给他的，说「路上吃」。他最终没有吃。</p>
+    <p class="nar reveal"><span class="k">◆</span>他第一次，为素不相识的人立碑。</p>
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「我不是原谅你。我只是……不想再让任何人，死在自己也分不清的黑暗里。」</span></p>
+    <div class="choice-box reveal">
+      <p class="choice-head">—— 佐助的选择 ——</p>
+      <p>战后第二年，木叶递来一纸文书：着宇智波佐助缉捕「夜阴众」首领影向，就地处决。<br>他提笔，在「处决」二字旁划了一道线，写下八个字：</p>
+      <p class="choice-words">「罪已入土，无须再斩。」</p>
+      <p>他没有杀弥生——弥生是自己放下执念，闭上眼的。佐助只是站在那里，替他挡住了最后的风。<br>有人说他变了。有人说他软弱了。佐助没有解释。他把文书折好，放进行囊，继续往西走。</p>
+    </div>
+    <style>
+    .choice-box{margin:44px 0;border:1px solid rgba(224,67,78,.35);background:linear-gradient(160deg,rgba(224,67,78,.06),transparent);padding:36px 40px;position:relative;text-align:center}
+    .choice-box::before,.choice-box::after{content:"";position:absolute;width:44px;height:44px;border-color:var(--red);opacity:.8}
+    .choice-box::before{top:-1px;left:-1px;border-top:2px solid var(--red);border-left:2px solid var(--red)}
+    .choice-box::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--red);border-right:2px solid var(--red)}
+    .choice-head{font-size:.66rem;letter-spacing:.5em;color:var(--red);margin-bottom:16px;text-indent:.5em}
+    .choice-box p{color:#cdd4e1;letter-spacing:.1em;line-height:2.3;font-size:.95rem;margin:.8em 0}
+    .choice-words{font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.8rem);color:#ffd9c2;letter-spacing:.42em;text-indent:.42em;margin:20px 0!important;text-shadow:0 0 30px rgba(255,122,89,.35)}
+    </style>
+
+    <p class="say reveal"><span class="who">佐助</span><span class="txt">「（哥哥。你说过——复仇之后剩下的，才是真正的自己。原来你说的不是放下刀。是拿起另一把刀。一把……不会伤到任何人的刀。）」</span></p>
+  </div>
+
+  <!-- 尾页大结语 -->
+  <div class="epilogue reveal" aria-hidden="false">
+    <div class="ep-inner">
+      <p class="ep-kanji">終</p>
+      <p class="ep-line">「每一双闭上的眼睛，都曾认真地看过这个世界。」</p>
+      <p class="ep-sub">残月终有尽时 · 此痕留予来人</p>
+    </div>
+  </div>
+  <style>
+  .epilogue{background:linear-gradient(180deg,#0a0d18,#04050a 70%,#000);padding:130px 0 150px;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+  .epilogue::before{content:"";position:absolute;inset:0;background:radial-gradient(700px 300px at 50% 30%,rgba(224,67,78,.08),transparent 70%)}
+  .ep-kanji{font-family:var(--jp);font-size:clamp(4rem,12vw,8rem);line-height:1;color:transparent;-webkit-text-stroke:1px rgba(224,67,78,.55);letter-spacing:.2em;margin-bottom:30px}
+  .ep-line{font-family:var(--serif);font-size:clamp(1.1rem,2.6vw,1.6rem);color:var(--paper);letter-spacing:.3em;line-height:2}
+  .ep-sub{font-size:.72rem;letter-spacing:.5em;color:var(--muted);margin-top:26px;text-indent:.5em}
+  </style>
+
+  <!-- 尾声 · 一年后 -->
+  <section class="post-sec">
+    <div class="wrap" style="max-width:820px;padding:90px 0 40px">
+      <div class="chap-title-card reveal" style="padding:0 0 30px;background:transparent">
+        <div class="chap-no">尾 声 · 一 年 后</div>
+        <h2 class="chap-title" style="font-size:clamp(1.3rem,3vw,1.9rem)">雨停之后<span class="jp">AME NO ATO</span></h2>
+        <div class="chap-rule"></div>
+      </div>
+      <p class="nar reveal"><span class="k">◆</span>来信 · 雨之驿站</p>
+      <div class="prologue-letter reveal" style="margin-top:26px">
+        <div class="letter-head"><span class="l1">时雨 → 佐助</span><span class="l2">雨之国 · 手书</span></div>
+        <p>大哥哥：</p>
+        <p>村里的叔叔婶婶醒过来了。他们什么都不记得，只记得做了一个很长的梦，梦里一直在看月亮。御堂先生走了。他留了一封信，说要去把所有「借来的眼睛」还回去——包括他自己的。</p>
+        <p>冬真把信送到了。他父亲托他送的那封信，是写给一个叫「弥惠」的女孩子的——原来她活着的时候，是蚀之里制墨坊的学徒。冬真把信埋在她家的墨池边，说这样她一定能收到。</p>
+        <p>我决定留在村里，替御堂先生行医。我学得很快，已经会包扎、会认药材了。村民说我像三年前的御堂先生。</p>
+        <p>大哥哥，你还在走路吗？路上有人给你递饭团吗？你要记得吃。月亮很好看的时候，要记得抬头看。</p>
+        <p class="sign">—— 时雨</p>
+      </div>
+      <p class="nar reveal" style="margin-top:26px"><span class="k">◆</span>回信 · 某处山道</p>
+      <div class="prose" style="margin-top:0">
+        <p class="reveal">佐助在驿站的火光下看完信，沉默了很久。他提笔，纸上只有一行字：</p>
+        <p class="say reveal" style="margin:2em 0"><span class="who">佐助</span><span class="txt">「会抬头看的。饭团也吃了。替我告诉村里——月亮，是白色的。」</span></p>
+        <p class="reveal">他把信折成很小的方块，贴身放好。屋外雨声渐歇，月光从云缝里漏下来，照在他肩头的旧伤上，像一道浅淡的、正在愈合的痕。</p>
+        <p class="reveal" style="color:#ffd9c2;font-family:var(--serif);letter-spacing:.24em;text-align:center;margin-top:56px">—— 完 ——</p>
+        <p class="reveal" style="text-align:center;color:var(--muted);font-size:.7rem;letter-spacing:.42em;margin-top:10px;text-indent:.42em">宇智波佐助外传 · 残月之痕</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <svg viewBox="0 0 40 40" class="brand-mark" aria-hidden="true"><path d="M20 2 L38 13 L38 27 L20 38 L2 27 L2 13 Z" fill="none" stroke="#e0434e" stroke-width="1.4" opacity=".9"/><path d="M20 10 L29 15.5 L29 24.5 L20 30 L11 24.5 L11 15.5 Z" fill="#e0434e" opacity=".92"/><circle cx="20" cy="20" r="2.1" fill="#07090f"/></svg>
+        <span class="brand-name">残月之痕<small>UCHIHA GAIDEN</small></span>
+      </div>
+      <p class="foot-note">这是一部粉丝创作的原创外传视觉小说，与任何商业作品无关。宇智波佐助及相关世界观元素版权归原作者及出版社所有；本页中的故事、人物、组织均为虚构创作。仅用于设计演示，无任何商业用途。</p>
+      <div class="foot-meta">
+        <span>原创剧情 · 全七章 + 尾声</span>
+        <span class="dot">·</span>
+        <span>页面以 HTML/CSS/SVG 手绘构建</span>
+        <span class="dot">·</span>
+        <a href="#top" class="back-top" id="backTop">回到月下 ▲</a>
+      </div>
+    </div>
+    <style>
+    .foot{border-top:1px solid var(--line);background:#04050a;padding:60px 0 40px}
+    .foot-in{width:min(1180px,92%);margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:26px}
+    .foot-note{flex:1 1 420px;font-size:.74rem;color:#5f6b80;letter-spacing:.1em;line-height:2.1}
+    .foot-meta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;font-size:.68rem;letter-spacing:.22em;color:var(--muted)}
+    .foot-meta .dot{color:#333c50}
+    .back-top{color:var(--red);transition:color .3s}
+    .back-top:hover{color:#ffb8c2}
+    .foot-brand{display:flex;align-items:center;gap:10px}
+    </style>
+  </footer>
+</section>
+
+<script>
+(function(){
+  document.documentElement.classList.add('js');
+  var nav=document.getElementById('nav');
+  var prog=document.getElementById('progress');
+  var burger=document.getElementById('burger');
+  var mobile=document.getElementById('navMobile');
+  var backTop=document.getElementById('backTop');
+
+  /* —— 目录生成 —— */
+  var chapters=[
+    ['#prologue','序','旅人'],['#ch1','一','蚀之里'],['#ch2','二','雨夜瞳火'],['#ch3','三','镜湖遗构'],
+    ['#cast','间','登场者'],['#ch4','四','团扇遗刻'],['#ch5','五','亡灵之丘'],['#ch6','六','残月之战'],['#ending','终','黎明']
+  ];
+  var list=document.getElementById('railList');
+  chapters.forEach(function(c){
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.setAttribute('href',c[0]);
+    var i=document.createElement('i');i.textContent=c[1];
+    a.appendChild(i);a.appendChild(document.createTextNode(c[2]));
+    li.appendChild(a);list.appendChild(li);
+  });
+
+  /* —— 导航状态 + 进度条 —— */
+  var ticking=false;
+  function onScroll(){
+    var y=window.pageYOffset||document.documentElement.scrollTop;
+    nav.classList.toggle('scrolled',y>30);
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    if(h>0){prog.style.width=((y/h)*100)+'%';}
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+  onScroll();
+
+  /* —— 移动端菜单 —— */
+  burger.addEventListener('click',function(){
+    var open=mobile.classList.toggle('open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    burger.innerHTML=open?'<span>✕</span>':'<span>☰</span>';
+  });
+  mobile.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mobile.classList.remove('open');burger.innerHTML='<span>☰</span>';burger.setAttribute('aria-expanded','false');});});
+
+  /* —— 回到顶部 —— */
+  if(backTop){backTop.addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});}
+
+  /* —— 滚动显现（默认可见，仅增强）—— */
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals=document.querySelectorAll('.reveal');
+  function revealAll(){reveals.forEach(function(el){el.classList.add('in');});}
+  if(!('IntersectionObserver' in window)||reduced){revealAll();}
+  else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+    reveals.forEach(function(el){io.observe(el);});
+    /* 兜底：从未滚入视野的元素（截图/打印等）也显示 */
+    setTimeout(function(){reveals.forEach(function(el){if(!el.classList.contains('in'))el.classList.add('in');});},2500);
+  }
+
+  /* —— 战斗章节：进入视野时点亮闪电 —— */
+  var battle=document.getElementById('ch6');
+  if(battle&&'IntersectionObserver' in window&&!reduced){
+    var bio=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){document.body.classList.add('flash');bio.disconnect();}});
+    },{threshold:0.05});
+    bio.observe(battle);
+  }
+
+  /* —— 写轮眼彩蛋：输入「十三」触发 —— */
+  var buffer='';
+  document.addEventListener('keydown',function(e){
+    if(e.key&&e.key.length===1){
+      buffer=(buffer+e.key.toLowerCase()).slice(-2);
+      if(buffer==='十三'||buffer==='13'){
+        var moon=document.querySelector('.moon');
+        var ring=document.createElement('div');
+        ring.textContent='🔔 你看见了隐藏的第十三声钟响——';
+        ring.style.cssText='position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:200;background:rgba(10,6,8,.95);color:#ffd9c2;border:1px solid var(--red);padding:12px 26px;font-size:.82rem;letter-spacing:.2em;font-family:"Noto Serif SC",serif;box-shadow:0 0 40px rgba(224,67,78,.4);pointer-events:none';
+        document.body.appendChild(ring);
+        setTimeout(function(){ring.style.transition='opacity .8s';ring.style.opacity='0';setTimeout(function(){ring.remove();},900);},3600);
+        buffer='';
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
