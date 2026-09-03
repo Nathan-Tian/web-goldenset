@@ -30,8 +30,8 @@ You may freely decide the visual style, layout, typography, color palette, image
 
 ## Golden Set 标注
 
-- **Good：** https://nathan-tian.github.io/web-goldenset/pair-01/good/
-- **Bad：** https://nathan-tian.github.io/web-goldenset/pair-01/bad/
+- **Good(claude)：** https://nathan-tian.github.io/web-goldenset/pair-01/good/
+- **Bad(teamily)：** https://nathan-tian.github.io/web-goldenset/pair-01/bad/
 
 ## Bad Reason
 
