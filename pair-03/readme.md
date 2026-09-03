@@ -66,8 +66,9 @@
 ## Golden Set 标注
 
 - **Good：** https://nathan-tian.github.io/web-goldenset/pair-03/good/
-- **Good 原始链接：** https://static.teamily.ai/sites/9d0277a1-0032-4118-88ed-f33f96e8bf79/webpages/linzhou-chengshi/index.html?tk=c2l0ZTo5ZDAyNzdhMS0wMDMyLTQxMTgtODhlZC1mMzNmOTZlOGJmNzkvd2VicGFnZXMvbGluemhvdS1jaGVuZ3NoaToxNzg4NTE5MDU2.N2IxMGE5OWQwZDc2YjhiZGFkYTNmYjZlMTJlNDQwYmQ
 - **Bad：** https://nathan-tian.github.io/web-goldenset/pair-03/bad/
+
+- **Good 原始链接：** https://static.teamily.ai/sites/9d0277a1-0032-4118-88ed-f33f96e8bf79/webpages/linzhou-chengshi/index.html?tk=c2l0ZTo5ZDAyNzdhMS0wMDMyLTQxMTgtODhlZC1mMzNmOTZlOGJmNzkvd2VicGFnZXMvbGluemhvdS1jaGVuZ3NoaToxNzg4NTE5MDU2.N2IxMGE5OWQwZDc2YjhiZGFkYTNmYjZlMTJlNDQwYmQ
 
 ## Bad Reason
 
