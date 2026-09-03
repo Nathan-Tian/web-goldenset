@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>There Is No Planet B — Protect What We Share</title>
+<meta name="description" content="A cinematic campaign for the only home we have ever known. From melting glaciers to restored forests — protect what we share.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%231e6b52'/><path d='M32 60 Q50 30 76 44 Q66 74 32 60Z' fill='%236fd3a2'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & TOKENS ============ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ink:#0b1210;--ink-2:#10201a;--pine:#123528;--pine-2:#0e2a20;--moss:#1e6b52;--leaf:#3fa377;--sage:#7fb79a;--mist:#cfe3d6;--paper:#f4f1e8;--paper-2:#fffdf6;--cloud:#eef4ee;--gold:#e6b86a;--amber:#d99a3d;--ember:#ff6b4a;--blood:#c8403a;--coral:#ff8a6b;--sun:#ffd98e;--white:#ffffff;--line:rgba(11,18,16,.12);--shadow:0 18px 50px rgba(8,20,14,.14);
+--f-serif:"Cormorant Garamond",Georgia,serif;--f-display:"Cinzel",Georgia,serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace;--f-sans:"Inter",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+body{font-family:var(--f-sans);background:var(--paper);color:var(--ink);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;mix-blend-mode:multiply;background-image:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.35) 3px,rgba(0,0,0,.35) 4px)}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::selection{background:var(--leaf);color:#fff}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.wrap-wide{width:min(1380px,94vw);margin-inline:auto}
+.skip{position:absolute;left:-999px;top:0;background:var(--leaf);color:#fff;padding:.6rem 1rem;z-index:10000}
+.skip:focus{left:0}
+/* ============ PROGRESS BAR ============ */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:1200;background:linear-gradient(90deg,var(--leaf),var(--gold));box-shadow:0 0 12px rgba(31,107,82,.5)}
+/* ============ NAV ============ */
+header.site{position:fixed;inset:0 0 auto 0;z-index:1000;mix-blend-mode:normal}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+header.site .wrap{transition:background .3s}
+header.site.scrolled{background:rgba(11,18,16,.86);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+header.site.scrolled .nav-inner{padding:.55rem 0}
+.brand{display:flex;align-items:center;gap:.6rem;color:#fff;font-family:var(--f-display);letter-spacing:.04em;font-size:1.02rem;text-transform:uppercase}
+.brand svg{width:26px;height:26px}
+.brand b{font-weight:600;color:var(--sun)}
+nav.links{display:flex;gap:1.7rem;align-items:center}
+nav.links a{color:rgba(255,255,255,.82);font-size:.82rem;font-weight:500;letter-spacing:.03em;position:relative;transition:color .25s}
+nav.links a:hover{color:#fff}
+nav.links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--gold);transition:width .3s}
+nav.links a:not(.btn):hover::after{width:100%}
+nav.links .btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);padding:.4rem .9rem;border-radius:2px;color:#fff;transition:all .25s}
+nav.links .btn:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+#burger{display:none;flex-direction:column;gap:5px;padding:6px;z-index:1100}
+#burger span{width:22px;height:2px;background:#fff;transition:.3s;border-radius:1px}
+#burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,14,11,.97);z-index:1050;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem}
+.mobile-menu.show{display:flex}
+.mobile-menu a{color:#fff;font-family:var(--f-display);font-size:1.5rem;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:860px){nav.links{display:none}#burger{display:flex}}
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#040a14;color:#fff}
+#heroScene{position:absolute;inset:0;width:100%;height:100%}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,10,20,.05) 0%,rgba(4,10,20,.05) 45%,rgba(4,10,20,.62) 76%,#040a14 100%);pointer-events:none;z-index:2}
+.hero .wrap{position:relative;z-index:5;padding-bottom:4.2rem}
+.kicker{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sun);border:1px solid rgba(255,217,142,.4);padding:.45rem 1rem;background:rgba(255,217,142,.06)}
+.kicker::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(230,184,106,.2);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.7}}
+.hero h1{font-family:var(--f-display);font-weight:600;font-size:clamp(3rem,8vw,6.3rem);line-height:1.02;letter-spacing:.01em;margin:1.5rem 0 1.4rem;text-wrap:balance}
+.hero h1 .thin{font-weight:400;color:var(--sun)}
+.hero h1 em{font-family:var(--f-serif);font-style:italic;font-weight:500;color:var(--gold)}
+.hero p.lede{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:54ch;color:rgba(255,255,255,.88);font-weight:300;line-height:1.7}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.2rem;margin:2rem 0 2.4rem}
+.hero-meta .chip{display:flex;flex-direction:column;gap:.1rem;font-family:var(--f-mono);border-left:2px solid var(--gold);padding-left:.9rem}
+.hero-meta .chip b{font-size:1.05rem;color:#fff}
+.hero-meta .chip span{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.cta-row{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:.95rem 1.9rem;border-radius:2px;font-weight:600;font-size:.95rem;letter-spacing:.02em;transition:all .28s;border:1px solid transparent}
+.btn-primary{background:var(--gold);color:var(--ink);box-shadow:0 10px 26px rgba(230,184,106,.32)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(230,184,106,.44)}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.btn svg{width:16px;height:16px}
+.btn-light{background:#fff;color:var(--ink-2);box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.btn-light:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.24)}
+.btn-green{background:var(--leaf);color:#fff}
+.btn-green:hover{background:var(--pine);transform:translateY(-2px);box-shadow:0 14px 30px rgba(31,107,82,.3)}
+.hero-foot{display:flex;gap:2rem;margin-top:3rem;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;color:rgba(255,255,255,.5);text-transform:uppercase}
+.scroll-hint{position:absolute;right:2.4rem;bottom:2rem;z-index:6;display:flex;flex-direction:column;align-items:center;gap:.8rem;color:rgba(255,255,255,.65);font-family:var(--f-mono);font-size:.62rem;letter-spacing:.3em;writing-mode:vertical-rl;text-transform:uppercase}
+.scroll-hint .line{width:1px;height:64px;background:linear-gradient(180deg,var(--gold),transparent);position:relative;overflow:hidden}
+.scroll-hint .line::after{content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;background:var(--gold);animation:drop 1.9s infinite}
+@keyframes drop{0%{top:-40%}100%{top:110%}}
+@media(max-width:860px){.scroll-hint{display:none}}
+/* HUD tags on hero */
+.hud-tag{position:absolute;z-index:6;display:inline-flex;align-items:center;gap:.5rem;background:rgba(6,16,28,.72);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);padding:.5rem .85rem;border-radius:2px;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;color:var(--mist);text-transform:uppercase;white-space:nowrap}
+.hud-tag i{width:6px;height:6px;border-radius:50%;background:var(--leaf);box-shadow:0 0 8px var(--leaf);font-style:normal;animation:pulse 2s infinite}
+.hud-tag.rec i{background:var(--ember);box-shadow:0 0 8px var(--ember)}
+.hud-1{top:16%;left:6%;animation:float 7s ease-in-out infinite}
+.hud-2{top:26%;right:7%;animation:float 9s 1s ease-in-out infinite}
+.hud-3{bottom:34%;left:9%;animation:float 8s .5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media(max-width:760px){.hud-tag{display:none}}
+/* ============ SECTION SCAFFOLD ============ */
+section{position:relative}
+.section-head{max-width:760px;margin:0 auto 3.4rem;text-align:center}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--leaf);display:inline-flex;align-items:center;gap:.7rem}
+.eyebrow::before,.eyebrow::after{content:"";width:26px;height:1px;background:var(--leaf)}
+.section-head h2{font-family:var(--f-display);font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.1;font-weight:600;margin:.9rem 0 1.1rem;color:var(--ink-2)}
+.section-head h2 em{font-family:var(--f-serif);font-style:italic;color:var(--moss);font-weight:500}
+.section-head p{color:#46554e;font-size:1.06rem}
+/* ============ TICKER ============ */
+.ticker{background:var(--pine-2);color:#fff;overflow:hidden;padding:.7rem 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.ticker-track{display:flex;gap:0;width:max-content;animation:ticker 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-track span{display:inline-flex;align-items:center;gap:1.6rem;padding-right:1.6rem;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.75);white-space:nowrap}
+.ticker-track span b{color:var(--gold);font-weight:500}
+.ticker-track span i{font-style:normal;color:var(--leaf)}
+/* ============ PROLOGUE ============ */
+.prologue{padding:7rem 0 5rem;background:var(--paper)}
+.prologue-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:4rem;align-items:center}
+.prologue .lede{font-family:var(--f-serif);font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.4;font-weight:500;color:var(--ink-2)}
+.prologue .lede::first-letter{font-size:3.6em;float:left;line-height:.85;padding:.06em .12em 0 0;color:var(--leaf);font-family:var(--f-display)}
+.prologue .lede em{color:var(--moss)}
+.prologue p.sub{color:#4a5a52;margin-top:1.4rem;font-size:1.04rem}
+.prologue figure{background:var(--pine);border-radius:14px;padding:2rem;color:#fff;box-shadow:var(--shadow)}
+.prologue figure .mono-head{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.18em;color:var(--sage);text-transform:uppercase;margin-bottom:1.4rem}
+.bars{display:flex;flex-direction:column;gap:1.1rem}
+.bar-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:1rem}
+.bar-row .lab{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.12em;color:var(--mist);text-transform:uppercase}
+.bar-row .track{height:6px;background:rgba(255,255,255,.14);border-radius:3px;overflow:hidden}
+.bar-row .fill{height:100%;border-radius:3px;animation:grow 1.6s ease-out both}
+@keyframes grow{from{width:0}}
+.bar-row .val{font-family:var(--f-mono);font-size:.7rem;color:var(--gold)}
+.vitals{margin-top:1.4rem;display:flex;gap:1.6rem;border-top:1px solid rgba(255,255,255,.14);padding-top:1.2rem;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.12em;color:var(--sage);text-transform:uppercase}
+@media(max-width:900px){.prologue-grid{grid-template-columns:1fr;gap:2.4rem}}
+/* ============ ACT / BAND ============ */
+.act-band{position:relative;color:#fff;padding:8rem 0;overflow:hidden}
+.act-band .bg-scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.act-band .wrap{position:relative;z-index:3}
+.act-band .act-label{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.34em;text-transform:uppercase;color:var(--sun);display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem}
+.act-band .act-label::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.25)}
+.act-band h2{font-family:var(--f-display);font-size:clamp(2.6rem,6vw,4.8rem);font-weight:600;line-height:1.05;max-width:16ch;text-wrap:balance}
+.act-band h2 em{font-family:var(--f-serif);font-style:italic;color:var(--gold);font-weight:500}
+.act-band .blurb{max-width:52ch;margin-top:1.4rem;color:rgba(255,255,255,.85);font-size:1.12rem;font-weight:300;line-height:1.75}
+.scene-credit{position:absolute;bottom:1.4rem;left:2rem;z-index:2;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;color:rgba(255,255,255,.5);text-transform:uppercase}
+.shade-bottom{position:absolute;inset:auto 0 0 0;height:42%;background:linear-gradient(180deg,transparent,rgba(5,10,8,.8));z-index:1;pointer-events:none}
+/* ============ CRISIS ============ */
+.crisis-wrap{background:var(--ink-2);color:#fff}
+.crisis{position:sticky;top:0;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;overflow:hidden}
+.crisis-text{padding:clamp(3rem,7vw,6.5rem);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:3}
+.crisis-text .no{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.2em;color:var(--ember);display:flex;align-items:center;gap:.8rem;margin-bottom:1.6rem}
+.crisis-text .no::before{content:"";width:36px;height:1px;background:var(--ember)}
+.crisis-text h2{font-family:var(--f-display);font-size:clamp(2rem,3.6vw,3rem);line-height:1.1;font-weight:600;margin-bottom:1.2rem;text-wrap:balance}
+.crisis-text h2 span{display:block;color:var(--sun);font-family:var(--f-serif);font-style:italic;font-weight:500}
+.crisis-text p{color:rgba(255,255,255,.8);font-weight:300;line-height:1.75;max-width:46ch}
+.crisis-text .fact{margin-top:1.8rem;border-left:3px solid var(--ember);padding:.5rem 0 .5rem 1.2rem;font-family:var(--f-serif);font-size:1.25rem;font-style:italic;color:var(--coral)}
+.crisis-hud{position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;min-height:100vh}
+.crisis-hud .sim{width:min(430px,74%);aspect-ratio:1;border-radius:24px;position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;padding:1.6rem;text-align:center}
+.sim-label{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.26em;color:rgba(255,255,255,.55);text-transform:uppercase}
+.sim-big{font-family:var(--f-serif);font-size:3.4rem;line-height:1;color:#fff}
+.sim-big small{font-size:1rem;font-family:var(--f-mono);color:var(--sun)}
+.sim-sub{font-size:.8rem;color:rgba(255,255,255,.65);max-width:26ch}
+.sim-note{position:absolute;bottom:14%;left:0;right:0;text-align:center;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.4);text-transform:uppercase}
+@media(max-width:900px){.crisis{grid-template-columns:1fr;position:relative;min-height:0}.crisis-hud{min-height:70vh;order:-1}}
+/* Act labels per crisis color */
+.c-text .no{color:var(--ember)}
+/* ============ LOSE (before/after) ============ */
+.lose{padding:7rem 0;background:var(--paper-2)}
+.lose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.4rem}
+.lose-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(8,20,14,.07);display:flex;flex-direction:column}
+.lose-card .pair{position:relative;height:250px;overflow:hidden}
+.lose-card .pair .side{position:absolute;inset:0;transition:opacity .5s}
+.lose-card .pair .side.before{opacity:1;z-index:2}
+.lose-card:hover .pair .side.before{opacity:0}
+.lose-card .pair .tag{position:absolute;top:.8rem;left:.8rem;z-index:5;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;padding:.3rem .6rem;border-radius:2px;text-transform:uppercase;color:#fff}
+.lose-card .pair .tag.b{background:rgba(200,64,58,.9)}
+.lose-card .pair .tag.a{background:rgba(31,107,82,.9)}
+.lose-card .cap{padding:1.4rem 1.5rem 1.6rem}
+.lose-card .cap h3{font-family:var(--f-display);font-size:1.22rem;color:var(--ink-2);margin-bottom:.5rem}
+.lose-card .cap p{font-size:.9rem;color:#57675f}
+.lose-card .cap .stat{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;color:var(--leaf);margin-top:1rem;border-top:1px dashed var(--line);padding-top:.9rem;text-transform:uppercase}
+/* ============ ROLL CALL ============ */
+.roll{background:var(--ink);color:#fff;padding:6.5rem 0;text-align:center;position:relative;overflow:hidden}
+.roll::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 110%,rgba(90,60,40,.35),transparent 60%)}
+.roll h2{font-family:var(--f-display);font-size:clamp(2rem,4.6vw,3.6rem);font-weight:600;margin-bottom:.8rem}
+.roll h2 em{font-family:var(--f-serif);font-style:italic;color:var(--coral)}
+.roll .sub{color:rgba(255,255,255,.6);max-width:56ch;margin:0 auto 3rem;font-weight:300}
+.roll-call{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;max-width:900px;margin:0 auto}
+.roll-name{font-family:var(--f-serif);font-size:1.2rem;font-style:italic;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.16);border-radius:99px;padding:.6rem 1.4rem;transition:.3s;background:rgba(255,255,255,.03)}
+.roll-name:hover{border-color:var(--coral);color:var(--coral);transform:translateY(-3px)}
+.roll-name b{font-family:var(--f-mono);font-style:normal;font-size:.6rem;letter-spacing:.14em;color:var(--sun);display:block;margin-top:.1rem}
+.roll-note{margin-top:2.6rem;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase}
+/* ============ SILENCE INTERLUDE ============ */
+.silence{background:#050807;color:rgba(255,255,255,.9);padding:9rem 0;text-align:center;position:relative;overflow:hidden}
+.silence h2{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:clamp(1.9rem,4vw,3.2rem);max-width:20ch;margin:0 auto;line-height:1.4}
+.silence h2 b{font-family:var(--f-display);font-style:normal;font-weight:600;color:var(--sun)}
+.silence .sig{margin-top:2.2rem;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+/* ============ HOPE ============ */
+.hope{padding:8rem 0;background:linear-gradient(180deg,var(--paper-2),#eaf1ea)}
+.restore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.6rem}
+.restore{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(30,107,82,.16);box-shadow:0 14px 40px rgba(8,20,14,.09);transition:.35s;display:flex;flex-direction:column}
+.restore:hover{transform:translateY(-6px);box-shadow:0 26px 54px rgba(8,20,14,.15)}
+.restore .scene{height:210px;position:relative;overflow:hidden}
+.restore .body{padding:1.6rem;flex:1;display:flex;flex-direction:column}
+.restore .body .tag{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--leaf);margin-bottom:.7rem}
+.restore .body h3{font-family:var(--f-display);font-size:1.35rem;color:var(--ink-2);margin-bottom:.6rem}
+.restore .body p{font-size:.92rem;color:#55655d;flex:1}
+.restore .delta{margin-top:1.3rem;display:flex;align-items:baseline;gap:1rem;border-top:1px dashed var(--line);padding-top:1.1rem;font-family:var(--f-mono);font-size:.7rem;color:#64746c;text-transform:uppercase}
+.restore .delta b{font-size:1.5rem;color:var(--moss);font-family:var(--f-serif);font-weight:600;text-transform:none}
+.timeline{margin-top:5rem;position:relative;padding:2.5rem 0 1rem}
+.timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,var(--leaf) 8%,var(--leaf) 92%,transparent);transform:translateX(-50%)}
+.tl-item{position:relative;width:50%;padding:1.6rem 3rem 2.6rem}
+.tl-item:nth-child(odd){left:0;text-align:right}
+.tl-item:nth-child(even){left:50%;text-align:left}
+.tl-item .dot{position:absolute;top:2rem;width:14px;height:14px;border-radius:50%;background:var(--leaf);border:3px solid #fff;box-shadow:0 0 0 2px var(--leaf)}
+.tl-item:nth-child(odd) .dot{right:-7px}
+.tl-item:nth-child(even) .dot{left:-7px}
+.tl-item .yr{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.2em;color:var(--leaf);text-transform:uppercase}
+.tl-item h4{font-family:var(--f-display);font-size:1.3rem;color:var(--ink-2);margin:.4rem 0 .5rem}
+.tl-item p{font-size:.9rem;color:#54645c}
+.tl-item .gain{display:inline-block;margin-top:.7rem;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;color:var(--moss);background:rgba(63,163,119,.12);padding:.3rem .8rem;border-radius:99px}
+@media(max-width:820px){.lose-grid,.restore-grid{grid-template-columns:1fr}.timeline::before{left:10px}.tl-item{width:100%;left:0!important;text-align:left!important;padding-left:3rem}.tl-item .dot{left:4px!important;right:auto!important}}
+/* hope stats */
+.hope-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:4.5rem}
+.hope-stat{text-align:center;padding:2rem 1rem;background:var(--pine);color:#fff;border-radius:18px;position:relative;overflow:hidden}
+.hope-stat::after{content:"";position:absolute;top:-30%;right:-20%;width:70%;height:70%;border-radius:50%;background:radial-gradient(circle,rgba(255,217,142,.25),transparent 65%)}
+.hope-stat b{font-family:var(--f-serif);font-size:3rem;display:block;color:var(--sun);line-height:1.1;position:relative;z-index:1}
+.hope-stat span{position:relative;z-index:1;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+/* ============ ACTION ============ */
+.action{padding:8rem 0;background:var(--paper)}
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.4rem}
+.act-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:2rem;position:relative;overflow:hidden;transition:.3s;box-shadow:0 8px 24px rgba(8,20,14,.06)}
+.act-card:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(8,20,14,.13);border-color:rgba(30,107,82,.4)}
+.act-card .num{font-family:var(--f-serif);font-style:italic;font-size:3.4rem;line-height:1;color:rgba(30,107,82,.14);position:absolute;top:1.2rem;right:1.4rem;font-weight:600}
+.act-card .ic{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--leaf),var(--moss));display:flex;align-items:center;justify-content:center;margin-bottom:1.3rem}
+.act-card .ic svg{width:26px;height:26px}
+.act-card h3{font-family:var(--f-display);font-size:1.3rem;color:var(--ink-2);margin-bottom:.6rem}
+.act-card p{font-size:.92rem;color:#55655d;line-height:1.7}
+.act-card .saving{margin-top:1.2rem;display:inline-flex;gap:.5rem;align-items:center;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;color:var(--leaf);text-transform:uppercase}
+.act-card .saving b{color:var(--moss)}
+/* ============ PLEDGE ============ */
+.pledge{padding:8rem 0;background:var(--ink-2);color:#fff;position:relative;overflow:hidden}
+.pledge::before{content:"";position:absolute;bottom:-30%;left:-10%;width:60%;height:80%;border-radius:50%;background:radial-gradient(circle,rgba(63,163,119,.18),transparent 65%)}
+.pledge::after{content:"";position:absolute;top:-20%;right:-10%;width:50%;height:70%;border-radius:50%;background:radial-gradient(circle,rgba(230,184,106,.12),transparent 60%)}
+.pledge .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+.pledge h2{font-family:var(--f-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:600;line-height:1.12;margin:1rem 0 1.2rem}
+.pledge h2 em{font-family:var(--f-serif);font-style:italic;color:var(--gold)}
+.pledge .intro{color:rgba(255,255,255,.75);font-weight:300;line-height:1.75;max-width:46ch}
+.pledge .count{margin-top:2.2rem;font-family:var(--f-mono);font-size:.8rem;letter-spacing:.14em;color:var(--sage)}
+.pledge .count b{font-size:2.2rem;font-family:var(--f-serif);font-weight:500;color:var(--sun);display:block;letter-spacing:0}
+.pledge-list{display:flex;flex-direction:column;gap:1rem}
+.pledge-opt{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:1.2rem 1.4rem;display:flex;gap:1.1rem;align-items:flex-start;cursor:pointer;transition:.25s}
+.pledge-opt:hover{border-color:rgba(230,184,106,.5);background:rgba(255,255,255,.07)}
+.pledge-opt .box{flex:none;width:24px;height:24px;border-radius:6px;border:2px solid rgba(255,255,255,.45);margin-top:.1rem;transition:.2s;display:flex;align-items:center;justify-content:center;color:transparent}
+.pledge-opt.checked .box{background:var(--gold);border-color:var(--gold);color:var(--ink-2)}
+.pledge-opt.checked{border-color:var(--gold)}
+.pledge-opt .box svg{width:14px;height:14px}
+.pledge-opt .txt b{display:block;color:#fff;font-size:1.02rem;margin-bottom:.2rem}
+.pledge-opt .txt span{font-size:.86rem;color:rgba(255,255,255,.6)}
+.pledge-opt .impact{margin-left:auto;align-self:center;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.08em;color:var(--sage);text-align:right;white-space:nowrap;text-transform:uppercase}
+@media(max-width:900px){.pledge .wrap{grid-template-columns:1fr}}
+/* modal */
+.modal{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;background:rgba(6,10,8,.72);backdrop-filter:blur(6px)}
+.modal.show{display:flex}
+.modal-card{background:var(--paper-2);border-radius:20px;max-width:440px;width:92%;padding:2.6rem;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.modal-card .earth{width:72px;height:72px;margin:0 auto 1.2rem}
+.modal-card h3{font-family:var(--f-display);color:var(--ink-2);font-size:1.5rem;margin-bottom:.6rem}
+.modal-card p{color:#57675f;font-size:.95rem}
+.modal-card .btn{margin-top:1.6rem}
+/* ============ FINAL CTA ============ */
+.final{position:relative;min-height:92vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:#0a0d16}
+.final .bg-scene{position:absolute;inset:0;width:100%;height:100%}
+.final .wrap{position:relative;z-index:4;padding:5rem 0 5.5rem;text-align:center}
+.final .eyebrow{color:var(--gold);justify-content:center}
+.final .eyebrow::before,.final .eyebrow::after{background:var(--gold)}
+.final h2{font-family:var(--f-display);font-size:clamp(2.6rem,7vw,5.8rem);font-weight:600;line-height:1.03;margin:1.6rem 0 1.4rem;text-wrap:balance}
+.final h2 em{font-family:var(--f-serif);font-style:italic;color:var(--sun);font-weight:500}
+.final p{color:rgba(255,255,255,.85);max-width:52ch;margin:0 auto 2.4rem;font-size:1.12rem;font-weight:300}
+.final .cta-row{justify-content:center}
+.final-foot{margin-top:2.6rem;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+/* ============ FOOTER ============ */
+footer{background:#070c09;color:#fff;padding:4.5rem 0 2.2rem}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.6rem;margin-bottom:3rem}
+footer h5{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);margin-bottom:1.1rem}
+footer a{display:block;color:rgba(255,255,255,.66);font-size:.9rem;padding:.26rem 0;transition:.2s}
+footer a:hover{color:var(--gold)}
+footer .about{color:rgba(255,255,255,.6);font-size:.92rem;line-height:1.7;max-width:34ch;margin-top:1.1rem}
+.brand-foot{display:flex;align-items:center;gap:.6rem;color:#fff;font-family:var(--f-display);text-transform:uppercase;letter-spacing:.04em;font-size:1.05rem}
+.brand-foot svg{width:30px;height:30px}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:1.8rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.08em;color:rgba(255,255,255,.4)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.12s}.reveal-d2{transition-delay:.24s}.reveal-d3{transition-delay:.36s}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+/* ============ SVG SCENES ============ */
+.scene{position:absolute;inset:0;width:100%;height:100%}
+/* hero earth handled in HTML */
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress"></div>
+<header class="site" id="siteHead">
+<div class="wrap nav-inner">
+<a class="brand" href="#top" aria-label="There Is No Planet B home">
+<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1e6b52"/><path d="M32 60 Q50 30 76 44 Q66 74 32 60Z" fill="#6fd3a2"/></svg>
+<b>There Is No <span style="color:var(--sun)">Planet&nbsp;B</span></b>
+</a>
+<nav class="links" aria-label="Primary">
+<a href="#beauty">Beauty</a>
+<a href="#crisis">Crisis</a>
+<a href="#losing">What We Lose</a>
+<a href="#hope">Hope</a>
+<a href="#action">Act</a>
+<a class="btn" href="#pledge">Take the Pledge</a>
+</nav>
+<button id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+<a href="#beauty">Beauty</a><a href="#crisis">Crisis</a><a href="#losing">What We Lose</a><a href="#hope">Hope</a><a href="#action">Act</a><a href="#pledge">Take the Pledge</a>
+</div>
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero" id="beauty-hero" aria-label="Hero">
+<svg id="heroScene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Earth seen from space at night, with city lights and drifting clouds above a dark horizon">
+<defs>
+<radialGradient id="earthGrad" cx="50%" cy="42%" r="60%"><stop offset="0%" stop-color="#3fa377"/><stop offset="45%" stop-color="#1e6b52"/><stop offset="80%" stop-color="#0e2a20"/><stop offset="100%" stop-color="#071410"/></radialGradient>
+<radialGradient id="earthGlow" cx="50%" cy="50%" r="50%"><stop offset="70%" stop-color="rgba(63,163,119,0)" stop-opacity="0"/><stop offset="100%" stop-color="rgba(63,163,119,.55)"/></radialGradient>
+<radialGradient id="auroraG" cx="50%" cy="30%" r="65%"><stop offset="0%" stop-color="rgba(64,255,150,.0)"/><stop offset="55%" stop-color="rgba(64,255,150,.0)"/><stop offset="75%" stop-color="rgba(64,190,140,.18)"/><stop offset="100%" stop-color="rgba(80,220,170,.0)"/></radialGradient>
+<linearGradient id="nightSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#02040a"/><stop offset="55%" stop-color="#04101c"/><stop offset="100%" stop-color="#0a2a28"/></linearGradient>
+<clipPath id="earthClip"><circle cx="720" cy="520" r="300"/></clipPath>
+<filter id="softGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1440" height="900" fill="url(#nightSky)"/>
+<g id="stars"></g>
+<ellipse cx="720" cy="330" rx="720" ry="330" fill="url(#auroraG)" opacity=".5"/>
+<circle cx="720" cy="520" r="352" fill="url(#earthGlow)" opacity=".9"/>
+<g clip-path="url(#earthClip)">
+<circle cx="720" cy="520" r="300" fill="url(#earthGrad)"/>
+<g id="landmasses" fill="rgba(63,180,130,.55)">
+<path d="M585 330 Q640 300 700 318 Q760 336 800 320 Q840 306 858 332 Q820 380 760 392 Q680 406 620 392 Q570 380 585 330Z" opacity=".8"/>
+<path d="M860 330 Q900 350 922 396 Q940 446 900 470 Q860 448 840 400 Q828 362 860 330Z" opacity=".7"/>
+<path d="M530 440 Q580 420 630 446 Q672 470 640 500 Q600 530 550 510 Q510 488 530 440Z" opacity=".75"/>
+<path d="M470 540 Q530 520 600 548 Q650 570 620 610 Q560 648 500 620 Q450 590 470 540Z" opacity=".7"/>
+<path d="M905 500 Q960 490 1010 530 Q1040 566 1000 600 Q950 616 906 580 Q884 548 905 500Z" opacity=".65"/>
+<path d="M640 640 Q700 610 790 640 Q860 660 830 700 Q780 740 700 732 Q630 710 640 640Z" opacity=".6"/>
+<path d="M950 640 Q1010 630 1060 670 Q1090 720 1040 750 Q980 770 940 720 Q930 676 950 640Z" opacity=".55"/>
+</g>
+<g id="cityLights" fill="#ffd98e" filter="url(#softGlow)">
+<g id="lights1"></g>
+</g>
+</g>
+<ellipse cx="720" cy="822" rx="620" ry="34" fill="#03130f" opacity=".8"/>
+<g id="clouds" fill="rgba(220,240,235,.10)">
+<ellipse cx="330" cy="330" rx="260" ry="26"/><ellipse cx="1120" cy="300" rx="300" ry="30"/><ellipse cx="700" cy="215" rx="230" ry="20"/><ellipse cx="1100" cy="560" rx="210" ry="22"/><ellipse cx="250" cy="640" rx="180" ry="18"/>
+</g>
+<g id="comet" opacity="0"><path d="M0 0 L90 30 L0 60 Z" fill="url(#cgrad)"/><defs><linearGradient id="cgrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fff" stop-opacity="0"/><stop offset="100%" stop-color="#fff"/></linearGradient></defs></g>
+</svg>
+<div class="hero-shade"></div>
+<div class="hud-tag hud-1 rec"><i></i>LIVE FEED — EARTH · DAY 365,244</div>
+<div class="hud-tag hud-2"><i></i>ATMOSPHERE · CO₂ 424 ppm</div>
+<div class="hud-tag hud-3"><i></i>BIODIVERSITY · 8.1M SPECIES</div>
+<div class="scroll-hint" aria-hidden="true"><span>Scroll</span><span class="line"></span></div>
+<div class="wrap">
+<div class="kicker">A film for the only home we have</div>
+<h1>There Is No <span class="thin">Planet B</span><br><em>But there is still time.</em></h1>
+<p class="lede">Every forest that breathes, every ocean that surges, every heartbeat of every species — they all share one address. This is the story of what we are losing, what we can still save, and why it begins with you.</p>
+<div class="hero-meta">
+<div class="chip"><b>~1°C</b><span>warmer since 1880</span></div>
+<div class="chip"><b>8M+</b><span>species at risk</span></div>
+<div class="chip"><b>10,000+</b><span>years of climate stability</span></div>
+</div>
+<div class="cta-row">
+<a class="btn btn-primary" href="#beauty">Watch the Story <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<a class="btn btn-ghost" href="#pledge">Take the Pledge</a>
+</div>
+<div class="hero-foot"><span>★★★★★ 4.9 — 128,000+ pledges</span><span>Global campaign · est. 1970</span></div>
+</div>
+</section>
+<!-- ticker -->
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+<!-- ============ PROLOGUE ============ -->
+<section class="prologue" aria-label="Prologue">
+<div class="wrap prologue-grid">
+<div class="reveal">
+<p class="eyebrow">Prologue</p>
+<h2 class="sr-only" style="font-family:var(--f-display);font-size:0">The state of our home</h2>
+<p class="lede">The Earth has been our home for <em>200,000 years</em> of human memory — and for 3.8 billion years, it has done something no other place in the universe is known to do: <em>it holds life.</em></p>
+<p class="sub">We are the first generation to see the full picture, and the last with a real chance to change the ending. This page is a journey: from the beauty that still surrounds us, through the quiet alarms, to the practical, joyful work of bringing the world back into balance.</p>
+</div>
+<figure class="reveal reveal-d1" aria-label="Homeostasis monitor">
+<div class="mono-head"><span>HOMEOSTASIS MONITOR</span><span>LIVE</span></div>
+<div class="bars">
+<div class="bar-row"><span class="lab">Climate</span><span class="track"><span class="fill" style="width:0;background:linear-gradient(90deg,#7fb79a,#d99a3d,#ff6b4a)" data-w="74%"></span></span><span class="val">STRESSED</span></div>
+<div class="bar-row"><span class="lab">Oceans</span><span class="track"><span class="fill" style="width:0;background:linear-gradient(90deg,#7fb79a,#d99a3d)" data-w="58%"></span></span><span class="val">ACIDIFYING</span></div>
+<div class="bar-row"><span class="lab">Forests</span><span class="track"><span class="fill" style="width:0;background:linear-gradient(90deg,#7fb79a,#d99a3d)" data-w="46%"></span></span><span class="val">SHRINKING</span></div>
+<div class="bar-row"><span class="lab">Species</span><span class="track"><span class="fill" style="width:0;background:linear-gradient(90deg,#7fb79a,#d99a3d,#ff6b4a)" data-w="82%"></span></span><span class="val">AT RISK</span></div>
+<div class="bar-row"><span class="lab">Ice</span><span class="track"><span class="fill" style="width:0;background:linear-gradient(90deg,#7fb79a,#d99a3d)" data-w="64%"></span></span><span class="val">MELTING</span></div>
+</div>
+<div class="vitals"><span>02:34:11 UTC</span><span>·</span><span>READING 4 OF 6</span><span>·</span><span>ALL SYSTEMS</span></div>
+</figure>
+</div>
+</section>
+<!-- ============ ACT I : BEAUTY ============ -->
+<section class="act-band" id="beauty" aria-label="Act one — Beauty" style="padding:0">
+<!-- bands injected by JS scene renderer -->
+</section>
+<!-- ============ ACT II : CRISIS ============ -->
+<section class="crisis-wrap" id="crisis" aria-label="Act two — The crisis"></section>
+<!-- ============ WHAT WE LOSE ============ -->
+<section class="lose" id="losing" aria-label="What we are losing">
+<div class="wrap">
+<div class="section-head reveal">
+<p class="eyebrow">What We Are Losing</p>
+<h2>The slow erasure of <em>forever places</em></h2>
+<p>Hover each frame. Behind every statistic is a place someone loved, a sound someone grew up hearing, a view that will never look the same again.</p>
+</div>
+<div class="lose-grid" id="loseGrid"></div>
+</div>
+</section>
+<!-- roll call -->
+<section class="roll" aria-label="Extinction roll call">
+<div class="wrap">
+<p class="eyebrow" style="color:var(--coral);justify-content:center">Extinction Roll Call</p>
+<h2 style="color:#fff">Some voices have already <em>gone quiet</em></h2>
+<p class="sub">A name, once spoken for millions of years, now spoken only in past tense. Each of these vanished in the lifetime of someone still alive today.</p>
+<div class="roll-call" id="rollCall"></div>
+<p class="roll-note">† last recorded · The silence they left behind is the loudest sound we have</p>
+</div>
+</section>
+<!-- silence -->
+<section class="silence" aria-label="Interlude">
+<div class="wrap">
+<h2 class="reveal">In the quiet, the Earth is not asking for permission.<br><b>It is waiting for a decision.</b></h2>
+<p class="sig reveal reveal-d1">— narrator, Act II</p>
+</div>
+</section>
+<!-- ============ ACT III : HOPE ============ -->
+<section class="hope" id="hope" aria-label="Act three — Hope">
+<div class="wrap">
+<div class="section-head reveal">
+<p class="eyebrow">Act III — Hope</p>
+<h2>What comes back, <em>when we choose it</em></h2>
+<p>Hope is not a feeling — it is a verb. These restorations are real, measured, and still growing. Each one began the same way: ordinary people refusing to accept the ending.</p>
+</div>
+<div class="restore-grid" id="restoreGrid"></div>
+<div class="timeline" id="timeline"></div>
+<div class="hope-stats" id="hopeStats"></div>
+</div>
+</section>
+<!-- ============ ACT IV : ACTION ============ -->
+<section class="action" id="action" aria-label="Act four — Take action">
+<div class="wrap">
+<div class="section-head reveal">
+<p class="eyebrow">Act IV — Small Steps, Big Sums</p>
+<h2>You don't need to be a hero.<br><em>Just start.</em></h2>
+<p>Seven billion small choices, made daily, are the largest force on Earth. Pick one habit — the planet will do the math.</p>
+</div>
+<div class="act-grid" id="actGrid"></div>
+</div>
+</section>
+<!-- ============ PLEDGE ============ -->
+<section class="pledge" id="pledge" aria-label="Take the pledge">
+<div class="wrap">
+<div class="reveal">
+<p class="eyebrow" style="color:var(--gold)">The Pledge</p>
+<h2>Sign your name to <em>the only planet</em> that has ever signed yours</h2>
+<p class="intro">A promise is where every movement begins. Choose the promises you can keep — then invite one person to join you. That is how the world changes: one kept promise, multiplied.</p>
+<div class="count"><span>JOINED BY</span><b id="pledgeCount">128,403</b><span>HUMANS ON PLANET EARTH</span></div>
+</div>
+<div class="pledge-list" id="pledgeList"></div>
+</div>
+</section>
+<!-- ============ FINAL CTA ============ -->
+<section class="final" aria-label="Final call to action">
+<svg class="bg-scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Sunrise over a calm ocean with a new green shore">
+<defs>
+<linearGradient id="dawnSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0b1230"/><stop offset="34%" stop-color="#28456b"/><stop offset="62%" stop-color="#d98e5a"/><stop offset="80%" stop-color="#ffd98e"/><stop offset="100%" stop-color="#ffe8b5"/></linearGradient>
+<radialGradient id="sunGlow" cx="50%" cy="62%" r="18%"><stop offset="0%" stop-color="#fff8d8" stop-opacity="1"/><stop offset="60%" stop-color="#ffd98e" stop-opacity=".6"/><stop offset="100%" stop-color="#ffd98e" stop-opacity="0"/></radialGradient>
+<linearGradient id="seaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e3a4a"/><stop offset="100%" stop-color="#07181f"/></linearGradient>
+<linearGradient id="landG" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2c5a3e"/><stop offset="100%" stop-color="#123528"/></linearGradient>
+</defs>
+<rect width="1440" height="900" fill="url(#dawnSky)"/>
+<g fill="#ffd98e" opacity=".9">
+<path d="M250 150l4 10 10 4-10 4-4 10-4-10-10-4 10-4zM1180 90l3 8 8 3-8 3-3 8-3-8-8-3 8-3zM1250 210l3 7 7 3-7 3-3 7-3-7-7-3 7-3zM180 260l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" opacity=".7"/>
+</g>
+<circle cx="720" cy="560" r="330" fill="url(#sunGlow)"/>
+<circle cx="720" cy="560" r="74" fill="#fff7da"/>
+<ellipse cx="720" cy="660" rx="820" ry="180" fill="url(#seaG)"/>
+<g stroke="#ffd98e" stroke-opacity=".25" fill="none">
+<path d="M100 680q155 -26 310 0t310 0 310 0 310 0"/><path d="M60 706q170 -24 340 0t340 0 340 0 340 0"/><path d="M120 734q160 -20 320 0t320 0 320 0 320 0"/><path d="M80 762q170 -18 340 0t340 0 340 0 340 0"/>
+</g>
+<path d="M0 790 Q240 700 500 720 Q740 738 940 700 Q1200 656 1440 690 L1440 900 L0 900Z" fill="url(#landG)"/>
+<g fill="#1e6b52">
+<circle cx="330" cy="720" r="9"/><circle cx="400" cy="712" r="13"/><circle cx="470" cy="726" r="8"/><circle cx="550" cy="716" r="15"/><circle cx="900" cy="706" r="10"/><circle cx="1010" cy="700" r="14"/><circle cx="1120" cy="714" r="9"/><circle cx="1190" cy="708" r="12"/></g>
+<g fill="#0a2418" opacity=".5"><path d="M280 900 Q300 830 340 820 Q370 812 380 840 Q386 860 360 880 L360 900Z"/><path d="M1080 900 Q1100 840 1130 830 Q1160 822 1170 848 Q1176 870 1150 886 L1150 900Z"/></g>
+</svg>
+<div class="final-shade" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,12,.2) 0%,transparent 34%,rgba(5,8,9,.55) 78%,rgba(5,8,9,.92) 100%);z-index:1"></div>
+<div class="wrap">
+<p class="eyebrow reveal">The Ending Is Not Written</p>
+<h2 class="reveal">Protect<br><em>What We Share.</em></h2>
+<p class="reveal reveal-d1">The Earth does not need us to be perfect. It needs us to be present — to choose it, daily, in a thousand small ways. The most powerful moment of the entire story is the next one. Make it count.</p>
+<div class="cta-row reveal reveal-d2">
+<a class="btn btn-light" href="#pledge">Take the Pledge</a>
+<a class="btn btn-ghost" href="#action">See the Actions</a>
+</div>
+<p class="final-foot reveal">There Is No Planet B · Est. on a living world · 3.8 billion years in the making</p>
+</div>
+</section>
+</main>
+<!-- ============ FOOTER ============ -->
+<footer>
+<div class="wrap">
+<div class="foot-grid">
+<div class="about-col">
+<div class="brand-foot">
+<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1e6b52"/><path d="M32 60 Q50 30 76 44 Q66 74 32 60Z" fill="#6fd3a2"/></svg>
+<b>There Is No Planet&nbsp;B</b>
+</div>
+<p class="about">A global awareness campaign for climate, ocean, forest, and biodiversity protection. We tell the story of our shared home — and equip everyone to write a better ending.</p>
+</div>
+<div class="col"><h5>Explore</h5><a href="#beauty">Beauty</a><a href="#crisis">Crisis</a><a href="#losing">What We Lose</a><a href="#hope">Hope</a><a href="#action">Act</a></div>
+<div class="col"><h5>Get Involved</h5><a href="#pledge">Take the Pledge</a><a href="#action">Everyday Actions</a><a href="#hope">Restoration Stories</a><a href="#pledge">Invite a Friend</a></div>
+<div class="col"><h5>Campaign</h5><a href="#top">About</a><a href="#top">Press Kit</a><a href="#top">Contact</a><a href="#top">Privacy</a></div>
+</div>
+<div class="foot-bottom"><span>© 2026 There Is No Planet B · A fictional campaign for demonstration</span><span>Made with care for the only home we have</span></div>
+</div>
+</footer>
+<!-- modal -->
+<div class="modal" id="pledgeModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+<div class="modal-card">
+<svg class="earth" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#1e6b52"/><path d="M32 60 Q50 30 76 44 Q66 74 32 60Z" fill="#6fd3a2"/></svg>
+<h3 id="pmTitle">Welcome to the movement 🌍</h3>
+<p>You've just joined <b id="pmCount">128,403</b> humans who promised the planet something real. Now tell one friend — change spreads by invitation.</p>
+<button class="btn btn-green" id="pmClose">I'll invite someone</button>
+</div>
+</div>
+<script>
+(function(){
+"use strict";
+/* tiny helpers */
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+/* Progress bar */
+var prog=$("#progress");
+function onScroll(){var h=document.documentElement;var max=h.scrollHeight-h.clientHeight;prog.style.width=(h.scrollTop/max*100)+"%";}
+window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+/* Header */
+var head=$("#siteHead");function onScroll2(){head.classList.toggle("scrolled",window.scrollY>40);}window.addEventListener("scroll",onScroll2,{passive:true});onScroll2();
+/* Burger */
+var burger=$("#burger"),mmenu=$("#mobileMenu");burger.addEventListener("click",function(){var open=burger.classList.toggle("open");burger.setAttribute("aria-expanded",open?"true":"false");mmenu.classList.toggle("show",open);});
+$$("#mobileMenu a").forEach(function(a){a.addEventListener("click",function(){burger.classList.remove("open");mmenu.classList.remove("show");});});
+/* Ticker */
+var tickItems=["We are the last generation that can act","2,400,000,000,000 — trees cut each year","Every 2 seconds, a forest the size of a football pitch is lost","8,000,000 — species share this planet","The ocean absorbs 30% of our CO₂","1 in 8 species faces extinction","Every minute, a garbage truck of plastic enters the sea","The first Earth Day was 1970 — and we are still here"];
+var track=$("#tickerTrack");var half=tickItems.map(function(t){return '<span><b>'+t.split("—")[0]+'</b><i>—</i>'+t.split("—").slice(1).join("—")+'</span>'}).join("");
+track.innerHTML=half+half;
+/* Star field + city lights (hero) */
+var stars=$("#stars");var s="";for(var i=0;i<160;i++){var x=Math.random()*1440,y=Math.random()*560,r=Math.random()*1.6+.4,o=(Math.random()*.7+.3).toFixed(2);s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r.toFixed(2)+'" fill="#fff" opacity="'+o+'"/>';}stars.innerHTML=s;
+var lights=$("#lights1");var l="";for(var j=0;j<420;j++){var lx=Math.random()*600+420,ly=Math.random()*600+220;var dx=(lx-720),dy=(ly-520);if(dx*dx+dy*dy<90000){l+='<circle cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="'+(Math.random()*1.1+.35).toFixed(2)+'" fill="#ffd98e" opacity="'+(Math.random()*.8+.2).toFixed(2)+'"/>';}}
+lights.innerHTML=l;
+/* comet */
+var comet=$("#comet");function fireComet(){comet.setAttribute("opacity","0");comet.setAttribute("transform","translate(1200,80)");var a=comet.animate([{transform:"translate(1200,80) rotate(-18deg)",opacity:0},{opacity:1,offset:.1},{transform:"translate(220,760) rotate(-18deg)",opacity:0}],{duration:3200,easing:"ease-in"});setTimeout(fireComet,14000);}if(comet.animate)setTimeout(fireComet,4000);
+/* counter helper */
+function animCount(el,to,dur,suffix){var start=null;function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);var eased=1-Math.pow(1-p,3);var val=Math.round(to*eased).toLocaleString();el.textContent=val+(suffix||"");if(p<1)requestAnimationFrame(step);}requestAnimationFrame(step);}
+/* ===== SCENE DATA ===== */
+var beautyScenes=[
+{title:"The Serengeti at Dusk",cap:"Tanzania · 24,000 km² of wild grass",scene:function(){return '<svg class="scene" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="African savanna at golden hour with elephants and acacia trees"><defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffb36b"/><stop offset="45%" stop-color="#ffd9a0"/><stop offset="75%" stop-color="#ffe3b8"/><stop offset="100%" stop-color="#f7c98a"/></linearGradient></defs><rect width="1440" height="760" fill="url(#skyA)"/><circle cx="1120" cy="180" r="120" fill="#fff" opacity=".92"/><circle cx="1120" cy="180" r="120" fill="#ffd98e" opacity=".55"/><g fill="#2a1a12" opacity=".9"><ellipse cx="200" cy="90" rx="130" ry="16"/><ellipse cx="560" cy="60" rx="100" ry="12"/><ellipse cx="880" cy="110" rx="140" ry="16"/></g><path d="M0 420 Q200 330 420 400 Q600 460 800 380 Q1000 300 1200 390 Q1320 440 1440 400 L1440 760 L0 760Z" fill="#e0a14f"/><path d="M0 500 Q220 430 460 500 Q680 560 920 480 Q1150 400 1440 490 L1440 760 L0 760Z" fill="#c07f3a"/><path d="M0 600 Q260 540 520 600 Q800 660 1080 580 Q1280 530 1440 590 L1440 760 L0 760Z" fill="#8f5a26"/><g fill="#3a2415"><path d="M1100 520 l10 -210 l14 210 z M1112 400 l60 40 l-70 10z"/><path d="M340 540 l8 -160 l12 160z M348 460 l46 30 l-52 8z"/><path d="M700 470 l9 -190 l12 190z M709 380 l56 38 l-64 10z"/></g><g fill="#4a2f1a"><path d="M180 470 q-30 -90 30 -110 q60 20 30 110z"/><path d="M180 520 q-26 -70 26 -86 q52 16 26 86z"/></g><ellipse cx="420" cy="330" rx="46" ry="24" fill="#6b4a2e"/><ellipse cx="520" cy="360" rx="40" ry="20" fill="#6b4a2e"/><g fill="#4a2f1a"><ellipse cx="420" cy="330" rx="46" ry="24"/><ellipse cx="520" cy="360" rx="40" ry="20"/></g><g fill="#7a5a36"><ellipse cx="420" cy="326" rx="46" ry="24"/><ellipse cx="520" cy="356" rx="40" ry="20"/></g><g fill="#4a2f1a"><circle cx="440" cy="318" r="10"/><circle cx="538" cy="348" r="9"/><circle cx="470" cy="328" r="8"/><circle cx="560" cy="356" r="7"/></g><g stroke="#5c3a1c" stroke-width="4" fill="none"><path d="M470 330 L700 470 M560 356 L760 440"/></g><g fill="#6b4a2e"><circle cx="700" cy="470" r="18"/><circle cx="760" cy="440" r="16"/></g><g fill="none" stroke="#8c6a44" stroke-width="2"><circle cx="700" cy="470" r="24"/><circle cx="760" cy="440" r="22"/></g><g fill="#fff" opacity=".55"><circle cx="1020" cy="520" r="3"/><circle cx="1080" cy="560" r="2"/><circle cx="960" cy="590" r="2"/><circle cx="1300" cy="540" r="3"/></g><g fill="#2a1508" opacity=".5"><path d="M300 760 l30 -90 l34 90z"/><path d="M850 760 l28 -84 l32 84z"/><path d="M1250 760 l26 -80 l30 80z"/></g></svg>';}},
+{title:"The Blue Heart of the Pacific",cap:"Palau · home to 700 species of coral",scene:function(){return '<svg class="scene" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Underwater ocean scene with whale and light shafts"><defs><linearGradient id="seaA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0e4a5e"/><stop offset="55%" stop-color="#0a3a52"/><stop offset="100%" stop-color="#03131e"/></linearGradient></defs><rect width="1440" height="760" fill="url(#seaA)"/><g fill="#fff" opacity=".05"><polygon points="300,0 340,760 260,760"/><polygon points="700,0 750,760 650,760"/><polygon points="1100,0 1160,760 1040,760"/></g><g stroke="#cfe3d6" stroke-opacity=".14" stroke-width="26"><line x1="310" y1="0" x2="330" y2="760"/><line x1="720" y1="0" x2="760" y2="760"/><line x1="1130" y1="0" x2="1170" y2="760"/></g><g fill="#062a38" opacity=".8"><path d="M0 600 Q150 560 300 590 Q520 630 700 580 Q900 530 1100 590 Q1280 640 1440 580 L1440 760 L0 760Z"/><path d="M0 660 Q200 630 420 660 Q700 690 960 640 Q1200 600 1440 650 L1440 760 L0 760Z"/></g><path d="M0 720 Q300 680 600 720 Q900 760 1200 710 Q1320 690 1440 720 L1440 760 L0 760Z" fill="#0a2a38"/><g fill="#1a5a6a"><path d="M200 700 q-10 -24 12 -28 q22 4 12 28z"/><path d="M340 720 q-8 -18 10 -20 q16 3 10 20z"/><path d="M520 690 q-10 -22 12 -26 q20 4 12 26z"/><path d="M900 710 q-8 -20 12 -24 q18 4 10 24z"/><path d="M1150 695 q-10 -24 12 -28 q22 4 12 28z"/></g><g fill="#7fb79a"><circle cx="1080" cy="200" r="14"/><circle cx="1120" cy="230" r="10"/><circle cx="1040" cy="240" r="8"/></g><g fill="#cfe3d6" opacity=".8"><circle cx="380" cy="180" r="3"/><circle cx="420" cy="200" r="2"/><circle cx="360" cy="220" r="2"/><circle cx="900" cy="300" r="3"/><circle cx="940" cy="320" r="2"/><circle cx="600" cy="250" r="2"/><circle cx="1280" cy="160" r="3"/></g><g fill="#3f86a6" opacity=".9"><circle cx="1100" cy="300" r="7"/><circle cx="400" cy="340" r="5"/><circle cx="800" cy="400" r="6"/></g><path d="M150 460 q420 -200 620 -120 q140 60 -60 130 q-240 80 -380 20 q-160 -50 -180 -30z" fill="#264d5e" opacity=".95"/><path d="M180 430 q420 -200 620 -120 q140 60 -60 130 q-240 80 -380 20 q-160 -50 -180 -30z" fill="#2d5a6e"/><path d="M330 460 q140 -70 260 -40 q90 22 -10 60 q-160 40 -240 10z" fill="#274d5e" opacity=".8"/><g stroke="#cfe3d6" stroke-opacity=".5"><path d="M120 620 q60 -20 80 0" fill="none" stroke-width="3"/><path d="M140 640 q50 -16 70 0" fill="none" stroke-width="2"/></g></svg>';}},
+{title:"The Breathing Canopy",cap:"Amazon · 400 billion trees exhale for us",scene:function(){return '<svg class="scene" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Rainforest canopy with emergent tree, mist and fireflies"><defs><linearGradient id="skyF" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0c3a2c"/><stop offset="45%" stop-color="#14604a"/><stop offset="80%" stop-color="#0c4a38"/><stop offset="100%" stop-color="#0a3526"/></linearGradient><radialGradient id="moonF" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fffbe8"/><stop offset="60%" stop-color="#f7e7b4"/><stop offset="100%" stop-color="#f7e7b4" stop-opacity="0"/></radialGradient></defs><rect width="1440" height="760" fill="url(#skyF)"/><circle cx="1120" cy="140" r="90" fill="url(#moonF)" opacity=".8"/><g fill="#123528" opacity=".6"><circle cx="1120" cy="140" r="90" opacity=".3"/></g><g fill="#0a3526"><path d="M0 420 L60 380 L120 420 L190 360 L260 420 L340 370 L420 420 L500 350 L580 420 L660 380 L740 420 L820 360 L900 420 L980 370 L1060 420 L1140 350 L1220 420 L1300 380 L1380 420 L1440 390 L1440 760 L0 760Z"/></g><g fill="#0c4a38"><path d="M0 500 L80 470 L160 500 L240 440 L320 500 L420 460 L520 500 L620 440 L720 500 L830 460 L930 500 L1040 440 L1140 500 L1240 460 L1340 500 L1440 470 L1440 760 L0 760Z"/></g><g fill="#14604a"><path d="M0 600 L100 570 L200 600 L320 550 L440 600 L560 560 L680 600 L800 550 L920 600 L1040 560 L1160 600 L1280 550 L1380 600 L1440 580 L1440 760 L0 760Z"/></g><path d="M620 760 L640 420 L660 760Z" fill="#123528"/><g fill="#123528"><ellipse cx="640" cy="420" rx="120" ry="34"/><ellipse cx="560" cy="460" rx="80" ry="24"/><ellipse cx="720" cy="460" rx="90" ry="26"/><ellipse cx="620" cy="500" rx="110" ry="30"/></g><g fill="#0f543f" opacity=".9"><ellipse cx="640" cy="420" rx="118" ry="32"/><ellipse cx="560" cy="460" rx="78" ry="22"/><ellipse cx="720" cy="460" rx="88" ry="24"/></g><g fill="#ffd98e" opacity=".85"><circle cx="560" cy="600" r="2.4"/><circle cx="720" cy="620" r="2"/><circle cx="840" cy="580" r="2.6"/><circle cx="400" cy="640" r="2.2"/><circle cx="1080" cy="600" r="2.4"/><circle cx="240" cy="620" r="2"/><circle cx="1280" cy="640" r="2.2"/></g><g fill="#3fa377" opacity=".5"><circle cx="560" cy="600" r="9"/><circle cx="720" cy="620" r="8"/><circle cx="840" cy="580" r="10"/><circle cx="400" cy="640" r="8"/><circle cx="1080" cy="600" r="9"/><circle cx="240" cy="620" r="7"/><circle cx="1280" cy="640" r="8"/></g><g fill="#cfe3d6" opacity=".6"><circle cx="200" cy="200" r="2"/><circle cx="260" cy="240" r="1.6"/><circle cx="900" cy="160" r="2"/><circle cx="1330" cy="220" r="1.8"/><circle cx="70" cy="300" r="1.8"/><circle cx="1370" cy="340" r="2"/></g><path d="M0 480 Q300 430 600 480 Q900 530 1200 470 Q1330 445 1440 480 L1440 760 L0 760Z" fill="#0c4a38" opacity=".4"/><path d="M0 560 Q250 520 500 570 Q750 620 1000 560 Q1220 515 1440 570 L1440 760 L0 760Z" fill="#0a3526" opacity=".35"/></svg>';}},
+{title:"The Last Ice Cathedral",cap:"Svalbard · where winter still rules",scene:function(){return '<svg class="scene" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Arctic night with aurora borealis, icebergs and a polar bear"><defs><linearGradient id="skyArc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020814"/><stop offset="55%" stop-color="#0a1630"/><stop offset="100%" stop-color="#14344f"/></linearGradient><linearGradient id="aur1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#40ff96" stop-opacity="0"/><stop offset="40%" stop-color="#40ff96" stop-opacity=".28"/><stop offset="60%" stop-color="#7cf7c4" stop-opacity=".5"/><stop offset="100%" stop-color="#40ff96" stop-opacity="0"/></linearGradient></defs><rect width="1440" height="760" fill="url(#skyArc)"/><g opacity=".85"><path d="M-50 180 Q280 40 560 160 Q800 260 1080 120 Q1300 40 1490 140 L1490 260 Q1280 180 1080 250 Q800 380 520 250 Q280 160 -50 300Z" fill="url(#aur1)"/><path d="M-50 260 Q300 120 620 240 Q900 340 1200 200 Q1350 140 1490 220 L1490 320 Q1300 250 1140 320 Q900 440 620 320 Q320 210 -50 380Z" fill="url(#aur1)" opacity=".6"/></g><g fill="#fff"><path d="M120 620 L150 480 L180 480 L210 620Z" opacity=".92"/><path d="M140 520 L150 470 L160 520Z" fill="#dceef7"/><path d="M1150 600 L1180 430 L1210 430 L1240 600Z" opacity=".92"/><path d="M1170 500 L1180 440 L1190 500Z" fill="#dceef7"/><path d="M820 640 L850 520 L880 520 L910 640Z" opacity=".9"/></g><path d="M0 640 Q200 600 400 620 Q700 650 1000 610 Q1250 580 1440 620 L1440 760 L0 760Z" fill="#e8f2f6"/><path d="M0 700 Q300 660 600 700 Q900 735 1200 690 Q1330 672 1440 700 L1440 760 L0 760Z" fill="#cfe3d6"/><g fill="#dceef7"><ellipse cx="400" cy="620" rx="70" ry="22" opacity=".8"/><ellipse cx="900" cy="610" rx="90" ry="24" opacity=".8"/><ellipse cx="1250" cy="620" rx="60" ry="18" opacity=".7"/></g><g fill="#fff" opacity=".8"><circle cx="180" cy="140" r="2"/><circle cx="240" cy="190" r="1.5"/><circle cx="1300" cy="120" r="2"/><circle cx="700" cy="90" r="1.8"/><circle cx="860" cy="160" r="1.5"/><circle cx="420" cy="110" r="1.7"/></g><g fill="#101824"><ellipse cx="920" cy="690" rx="34" ry="16"/><ellipse cx="970" cy="690" rx="30" ry="14"/></g></svg>';}},
+{title:"The Reef That Remembers",cap:"Great Barrier Reef · 2,300 km of living colour",scene:function(){return '<svg class="scene" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Coral reef with sea turtle and colourful fish"><defs><linearGradient id="reefSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0f5a72"/><stop offset="60%" stop-color="#0a4a60"/><stop offset="100%" stop-color="#04222e"/></linearGradient></defs><rect width="1440" height="760" fill="url(#reefSea)"/><g fill="#fff" opacity=".07"><polygon points="200,0 240,760 160,760"/><polygon points="640,0 690,760 590,760"/><polygon points="1100,0 1160,760 1040,760"/></g><g stroke="#d6f0e0" stroke-opacity=".12" stroke-width="20"><line x1="220" y1="0" x2="240" y2="760"/><line x1="680" y1="0" x2="700" y2="760"/><line x1="1140" y1="0" x2="1170" y2="760"/></g><path d="M0 520 Q300 460 600 510 Q900 560 1200 490 Q1330 460 1440 500 L1440 760 L0 760Z" fill="#0c4458"/><g fill="#d98e5a"><path d="M0 560 Q200 540 420 570 L420 760 L0 760Z" opacity=".85"/><circle cx="150" cy="590" r="26"/><circle cx="260" cy="600" r="20"/><circle cx="380" cy="620" r="28"/></g><g fill="#3fa377"><path d="M900 580 Q1100 550 1300 590 L1300 760 L900 760Z" opacity=".9"/><circle cx="1000" cy="600" r="30"/><circle cx="1130" cy="590" r="36"/><circle cx="1260" cy="620" r="24"/></g><g fill="#c8403a"><circle cx="100" cy="700" r="12"/><circle cx="160" cy="680" r="9"/><circle cx="220" cy="710" r="11"/></g><g fill="#e6b86a"><circle cx="1050" cy="660" r="10"/><circle cx="1120" cy="680" r="8"/><circle cx="1190" cy="660" r="12"/></g><g fill="#7fb79a"><circle cx="820" cy="640" r="14"/><circle cx="860" cy="670" r="10"/><circle cx="780" cy="680" r="9"/></g><g fill="#4a9a6a"><path d="M600 640 q-60 -110 -20 -140 q50 20 20 140z"/><path d="M680 650 q-40 -90 -10 -115 q34 16 10 115z"/><path d="M720 620 q-30 -80 0 -100 q26 12 0 100z"/></g><g fill="#e6b86a"><circle cx="690" cy="560" r="7"/><circle cx="705" cy="585" r="5"/></g><g fill="#0a3a4e"><path d="M380 640 l8 -60 l10 60z"/><path d="M700 700 l8 -54 l10 54z"/></g><ellipse cx="980" cy="640" rx="60" ry="80" fill="#2a6a4a"/><ellipse cx="980" cy="560" rx="46" ry="60" fill="#3fa377"/><g stroke="#2a6a4a" stroke-width="3" fill="none"><path d="M960 540 q40 -30 40 20 q0 30 -34 40"/><path d="M1000 540 q-36 -34 -30 20 q4 26 30 36"/><path d="M1010 590 q20 -20 26 4 q4 20 -12 34"/></g><path d="M980 522 q-20 -40 4 -64 q30 22 10 64z" fill="#3fa377"/><circle cx="1008" cy="522" r="3.6" fill="#123528"/><g fill="#fff" opacity=".85"><circle cx="900" cy="430" r="4"/><circle cx="420" cy="380" r="3"/><circle cx="1260" cy="400" r="3.4"/><circle cx="260" cy="440" r="2.6"/><circle cx="760" cy="330" r="3"/></g><g fill="#ff8a6b" opacity=".9"><circle cx="520" cy="300" r="5"/><circle cx="330" cy="470" r="4"/><circle cx="1120" cy="330" r="5"/></g></svg>';}}
+];
+/* ===== CRISIS DATA ===== */
+var crises=[
+{no:"01",name:"Climate",tag:"The atmosphere is running a fever",fact:"The hottest 10 years in recorded history have all occurred since 2014.",simBg:"linear-gradient(160deg,#1a2436,#3b2a1a)",therm:function(){return '<div class="sim-label">GLOBAL TEMPERATURE ANOMALY</div><div style="position:relative;width:200px;height:60px"><div style="position:absolute;bottom:0;left:0;right:0;height:6px;background:rgba(255,255,255,.2);border-radius:3px"></div><div style="position:absolute;bottom:26px;left:0;right:0;height:6px;background:rgba(255,255,255,.2);border-radius:3px"></div><div style="position:absolute;bottom:52px;left:0;right:0;height:6px;background:rgba(255,255,255,.2);border-radius:3px"></div><div class="sim-big" style="font-size:2.6rem;text-align:center;width:100%;color:var(--ember)">1.5°C</div><div style="position:absolute;bottom:0;right:8px;font-family:var(--f-mono);font-size:.55rem;color:var(--sun)">▲ +1.5°</div></div><div class="sim-sub">average warming above pre-industrial levels — and climbing</div>';}},
+{no:"02",name:"Plastic",tag:"The oceans are becoming a landfill",fact:"More than 8 million tonnes of plastic enter the ocean every year.",simBg:"linear-gradient(160deg,#14334a,#1a4a5e)",therm:function(){return '<div class="sim-label">MICROPLASTICS IN THE GYRE</div><div style="font-family:var(--f-serif);font-size:3.4rem;color:#fff;line-height:1">8M <small>t/yr</small></div><div class="sim-sub">tonnes dumped into the sea — a garbage truck every minute</div><div style="margin-top:.6rem;display:flex;gap:.3rem;flex-wrap:wrap;justify-content:center;max-width:180px"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.9)"></span><span style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6)"></span><span style="width:11px;height:11px;border-radius:50%;background:rgba(230,184,106,.9)"></span><span style="width:7px;height:7px;border-radius:50%;background:rgba(255,138,107,.8)"></span><span style="width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.8)"></span><span style="width:5px;height:5px;border-radius:50%;background:rgba(230,184,106,.7)"></span></div>';}},
+{no:"03",name:"Forests",tag:"The lungs of the Earth are burning",fact:"We lose about 10 million hectares of forest every year — an area the size of Iceland.",simBg:"linear-gradient(160deg,#1a1c12,#3a2414)",therm:function(){return '<div class="sim-label">CANOPY LOSS / MINUTE</div><div style="font-family:var(--f-serif);font-size:3rem;color:var(--ember);line-height:1">19 <small>ha</small></div><div class="sim-sub">cleared every minute — an Iceland every year</div><div style="margin-top:.8rem;display:flex;gap:.24rem;align-items:flex-end;height:34px"><span style="width:8px;height:10px;background:#123528"></span><span style="width:8px;height:16px;background:#1a4a38"></span><span style="width:8px;height:24px;background:#2a6a4a"></span><span style="width:8px;height:12px;background:#1a4a38"></span><span style="width:8px;height:30px;background:#2a6a4a"></span><span style="width:8px;height:8px;background:#123528"></span><span style="width:8px;height:22px;background:#1a4a38"></span><span style="width:8px;height:14px;background:#123528"></span><span style="width:8px;height:26px;background:#2a6a4a"></span><span style="width:8px;height:10px;background:#1a4a38"></span><span style="width:8px;height:18px;background:#123528"></span><span style="width:8px;height:28px;background:#2a6a4a"></span><span style="width:8px;height:6px;background:#123528"></span><span style="width:8px;height:20px;background:#1a4a38"></span><span style="width:8px;height:12px;background:#2a6a4a"></span></div>';}},
+{no:"04",name:"Oceans",tag:"The sea is turning acid",fact:"The ocean has absorbed about 30% of human CO₂ — acidifying 30% faster than at any time in 300 million years.",simBg:"linear-gradient(160deg,#0a2a3a,#123c4c)",therm:function(){return '<div class="sim-label">OCEAN pH — 8.1 AND FALLING</div><div style="font-family:var(--f-mono);font-size:1.5rem;color:var(--coral);letter-spacing:.06em">▼ 0.11 pH</div><div class="sim-sub">since the industrial revolution — shells are dissolving</div><div style="margin-top:.8rem;display:flex;align-items:flex-end;height:36px;gap:5px"><div style="width:7px;height:6px;background:rgba(255,255,255,.35)"></div><div style="width:7px;height:12px;background:rgba(255,255,255,.4)"></div><div style="width:7px;height:18px;background:rgba(255,255,255,.5)"></div><div style="width:7px;height:24px;background:rgba(255,255,255,.6)"></div><div style="width:7px;height:30px;background:rgba(255,255,255,.7)"></div><div style="width:7px;height:36px;background:rgba(255,255,255,.85)"></div><div style="width:7px;height:26px;background:rgba(255,255,255,.55)"></div><div style="width:7px;height:16px;background:rgba(255,255,255,.4)"></div><div style="width:7px;height:9px;background:rgba(255,255,255,.3)"></div></div>';}},
+{no:"05",name:"Biodiversity",tag:"The sixth extinction is underway",fact:"Up to 1 million species are threatened with extinction — many within decades.",simBg:"linear-gradient(160deg,#251a20,#3a1a1a)",therm:function(){return '<div class="sim-label">EXTINCTION RATE × NATURAL</div><div style="font-family:var(--f-serif);font-size:3.6rem;color:var(--ember);line-height:1">1,000×</div><div class="sim-sub">faster than the natural background rate</div><div style="margin-top:.8rem;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;color:rgba(255,255,255,.5)">ONE SPECIES · EVERY 20 MINUTES</div>';}}
+];
+/* ===== LOSE DATA ===== */
+var losePairs=[
+{name:"Glacier Bay, Alaska",before:"1976 — the Johns Hopkins Glacier reaches the sea",after:"Today — the ice edge has retreated 16 km inland",bScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#bcd8e6"/><rect width="400" height="250" fill="#dceef7" opacity=".5"/><path d="M0 250 L0 150 L90 90 L180 150 L260 90 L400 170 L400 250Z" fill="#e8f2f6"/><path d="M0 190 L100 130 L200 190 L320 120 L400 180 L400 250 L0 250Z" fill="#cfe0e8"/><g fill="#fff"><path d="M90 90 L120 40 L140 90Z"/><path d="M260 90 L290 30 L310 90Z"/></g><path d="M0 250 Q100 210 200 250 Q300 290 400 240 L400 250Z" fill="#3a6a86"/></svg>',aScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#8baab8"/><path d="M0 250 L0 170 L80 140 L160 190 L260 130 L400 190 L400 250Z" fill="#9db8c0"/><path d="M0 210 L100 170 L200 220 L320 160 L400 200 L400 250 L0 250Z" fill="#6e8a92"/><g fill="#fff" opacity=".6"><path d="M160 190 L175 150 L190 190Z"/><path d="M260 130 L275 95 L290 130Z"/></g><path d="M0 250 Q100 220 200 250 Q300 280 400 235 L400 250Z" fill="#2c4a56"/><g stroke="#4a6a74" stroke-width="3" opacity=".6"><path d="M30 90 l14 14 M44 90 l-14 14"/></g></svg>',stat:"−16 km of ice"},
+{name:"Borneo Rainforest",before:"1990 — two orangutans per square kilometre",after:"Today — 60% of the lowland forest is gone",bScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#1c4a34"/><g fill="#123528"><path d="M0 250 L40 100 L80 250Z"/><path d="M100 250 L150 60 L200 250Z"/><path d="M220 250 L280 90 L340 250Z"/><path d="M330 250 L370 130 L400 230 L400 250Z"/></g><g fill="#2a6a4a"><ellipse cx="60" cy="100" rx="40" ry="14"/><ellipse cx="150" cy="60" rx="52" ry="18"/><ellipse cx="280" cy="90" rx="46" ry="16"/><ellipse cx="370" cy="130" rx="34" ry="12"/></g><g fill="#3fa377"><ellipse cx="90" cy="130" rx="26" ry="10"/><ellipse cx="210" cy="90" rx="30" ry="10"/></g><g fill="#0c3526"><path d="M0 190 Q100 160 200 190 Q300 220 400 180 L400 250 L0 250Z"/></g></svg>',aScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#8a6a42"/><g fill="#6a5234"><path d="M0 250 L30 120 L60 250Z"/><path d="M130 250 L170 80 L210 250Z"/><path d="M260 250 L300 110 L340 250Z"/></g><g fill="#3a2a18"><path d="M70 250 L95 150 L120 250Z"/><path d="M350 250 L375 140 L400 230 L400 250Z"/></g><path d="M0 250 Q100 230 200 250 Q300 270 400 240 L400 250Z" fill="#4a3a24"/><g stroke="#2a1a08" stroke-width="2" opacity=".7"><path d="M160 70 q-20 -20 0 -34 q22 12 0 34z" fill="#ff8a6b" stroke="none"/><path d="M170 90 q-24 -26 0 -46 q26 18 0 46z" fill="#ff8a6b" stroke="none"/></g></svg>',stat:"−60% forest cover"},
+{name:"The Great Barrier Reef",before:"1985 — 48% of corals thriving",after:"Today — only 14% of coral cover remains",bScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#0f5a7a"/><path d="M0 170 Q100 150 200 180 Q300 210 400 160 L400 250 L0 250Z" fill="#0c4458"/><g fill="#ff8a6b"><circle cx="60" cy="200" r="18"/><circle cx="120" cy="220" r="22"/><circle cx="200" cy="205" r="20"/><circle cx="300" cy="215" r="24"/><circle cx="360" cy="200" r="16"/><circle cx="160" cy="235" r="14"/><circle cx="250" cy="235" r="18"/></g><g fill="#e6b86a"><circle cx="90" cy="180" r="10"/><circle cx="230" cy="185" r="12"/><circle cx="330" cy="185" r="10"/></g><g fill="#3fa377"><circle cx="30" cy="190" r="12"/><circle cx="350" cy="235" r="13"/><circle cx="280" cy="190" r="9"/></g><g fill="#0a3a4e"><path d="M90 120 l6 -40 l8 40z"/><path d="M290 130 l6 -36 l8 36z"/></g><g fill="#7fb79a" opacity=".8"><circle cx="140" cy="120" r="6"/><circle cx="160" cy="130" r="5"/><circle cx="330" cy="110" r="6"/><circle cx="240" cy="100" r="5"/></g></svg>',aScene:'<svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="250" fill="#2a4a58"/><path d="M0 180 Q100 165 200 190 Q300 215 400 165 L400 250 L0 250Z" fill="#1c3a46"/><g fill="#6e8a92"><circle cx="70" cy="210" r="16"/><circle cx="170" cy="225" r="20"/><circle cx="280" cy="220" r="18"/><circle cx="350" cy="210" r="14"/></g><g fill="#4a5a62"><circle cx="120" cy="235" r="12"/><circle cx="230" cy="235" r="15"/><circle cx="310" cy="235" r="11"/></g><path d="M0 250 Q100 240 200 250 Q300 260 400 245 L400 250Z" fill="#12303c"/><g stroke="#5a6a72" stroke-width="2" opacity=".5"><path d="M180 130 l12 12 M192 130 l-12 12"/></g></svg>',stat:"−34% coral cover"}
+];
+/* ===== ROLL CALL ===== */
+var rollNames=[["Bramble Cay melomys","2016"],["Yangtze river dolphin","2006"],["Golden toad","1989"],["Western black rhino","2011"],["Pinta Island tortoise","2012"],["Spix's macaw (wild)","2000"]];
+/* ===== HOPE DATA ===== */
+var restores=[
+{tag:"Rewilding",name:"The Wolves of Yellowstone",txt:"After 70 years of absence, 14 wolves were reintroduced in 1995. They changed the rivers: elk thinned, willows returned, beavers rebuilt, and the whole park came alive again.",delta:"1995 → now",scene:'<svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="210" fill="#c8dce6"/><rect width="400" height="210" fill="url(#h1)" /><defs><linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7fa8b8"/><stop offset="100%" stop-color="#d8e8ee"/></linearGradient></defs><path d="M0 210 L0 130 L80 60 L200 150 L320 50 L400 120 L400 210Z" fill="#3a6a5a"/><g fill="#2a4a3e"><path d="M0 210 L0 150 L70 100 L150 170 L260 90 L400 180 L400 210Z"/></g><path d="M0 210 Q100 170 200 195 Q320 220 400 180 L400 210Z" fill="#3fa377" opacity=".6"/><g fill="#1c3a30"><path d="M80 210 L95 60 L110 210Z"/><path d="M280 210 L300 90 L320 210Z"/><path d="M180 210 L200 120 L220 210Z"/></g><g fill="#3fa377"><ellipse cx="95" cy="60" rx="36" ry="12"/><ellipse cx="300" cy="90" rx="40" ry="13"/><ellipse cx="200" cy="120" rx="30" ry="10"/></g><g stroke="#1c3a30" stroke-width="3" fill="none"><path d="M340 140 l-10 -26 8 -14 -22 8 -12 12 6 22 16 14z"/><path d="M340 140 l26 6 16 -8 -20 -12z"/><circle cx="338" cy="118" r="3" fill="#1c3a30" stroke="none"/></g><g fill="#123528"><ellipse cx="60" cy="200" rx="26" ry="8"/><ellipse cx="120" cy="200" rx="20" ry="6"/><ellipse cx="360" cy="195" rx="24" ry="7"/></g></svg>'},
+{tag:"Blue carbon",name:"Mangroves of Bhitarkanika",txt:"Villagers planted 55 km² of mangroves along India's Odisha coast. The trees now blunt cyclones, shelter nurseries of fish, and lock away carbon 4× faster than rainforests.",delta:"+55 km² forest",scene:'<svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="210" fill="#0f5a72"/><g fill="#0a3a4e"><path d="M0 210 L0 120 L400 60 L400 210Z" opacity=".8"/></g><g fill="#0e2a20"><path d="M20 210 L45 60 L70 210Z"/><path d="M90 210 L120 40 L150 210Z"/><path d="M180 210 L215 70 L250 210Z"/><path d="M290 210 L320 50 L350 210Z"/><path d="M360 210 L382 90 L400 200 L400 210Z"/></g><g fill="#1e6b52"><path d="M45 60 L20 100 L45 90 L70 110Z"/><path d="M45 60 L30 130 L50 115 L65 140Z"/><path d="M120 40 L95 90 L120 75 L145 100Z"/><path d="M120 40 L100 120 L125 100 L150 130Z"/><path d="M215 70 L185 120 L215 100 L245 130Z"/><path d="M215 70 L195 140 L220 120 L245 150Z"/><path d="M320 50 L295 100 L320 85 L345 110Z"/><path d="M320 50 L300 130 L325 110 L350 140Z"/></g><g stroke="#3fa377" stroke-width="5" fill="none" opacity=".8"><path d="M80 210 L80 180 M80 180 L60 165 M80 180 L100 165"/><path d="M260 210 L260 175 M260 175 L240 158 M260 175 L280 158"/></g><g fill="#cfe3d6" opacity=".7"><circle cx="330" cy="150" r="4"/><circle cx="350" cy="160" r="3"/><circle cx="310" cy="165" r="3"/></g></svg>'},
+{tag:"Ocean regrowth",name:"Coral Gardens of the Ryukyus",txt:"Local divers and scientists glued 1,000 coral fragments onto dead reef. Ten years later, the site hosts 30,000 new colonies and is quietly seeding neighbouring reefs.",delta:"+30,000 colonies",scene:'<svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%"><rect width="400" height="210" fill="#0f5a72"/><g fill="#fff" opacity=".08"><polygon points="120,0 150,210 90,210"/><polygon points="280,0 315,210 245,210"/></g><path d="M0 150 Q100 130 200 155 Q300 180 400 145 L400 210 L0 210Z" fill="#0a3a4e"/><g fill="#ff8a6b"><circle cx="60" cy="175" r="16"/><circle cx="150" cy="190" r="20"/><circle cx="240" cy="180" r="17"/><circle cx="330" cy="190" r="19"/><circle cx="110" cy="195" r="12"/><circle cx="290" cy="198" r="13"/><circle cx="370" cy="182" r="11"/></g><g fill="#e6b86a"><circle cx="90" cy="165" r="9"/><circle cx="200" cy="170" r="11"/><circle cx="350" cy="170" r="9"/><circle cx="130" cy="200" r="8"/><circle cx="270" cy="185" r="8"/></g><g fill="#3fa377"><circle cx="35" cy="180" r="10"/><circle cx="320" cy="205" r="10"/><circle cx="400" cy="200" r="9"/><circle cx="180" cy="200" r="9"/></g><g fill="#0a3a4e"><path d="M70 90 l6 -38 l8 38z"/><path d="M320 100 l6 -34 l8 34z"/></g><g fill="#7fb79a" opacity=".9"><circle cx="120" cy="90" r="5"/><circle cx="150" cy="105" r="4"/><circle cx="290" cy="80" r="5"/><circle cx="230" cy="95" r="4"/><circle cx="60" cy="110" r="4"/></g><g stroke="#cfe3d6" stroke-width="2.4" fill="none" opacity=".6"><path d="M360 130 q10 -14 24 -12"/><path d="M365 140 q14 -10 28 -6"/></g></svg>'}
+];
+var timelineData=[
+{yr:"1970",t:"The first Earth Day",p:"20 million people — 10% of the US population — took to the streets. Within a year, the EPA existed and the Clean Air Act passed.",gain:"1st global environmental movement"},
+{yr:"1987",t:"The Montreal Protocol",p:"The world agreed to stop making the chemicals that were tearing a hole in the ozone layer. The hole has been healing ever since.",gain:"Ozone on track to recover by ~2066"},
+{yr:"1991",t:"The Antarctic Treaty goes green",p:"50 years of protection made the Southern Ocean the world's largest marine reserve — home to 10,000 species.",gain:"Largest protected area on Earth"},
+{yr:"2006",t:"The tide turns on plastic",p:"A single image of a whale with a plastic bag in its mouth moved 40 countries to ban single-use plastic bags.",gain:"40+ national bag bans"},
+{yr:"2015",t:"Paris — 196 nations, one promise",p:"Every country on Earth agreed to hold warming to well below 2°C. It is not enough yet — but it was never possible before.",gain:"The first truly global climate treaty"}
+];
+var hopeStatsData=[
+["96%","of countries now have climate laws or policies"],
+["71%","of people say they would act if their neighbours did"],
+["2°C→1.5°C","the target we are still fighting for"],
+["30×30","goal: protect 30% of land & sea by 2030"]
+];
+/* ===== ACTION DATA ===== */
+var actions=[
+{ic:"sun",t:"Flip your energy",d:"Switch to a renewable tariff or add a solar panel. A typical home can cut its carbon footprint by a third — and save money on the way.",sv:"~1.6 t CO₂ / yr",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg>'},
+{ic:"bike",t:"Move lighter",d:"Walk, cycle, share rides or take the train once a week. Transport is a quarter of global emissions — and the fix is often the most fun part of the day.",sv:"~0.5 t CO₂ / yr",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="16" r="3.4"/><circle cx="18" cy="16" r="3.4"/><path d="M6 16l4-6h4M14 10h3l2 6M10 16h2"/></svg>'},
+{ic:"leaf",t:"Eat a little greener",d:"Skip meat one day a week and cut food waste in half. Livestock and wasted food together drive nearly a fifth of global emissions.",sv:"~0.8 t CO₂ / yr",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M5 19C5 10 10 4 20 4c0 10-6 15-15 15z"/><path d="M5 19c3-6 7-9 12-11"/></svg>'},
+{ic:"bag",t:"Refuse single-use",d:"Carry a bottle, a bag and a cup. Every piece of plastic ever made still exists — the cheapest fix is the one that is never created.",sv:"~150 kg plastic / yr",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M5 8h14l-1.5 12h-11z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>'},
+{ic:"tree",t:"Plant & protect",d:"Plant native species in your garden, balcony or street. One mature tree absorbs ~22 kg of CO₂ a year and cools its neighbourhood.",sv:"~22 kg CO₂ / tree·yr",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v13M12 21v-3"/><path d="M12 6C12 3 8 3 8 6c0 2 2 2 2 4 0 2-2 2-2 4 0 3 4 3 4 0z"/><path d="M12 5c0-2 4-2 4 1 0 2-2 2-2 4 0 2 2 2 2 4 0 2-4 2-4-1z"/></svg>'},
+{ic:"megaphone",t:"Use your voice",d:"Talk about it at dinner, vote for it in elections, share it at work. Individual action becomes collective power the moment it is spoken aloud.",sv:"×10 your impact",svg:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M4 11v3M6 9v7M8 7v11M10 5v15M12 9l9-4v14l-9-4"/></svg>'}
+];
+/* ===== PLEDGE DATA ===== */
+var pledges=[
+{t:"I will reduce my waste",d:"Carry what I need, refuse what I don't.",im:"−40% landfill"},
+{t:"I will protect a place",d:"Adopt a street, beach, park or forest near me.",im:"1 place saved"},
+{t:"I will choose climate-friendly",d:"Energy, transport and food — one change this season.",im:"−1 t CO₂"},
+{t:"I will speak for the planet",d:"Have one honest conversation a month.",im:"×10 reach"},
+{t:"I will keep learning",d:"Read one science-backed story a month.",im:"informed action"}
+];
+/* ===== RENDER: BEAUTY BANDS ===== */
+var beautyWrap=$("#beauty");
+beautyScenes.forEach(function(sc,i){
+var band=document.createElement("div");
+band.className="act-band";
+band.style.padding=i===0?"10rem 0 8rem":"10rem 0 8rem";
+var color="var(--pine-2)";
+if(i%3===1)color="#071a16";if(i%3===2)color="var(--pine)";
+band.style.background="linear-gradient(180deg,"+color+","+color+")";
+var inner='<div class="bg-scene reveal-scene">'+sc.scene()+'<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,12,9,.1) 0%,rgba(6,12,9,.1) 40%,rgba(6,12,9,.72) 82%,'+color+' 100%)"></div></div>';
+var side=i%2===0?"left":"right";
+inner+='<div class="wrap" style="display:grid;grid-template-columns:'+(side==="left"?"1.05fr .8fr":".8fr 1.05fr")+';gap:3rem;align-items:end">';
+if(side==="right")inner+='<div></div>';
+inner+='<div class="reveal" style="padding-bottom:2rem"><span class="act-label">Scene '+(i+1)+' — Beauty</span><h2 style="font-size:clamp(1.9rem,3.6vw,2.9rem)">'+sc.title+'</h2><p style="color:rgba(255,255,255,.75);margin-top:.7rem;font-weight:300">'+sc.cap+'</p></div>';
+if(side==="left")inner+='<div></div>';
+inner+='</div><span class="scene-credit">'+sc.cap+'</span>';
+band.innerHTML=inner;
+beautyWrap.appendChild(band);
+});
+/* ===== RENDER: CRISIS ===== */
+var cWrap=$("#crisis");
+crises.forEach(function(c,i){
+var csec=document.createElement("section");
+csec.className="crisis";
+csec.style.background="linear-gradient(180deg,"+(i%2? "var(--ink)" :"#0d1a16")+","+(i%2? "#0a1510" :"var(--ink-2)")+")";
+var bgGrads=["linear-gradient(160deg,#1a2436,#3b2a1a)","linear-gradient(160deg,#14334a,#1a4a5e)","linear-gradient(160deg,#1a1c12,#3a2414)","linear-gradient(160deg,#0a2a3a,#123c4c)","linear-gradient(160deg,#251a20,#3a1a1a)"];
+csec.innerHTML='<div class="crisis-text reveal"><span class="no">'+c.no+' — '+c.name+'</span><h2>'+c.tag+'<span>'+c.fact.split(" — ")[0]+'</span></h2><p>'+c.fact+'</p><div class="fact">"'+["The decisions of the next ten years will echo for a thousand.","What we throw 'away' always ends up somewhere — and that somewhere is alive.","A forest is not timber waiting to be cut; it is a weather machine, a pharmacy, a cathedral.","The sea has been quietly absorbing our mistakes — at a cost we are only beginning to count.","Extinction is forever. The arrow only flies one way."][i]+'"</div></div><div class="crisis-hud"><div class="sim" style="background:'+bgGrads[i]+';border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 60px rgba(0,0,0,.45)">'+c.therm()+'</div></div>';
+cWrap.appendChild(csec);
+});
+/* ===== RENDER: LOSE ===== */
+var loseGrid=$("#loseGrid");
+losePairs.forEach(function(p){
+var card=document.createElement("div");card.className="lose-card reveal";
+card.innerHTML='<div class="pair"><span class="tag b">Then · '+p.before.split("—")[0].trim()+'</span><div class="side before">'+p.bScene+'</div><div class="side after">'+p.aScene+'</div><span class="tag a" style="top:.8rem;right:.8rem;left:auto;background:rgba(31,107,82,.9)">Now</span></div><div class="cap"><h3>'+p.name+'</h3><p>'+p.before+'</p><p style="margin-top:.4rem;color:#8a5a3a">'+p.after+'</p><div class="stat"><span>Change</span><b>'+p.stat+'</b></div></div>';
+loseGrid.appendChild(card);
+});
+/* ===== RENDER: ROLL CALL ===== */
+var roll=$("#rollCall");
+rollNames.forEach(function(r){
+var el=document.createElement("span");el.className="roll-name reveal";el.innerHTML=r[0]+"<b>† "+r[1]+"</b>";roll.appendChild(el);
+});
+/* ===== RENDER: HOPE ===== */
+var rGrid=$("#restoreGrid");
+restores.forEach(function(r){
+var el=document.createElement("article");el.className="restore reveal";
+el.innerHTML='<div class="scene">'+r.scene+'</div><div class="body"><span class="tag">'+r.tag+'</span><h3>'+r.name+'</h3><p>'+r.txt+'</p><div class="delta"><span>Since</span><b>'+r.delta+'</b></div></div>';
+rGrid.appendChild(el);
+});
+var tLine=$("#timeline");
+timelineData.forEach(function(t,i){
+var el=document.createElement("div");el.className="tl-item reveal";
+el.innerHTML='<span class="dot"></span><span class="yr">'+t.yr+'</span><h4>'+t.t+'</h4><p>'+t.p+'</p><span class="gain">'+t.gain+'</span>';
+tLine.appendChild(el);
+});
+var hStats=$("#hopeStats");
+hopeStatsData.forEach(function(s){
+var el=document.createElement("div");el.className="hope-stat reveal";
+el.innerHTML='<b data-count="'+s[0].replace(/[^\d.]/g,"")+'">'+s[0]+'</b><span>'+s[1]+'</span>';
+hStats.appendChild(el);
+});
+/* ===== RENDER: ACTIONS ===== */
+var aGrid=$("#actGrid");
+actions.forEach(function(a,i){
+var el=document.createElement("div");el.className="act-card reveal";
+el.innerHTML='<span class="num">'+(i+1)+'</span><div class="ic">'+a.svg+'</div><h3>'+a.t+'</h3><p>'+a.d+'</p><span class="saving">saves <b>'+a.sv+'</b></span>';
+aGrid.appendChild(el);
+});
+/* ===== RENDER: PLEDGE ===== */
+var pList=$("#pledgeList");
+var pc=128403;
+var pm=$("#pledgeModal"),pmC=$("#pmCount"),pmClose=$("#pmClose");
+pledges.forEach(function(p,i){
+var el=document.createElement("label");el.className="pledge-opt";
+el.innerHTML='<span class="box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 12l5 5L20 7"/></svg></span><span class="txt"><b>'+p.t+'</b><span>'+p.d+'</span></span><span class="impact">'+p.im+'</span>';
+el.addEventListener("click",function(e){if(e.target.closest("a"))return;var was=el.classList.contains("checked");if(was){el.classList.remove("checked");pc--;el.querySelector(".box").setAttribute("aria-checked","false");}else{el.classList.add("checked");pc++;el.querySelector(".box").setAttribute("aria-checked","true");pmCount.textContent=pc.toLocaleString();var c=$("#pledgeCount");if(c)c.textContent=pc.toLocaleString();}});
+pList.appendChild(el);
+});
+var pledgeBtn=document.createElement("button");pledgeBtn.className="btn btn-green";pledgeBtn.style.marginTop=".4rem";pledgeBtn.style.alignSelf="flex-start";pledgeBtn.textContent="Confirm my pledge →";pledgeBtn.addEventListener("click",function(){var any=$(".pledge-opt.checked");if(!any){alert("Please choose at least one promise.");return;}pm.classList.add("show");pmC.textContent=pc.toLocaleString();});pList.appendChild(pledgeBtn);
+pmClose.addEventListener("click",function(){pm.classList.remove("show");$$(".pledge-opt.checked").forEach(function(el){el.classList.remove("checked");});});
+pm.addEventListener("click",function(e){if(e.target===pm)pm.classList.remove("show");});
+/* ===== REVEAL IO ===== */
+var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}});},{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+$$(".reveal").forEach(function(el){io.observe(el);});
+/* hero scene reveal (bands are in viewport early) */
+var io2=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io2.unobserve(en.target);}});},{threshold:.08,rootMargin:"0px 0px -10% 0px"});
+$$(".reveal-scene").forEach(function(el){io2.observe(el);});
+/* ===== COUNT-UP ON VIEW ===== */
+var cio=new IntersectionObserver(function(entries){entries.forEach(function(en){if(!en.isIntersecting)return;var el=en.target;var final=el.getAttribute("data-count")||el.textContent.replace(/[^\d.]/g,"");if(!final)return;animCount(el,parseFloat(final),1600,el.getAttribute("data-suffix")||"");cio.unobserve(el);});},{threshold:.5});
+$$(".hope-stat b[data-count]").forEach(function(el){el.setAttribute("data-suffix","");cio.observe(el);});
+/* fill bars animate */
+var fio=new IntersectionObserver(function(entries){entries.forEach(function(en){if(!en.isIntersecting)return;var f=en.target;f.style.width=f.getAttribute("data-w");fio.unobserve(f);});},{threshold:.4});
+$$(".fill[data-w]").forEach(function(el){fio.observe(el);});
+/* hero pledge count + stats counters already set */
+})();
+</script>
+</body>
+</html>
