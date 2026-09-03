@@ -1,0 +1,960 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山水林州 · 太行气魄 · 红旗渠精神</title>
+<meta name="description" content="山水林州，太行气魄，红旗渠精神。河南林州城市形象专题——太行山的壮美、红旗渠的精神、石板岩的烟火与四季风物。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%239b4a2f'/%3E%3Cpath d='M3 24 L11 9 L17 19 L22 12 L29 24 Z' fill='none' stroke='%23f6f1e7' stroke-width='2.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   山水林州 · 太行气魄 · 红旗渠精神
+   林州城市形象单页宣传
+   ============================================================ */
+:root{
+  --ink:#26221c;            /* 墨褐 */
+  --ink-2:#4b453a;
+  --muted:#6f675a;
+  --paper:#f7f3ea;          /* 云雾暖白 */
+  --paper-2:#efe9dc;
+  --card:#fffdf7;
+  --slate:#343a3f;          /* 山石灰 深 */
+  --slate-ink:#23272b;
+  --forest:#3e5c4b;         /* 森林绿 */
+  --forest-deep:#2c4437;
+  --ochre:#a9743a;          /* 暖土 */
+  --red:#b03a2e;            /* 红旗红 */
+  --red-deep:#8e2d22;
+  --line:rgba(60,52,40,.16);
+  --line-w:rgba(255,252,245,.14);
+  --serif:"Noto Serif SC", "Songti SC", "STSong", serif;
+  --sans:"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.8;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(176,58,46,.18)}
+
+/* ---------- 通用容器与章节 ---------- */
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.sec{position:relative;padding:clamp(90px,11vw,150px) 0}
+.sec-head{margin-bottom:clamp(44px,6vw,78px)}
+.kicker{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:13px;letter-spacing:.5em;color:var(--muted);
+  font-weight:500;padding-left:4px;
+}
+.kicker::before{content:"";width:38px;height:1px;background:currentColor;opacity:.55}
+.kicker.tone-paper{color:rgba(247,243,234,.62)}
+h2.title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(30px,4.4vw,46px);
+  letter-spacing:.08em;margin-top:20px;line-height:1.35;
+}
+.title .accent{color:var(--red)}
+.title .accent-f{color:#c98f4a}
+
+/* ---------- 顶部导航 ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  height:72px;padding:0 max(4vw,24px);
+  transition:background .45s ease,box-shadow .45s ease,height .45s ease;
+  color:rgba(255,253,247,.94);
+}
+.nav.solid{
+  background:rgba(38,34,28,.92);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(255,255,255,.08);
+  height:62px;
+}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;letter-spacing:.2em;font-size:17px}
+.brand .seal{
+  width:34px;height:34px;border:1px solid rgba(255,255,255,.4);border-radius:6px;
+  display:grid;place-items:center;background:rgba(255,255,255,.06);
+}
+.brand .seal svg{width:18px;height:18px}
+.nav-links{display:flex;align-items:center;gap:clamp(16px,2.4vw,34px)}
+.nav-links a{font-size:14.5px;letter-spacing:.12em;opacity:.86;transition:opacity .25s;position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:#d8a05e;transition:width .3s var(--ease)}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{width:100%}
+.burger{display:none;width:42px;height:42px;cursor:pointer;z-index:130;position:relative;background:none;border:1px solid rgba(255,255,255,.3);border-radius:8px}
+.burger span{position:absolute;left:10px;right:10px;height:1.6px;background:rgba(255,255,255,.92);transition:.35s var(--ease)}
+.burger span:nth-child(1){top:14px}
+.burger span:nth-child(2){top:20px}
+.burger span:nth-child(3){top:26px}
+body.menu-open .burger span:nth-child(1){top:20px;transform:rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){top:20px;transform:rotate(-45deg)}
+.mobile-nav{
+  position:fixed;inset:0;z-index:110;background:rgba(28,25,20,.97);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;
+  opacity:0;pointer-events:none;transition:opacity .35s var(--ease);
+}
+body.menu-open .mobile-nav{opacity:1;pointer-events:auto}
+.mobile-nav a{font-family:var(--serif);font-size:22px;letter-spacing:.3em;color:#f6f1e7;padding:13px 26px;opacity:.85;transition:opacity .2s}
+.mobile-nav a:hover{opacity:1;color:#e5b579}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;background:#20242a}
+.hero .bg{position:absolute;inset:0;background:url('images/hero.jpg') center 42%/cover no-repeat;transform:scale(1.06)}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,16,20,.52) 0%,rgba(16,16,20,.18) 34%,rgba(16,16,20,.28) 58%,rgba(14,14,18,.82) 100%)}
+.hero .dust{position:absolute;inset:0;pointer-events:none}
+.hero-content{
+  position:relative;z-index:3;height:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+  color:#f8f4ec;padding:0 20px 9vh;
+}
+.hero .top-tag{
+  display:inline-flex;align-items:center;gap:14px;
+  border:1px solid rgba(255,255,255,.26);border-radius:100px;
+  padding:8px 20px;font-size:12.5px;letter-spacing:.5em;color:#efe7d8;
+  background:rgba(255,255,255,.05);backdrop-filter:blur(6px);
+  margin-bottom:clamp(30px,4.5vh,52px);text-indent:.5em;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(58px,11vw,148px);
+  line-height:1.06;letter-spacing:.12em;color:#fff;
+  text-shadow:0 8px 60px rgba(0,0,0,.4);
+  text-indent:.12em;
+}
+.hero .shui{
+  font-size:clamp(24px,3.6vw,46px);letter-spacing:.5em;text-indent:.5em;
+  color:#e8dcc6;font-family:var(--serif);font-weight:600;margin:6px 0 26px;opacity:.94;
+}
+.hero .sub{
+  font-size:clamp(15px,1.9vw,20px);letter-spacing:.42em;color:rgba(246,240,230,.9);
+  font-weight:300;text-indent:.42em;margin-bottom:clamp(34px,5vh,58px);
+}
+.hero .scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:9px;color:rgba(248,244,236,.75);
+  font-size:11px;letter-spacing:.45em;text-indent:.45em;
+}
+.hero .scroll-hint i{width:1px;height:52px;background:linear-gradient(180deg,rgba(248,244,236,.8),transparent);display:block;animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero .side-word{
+  position:absolute;right:3.4vw;top:50%;transform:translateY(-50%);
+  writing-mode:vertical-rl;letter-spacing:.9em;color:rgba(255,255,255,.4);
+  font-family:var(--serif);font-size:13px;z-index:3;text-indent:.4em;
+}
+.hero .frame-line{position:absolute;inset:20px;border:1px solid rgba(255,255,255,.14);z-index:2;pointer-events:none}
+
+/* 首屏底部指标带 */
+.hero-strip{position:absolute;left:0;right:0;bottom:0;z-index:4;color:#f2ecdf}
+.hero-strip .wrap{display:flex;justify-content:space-between;gap:20px;padding-bottom:82px;flex-wrap:wrap}
+.hero-strip .hs-item{display:flex;flex-direction:column;gap:2px;border-left:2px solid rgba(230,186,130,.85);padding-left:16px}
+.hero-strip .hs-item b{font-family:var(--serif);font-size:clamp(20px,2.4vw,28px);font-weight:700;letter-spacing:.04em}
+.hero-strip .hs-item span{font-size:12px;letter-spacing:.24em;color:rgba(242,236,223,.72)}
+
+/* ---------- 卷首语 ---------- */
+.credo{background:var(--paper);text-align:center}
+.credo .big-q{
+  font-family:var(--serif);font-weight:700;color:var(--red);
+  font-size:clamp(44px,6.5vw,80px);line-height:1;opacity:.9;
+}
+.credo .c-line{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(22px,3.4vw,38px);line-height:2.05;letter-spacing:.16em;
+  margin:8px auto 0;color:var(--ink);
+}
+.credo .c-line .t1{color:var(--forest-deep)}
+.credo .c-line .t2{color:var(--red)}
+.credo .c-line .t3{color:var(--ochre)}
+.credo .c-note{max-width:560px;margin:26px auto 0;color:var(--muted);font-size:15px;letter-spacing:.06em}
+
+/* ---------- 01 初见林州 ---------- */
+.city{background:var(--paper)}
+.city .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,90px);align-items:center}
+.city h2.title{margin-top:18px}
+.city .lede{font-size:clamp(17px,1.8vw,20px);color:var(--ink-2);line-height:2;margin:26px 0 14px;font-weight:500}
+.city .lede em{font-style:normal;color:var(--forest-deep);font-weight:700}
+.city p{color:var(--muted);margin-top:16px;font-size:15.5px}
+.city .cite{
+  margin-top:30px;font-size:13px;color:var(--ochre);letter-spacing:.12em;
+  display:flex;align-items:center;gap:12px;
+}
+.city .cite::before{content:"";width:30px;height:1px;background:var(--ochre)}
+.city .city-facts{display:flex;gap:0;border-top:1px solid var(--line);margin-top:38px;padding-top:26px}
+.city .cf{flex:1;display:flex;flex-direction:column;gap:4px}
+.city .cf+.cf{border-left:1px solid var(--line);padding-left:clamp(16px,2.6vw,38px)}
+.city .cf b{font-family:var(--serif);font-size:clamp(20px,2.2vw,27px);color:var(--ink);font-weight:700}
+.city .cf b i{font-style:normal;font-size:.55em;color:var(--muted);font-family:var(--sans);font-weight:400;margin-left:3px}
+.city .cf span{font-size:12.5px;letter-spacing:.14em;color:var(--muted)}
+.city .visual{position:relative}
+.city .visual .ph{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(30,25,15,.5)}
+.city .visual .ph img{width:100%;height:clamp(400px,52vw,600px);object-fit:cover;transition:transform 6s var(--ease)}
+.city .visual .ph:hover img{transform:scale(1.05)}
+.city .visual .ph figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:44px 22px 16px;
+  font-size:12px;letter-spacing:.3em;color:#f2ecdf;text-indent:.3em;
+  background:linear-gradient(180deg,transparent,rgba(10,10,12,.72));
+}
+.city .visual .ph svg.frame{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0}
+.city .visual .chip{
+  position:absolute;left:-18px;bottom:34px;background:var(--forest-deep);color:#f4efe3;
+  padding:16px 22px;font-family:var(--serif);letter-spacing:.3em;font-size:14px;
+  border-radius:3px;box-shadow:0 18px 40px -14px rgba(20,30,22,.55);
+}
+.city .visual .corner-txt{
+  position:absolute;right:-6px;top:-8px;writing-mode:vertical-rl;
+  font-family:var(--serif);color:rgba(38,34,28,.22);letter-spacing:.6em;font-size:clamp(34px,4vw,54px);font-weight:700;
+}
+
+/* ---------- 02 太行气象（沉浸暗章） ---------- */
+.taihang{background:#171a1c;color:#eae6db}
+.taihang::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(1100px 500px at 82% -6%,rgba(169,116,58,.10),transparent 62%),
+    radial-gradient(900px 480px at 6% 108%,rgba(62,92,75,.14),transparent 60%);
+  pointer-events:none;
+}
+.taihang h2.title{color:#f3eee3}
+.taihang .head-sub{color:rgba(234,230,219,.6);margin-top:16px;font-size:15px;max-width:520px;letter-spacing:.04em}
+.scape-stack{display:grid;grid-template-columns:1.5fr 1fr;grid-auto-rows:clamp(240px,32vw,360px);gap:16px;margin-top:clamp(40px,6vw,64px)}
+.scape{position:relative;overflow:hidden;border-radius:3px;isolation:isolate}
+.scape img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.scape:hover img{transform:scale(1.055)}
+.scape .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,15,16,.05) 40%,rgba(12,13,14,.86) 100%);z-index:1}
+.scape.wide .shade{background:linear-gradient(180deg,rgba(14,15,16,.02) 30%,rgba(10,11,12,.88) 100%)}
+.scape .cap{position:absolute;left:0;bottom:0;z-index:2;padding:20px 24px 18px}
+.scape .cap .no{font-size:11.5px;letter-spacing:.4em;color:#d8b083;text-indent:.4em}
+.scape .cap h3{font-family:var(--serif);font-size:clamp(19px,2.1vw,25px);font-weight:700;letter-spacing:.14em;margin-top:6px;color:#f6f1e6}
+.scape .cap p{font-size:12.5px;color:rgba(240,234,222,.7);margin-top:4px;letter-spacing:.05em}
+.taihang .quote-big{
+  margin-top:clamp(48px,7vw,90px);text-align:center;position:relative;
+  font-family:var(--serif);font-weight:600;color:#d9d2c2;
+  font-size:clamp(18px,2.5vw,26px);letter-spacing:.24em;line-height:2.1;
+}
+.taihang .quote-big::before,.taihang .quote-big::after{
+  content:"—";color:var(--ochre);display:block;opacity:.7;font-size:.7em;margin:14px auto;
+  letter-spacing:0;
+}
+.taihang .q-note{margin-top:10px;font-family:var(--sans);font-weight:300;font-size:12.5px;color:rgba(234,230,219,.42);letter-spacing:.5em;text-indent:.5em}
+
+/* ---------- 03 红旗渠（红色章节） ---------- */
+.canals{background:#221a15;color:#f0e9dc;position:relative}
+.canals::before{content:"";position:absolute;inset:0;background:radial-gradient(1000px 620px at 50% 0%,rgba(176,58,46,.14),transparent 66%)}
+.canals .kicker{color:rgba(235,225,210,.62)}
+.canals h2.title{color:#f7f0e4}
+.canals h2.title .accent{color:#e2725e}
+.canals .head-wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.canals .head-sub{color:rgba(240,233,220,.6);max-width:430px;font-size:14.5px;margin-top:18px;letter-spacing:.05em}
+.canals .head-sub b{color:#e9b98f;font-weight:600}
+/* 大横幅 */
+.canal-hero{position:relative;margin-top:clamp(40px,6vw,60px);border-radius:4px;overflow:hidden;min-height:clamp(320px,46vw,540px);display:grid;place-items:center;isolation:isolate}
+.canal-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.canal-hero .cover{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,13,10,.12) 20%,rgba(20,13,10,.6) 100%);z-index:1}
+.canal-hero .hero-quote{position:relative;z-index:2;text-align:center;padding:40px 24px;max-width:820px}
+.canal-hero .hero-quote .bq{font-family:var(--serif);font-size:clamp(24px,4vw,44px);font-weight:900;letter-spacing:.2em;line-height:1.7;color:#fff;text-shadow:0 4px 40px rgba(0,0,0,.5)}
+.canal-hero .hero-quote .bq-eng{margin-top:14px;color:#e6c39b;letter-spacing:.5em;font-size:clamp(11px,1.4vw,15px);text-indent:.5em}
+.canal-hero .hero-quote .tag{display:inline-block;margin-top:22px;border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:7px 20px;font-size:12px;letter-spacing:.4em;color:#f3e8d8;text-indent:.4em;background:rgba(0,0,0,.22);backdrop-filter:blur(4px)}
+/* 三幕：缘起 · 十年 · 回响 */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+.act{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-top:2px solid rgba(214,122,96,.7);padding:34px 28px 30px;position:relative}
+.act .step{font-family:var(--serif);color:#c96a52;font-size:15px;letter-spacing:.5em;text-indent:.5em;font-weight:600}
+.act h3{font-family:var(--serif);font-size:24px;letter-spacing:.2em;margin-top:12px;color:#f7f0e4;font-weight:700}
+.act .yr{margin-top:6px;font-size:12.5px;color:#c7a37c;letter-spacing:.14em}
+.act p{font-size:14px;line-height:2;color:rgba(240,233,220,.74);margin-top:14px}
+.act .quote-line{margin-top:18px;border-left:2px solid rgba(214,122,96,.6);padding-left:14px;color:#e9c9a8;font-size:13.5px;letter-spacing:.06em;line-height:1.9}
+/* 数字冲击带 */
+.fig-band{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px}
+.fig{
+  border:1px solid rgba(240,233,220,.14);background:rgba(240,233,220,.04);
+  padding:26px 18px 22px;text-align:center;position:relative;overflow:hidden;
+  transition:border-color .3s,background .3s;
+}
+.fig:hover{border-color:rgba(226,130,100,.55);background:rgba(226,130,100,.07)}
+.fig .n{font-family:var(--serif);font-size:clamp(30px,3.6vw,46px);font-weight:900;color:#f2b17f;letter-spacing:.02em;line-height:1.2}
+.fig .n small{font-size:.42em;font-weight:400;color:#caa47e;font-family:var(--sans);margin-left:2px}
+.fig .l{margin-top:8px;font-size:12.5px;color:rgba(240,233,220,.62);letter-spacing:.18em;text-indent:.18em}
+.canals .afterword{
+  margin-top:clamp(48px,7vw,84px);display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,6vw,80px);
+  align-items:center;border-top:1px solid rgba(240,233,220,.12);padding-top:clamp(44px,6vw,70px);
+}
+.canals .aw-txt h3{font-family:var(--serif);font-weight:900;font-size:clamp(22px,3vw,34px);letter-spacing:.12em;line-height:1.6;color:#f6eee0}
+.canals .aw-txt h3 em{font-style:normal;color:#e2725e}
+.canals .aw-txt p{margin-top:18px;color:rgba(240,233,220,.72);font-size:15px;line-height:2.1}
+.canals .aw-txt .spirit{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.canals .aw-txt .spirit span{border:1px solid rgba(226,130,100,.5);color:#e9b392;padding:7px 18px;border-radius:100px;font-size:13px;letter-spacing:.26em;text-indent:.26em;background:rgba(176,58,46,.08)}
+.canals .aw-img{position:relative;border-radius:4px;overflow:hidden;box-shadow:0 30px 70px -24px rgba(0,0,0,.65)}
+.canals .aw-img img{width:100%;height:clamp(280px,38vw,440px);object-fit:cover}
+.canals .aw-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 14px;font-size:12px;letter-spacing:.26em;color:#e8ddcc;text-indent:.26em;background:linear-gradient(180deg,transparent,rgba(10,8,6,.78))}
+
+/* ---------- 04 石板岩 · 山间烟火 ---------- */
+.shanyan{background:#f1ecdf;position:relative}
+.shanyan::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 500px at 90% 8%,rgba(169,116,58,.08),transparent 60%),radial-gradient(700px 400px at 4% 96%,rgba(62,92,75,.07),transparent 60%)}
+.shanyan .grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(34px,6vw,84px);align-items:start}
+.shanyan .lede{font-size:16px;color:var(--ink-2);margin-top:22px;line-height:2.1}
+.shanyan .lede em{font-style:normal;color:var(--red);font-weight:600}
+.shanyan .collage{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:100px;gap:14px;margin-top:6px}
+.shanyan .collage .p{position:relative;overflow:hidden;border-radius:3px;box-shadow:0 22px 50px -24px rgba(40,32,18,.45)}
+.shanyan .collage .p img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s var(--ease)}
+.shanyan .collage .p:hover img{transform:scale(1.06)}
+.shanyan .collage .p figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 9px;font-size:11px;letter-spacing:.22em;color:#f5efe2;text-indent:.22em;background:linear-gradient(180deg,transparent,rgba(20,16,10,.66));opacity:0;transition:opacity .35s}
+.shanyan .collage .p:hover figcaption{opacity:1}
+.shanyan .c1{grid-column:1/7;grid-row:1/4}
+.shanyan .c2{grid-column:7/13;grid-row:1/3}
+.shanyan .c3{grid-column:1/6;grid-row:4/7}
+.shanyan .c4{grid-column:6/13;grid-row:3/7}
+.shanyan .c5{grid-column:8/13;grid-row:7/10}
+.shanyan .c6{grid-column:1/8;grid-row:7/10}
+.shanyan .c-note{grid-column:1/13;grid-row:auto;text-align:center;color:var(--muted);font-size:13px;letter-spacing:.2em;margin-top:6px}
+.warm-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(48px,7vw,84px)}
+.warm{background:#f8f4ea;padding:26px 18px;text-align:center;transition:background .3s}
+.warm:hover{background:#f3ecdb}
+.warm .ic{font-family:var(--serif);color:var(--red);font-size:22px}
+.warm h4{font-size:15px;letter-spacing:.1em;color:var(--ink);margin-top:8px;font-weight:600}
+.warm p{font-size:12.5px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+
+/* ---------- 05 林州四季 ---------- */
+.seasons{background:var(--paper)}
+.seasons .head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.seasons .head-note{color:var(--muted);font-size:14.5px;max-width:380px;letter-spacing:.04em;margin-bottom:6px}
+.season-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(190px,24vw,270px);gap:16px;margin-top:clamp(42px,6vw,62px)}
+.sn{position:relative;overflow:hidden;border-radius:3px}
+.sn img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.5s var(--ease)}
+.sn:hover img{transform:scale(1.07)}
+.sn .s-cap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.sn .s-cap .s-t{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:.3em;text-indent:.3em;color:#fff;text-shadow:0 3px 26px rgba(0,0,0,.55);line-height:1.2}
+.sn .s-cap .s-en{font-size:10.5px;letter-spacing:.42em;color:rgba(255,255,255,.8);text-indent:.42em;margin-top:4px}
+.sn .s-cap .s-d{position:absolute;right:18px;bottom:16px;max-width:230px;text-align:right;font-size:12px;line-height:1.9;color:rgba(255,255,255,.9);letter-spacing:.04em;opacity:0;transform:translateY(8px);transition:.45s var(--ease);text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.sn:hover .s-d{opacity:1;transform:none}
+.sn::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(12,12,10,.66));z-index:1}
+.sn.spring{grid-column:1/8;grid-row:1/3}
+.sn.summer{grid-column:8/13;grid-row:1/2}
+.sn.autumn{grid-column:8/13;grid-row:2/3}
+.sn.winter{grid-column:1/13;grid-row:3/4}
+.sn.winter .winter-box{position:relative;z-index:2;height:100%;display:flex;align-items:center;gap:clamp(20px,4vw,48px);padding:clamp(20px,3vw,34px) clamp(24px,4vw,56px)}
+.sn.winter::after{background:linear-gradient(90deg,rgba(16,20,28,.55),rgba(10,12,16,.28) 55%,rgba(10,12,16,.62))}
+.sn.winter .s-cap{position:static;flex:0 0 auto;padding:0}
+.sn.winter .s-cap .s-t{font-size:clamp(40px,7vw,80px);letter-spacing:.24em;text-indent:.24em}
+.sn.winter .s-cap .s-en{letter-spacing:.5em}
+.sn.winter .s-d{position:static;opacity:1;transform:none;text-align:left;max-width:420px;border-left:1px solid rgba(255,255,255,.35);padding-left:clamp(16px,2.6vw,34px);font-size:13.5px;line-height:2.1;color:rgba(255,255,255,.9)}
+
+/* ---------- 06 味道与人文 ---------- */
+.flavor{background:#efe7d6}
+.flavor .row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:clamp(40px,5vw,56px)}
+.flavor .col h3{font-family:var(--serif);font-size:21px;letter-spacing:.24em;color:var(--ink);display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(60,52,40,.22);font-weight:700}
+.flavor .col h3 .idx{font-size:12px;color:var(--red);letter-spacing:.2em;font-family:var(--sans);font-weight:500}
+.flavor .fitem{display:flex;gap:16px;padding:18px 2px;border-bottom:1px dashed rgba(60,52,40,.16);align-items:flex-start}
+.flavor .fitem:last-child{border-bottom:none}
+.flavor .fitem .dot{flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#fdf8ee;border:1px solid rgba(169,116,58,.4);display:grid;place-items:center;font-family:var(--serif);color:var(--ochre);font-size:21px;font-weight:700;margin-top:2px;box-shadow:inset 0 0 0 3px #efe7d6}
+.flavor .fitem h4{font-size:15.5px;font-weight:600;color:var(--ink);letter-spacing:.08em}
+.flavor .fitem .ph{font-size:12px;color:var(--ochre);letter-spacing:.2em;margin-top:1px}
+.flavor .fitem p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.9}
+.flavor .f-note{margin-top:40px;text-align:center;color:var(--ink-2);font-family:var(--serif);font-size:clamp(17px,2.2vw,22px);letter-spacing:.24em;font-weight:600}
+.flavor .f-note em{font-style:normal;color:var(--red)}
+
+/* ---------- 07 结语 ---------- */
+.outro{position:relative;min-height:92vh;display:grid;place-items:center;overflow:hidden;background:#14161a}
+.outro .bg{position:absolute;inset:0;background:url('images/dusk.jpg') center 30%/cover no-repeat;transform:scale(1.06)}
+.outro .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,16,.62),rgba(13,13,16,.38) 45%,rgba(10,10,13,.86))}
+.outro .inner{position:relative;z-index:2;text-align:center;padding:100px 20px}
+.outro .o-kick{font-size:13px;letter-spacing:.6em;color:#d8b98e;text-indent:.6em}
+.outro .o-line{
+  font-family:var(--serif);font-weight:900;color:#fff;
+  font-size:clamp(32px,6vw,72px);line-height:1.55;letter-spacing:.1em;margin-top:36px;
+}
+.outro .o-line .hl{position:relative;display:inline-block}
+.outro .o-line .hl::after{content:"";position:absolute;left:0;right:0;bottom:.04em;height:.5em;background:rgba(176,58,46,.55);z-index:-1;transform:skewX(-12deg)}
+.outro .o-note{margin-top:34px;color:rgba(244,238,227,.78);font-size:15px;letter-spacing:.14em;line-height:2.2;max-width:600px;margin-inline:auto}
+.outro .o-line2{
+  margin-top:clamp(48px,7vw,80px);font-family:var(--serif);
+  font-size:clamp(15px,1.9vw,21px);color:#e2d3ba;letter-spacing:.44em;text-indent:.44em;line-height:2.3;
+}
+
+/* ---------- 页脚 ---------- */
+footer{background:#1a1712;color:#c9c1b2;padding:64px 0 40px}
+footer .f-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.09)}
+footer .f-brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:18px;color:#efe8da;letter-spacing:.24em;font-weight:700}
+footer .f-brand .seal{width:38px;height:38px;border:1px solid rgba(232,186,130,.5);border-radius:6px;display:grid;place-items:center;color:#e5b579}
+footer .f-brand .seal svg{width:19px;height:19px}
+footer .f-desc{margin-top:14px;font-size:13px;color:rgba(201,193,178,.6);letter-spacing:.1em;max-width:340px}
+footer .f-links{display:flex;gap:clamp(22px,4vw,56px);flex-wrap:wrap}
+footer .f-links .fl h5{font-size:12px;letter-spacing:.3em;color:#9d917d;margin-bottom:16px;font-weight:500}
+footer .f-links .fl a{display:block;font-size:13.5px;color:rgba(201,193,178,.82);padding:5px 0;letter-spacing:.08em;transition:color .25s}
+footer .f-links .fl a:hover{color:#e5b579}
+footer .f-bottom{margin-top:36px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:rgba(201,193,178,.5);letter-spacing:.12em}
+footer .f-bottom .credit em{font-style:normal;color:var(--red);opacity:.9}
+
+/* ---------- 滚动动画 ---------- */
+/* 默认内容始终可见；仅当 JS 检测到支持时才先隐藏、滚动进入视口后再显现 */
+[data-reveal]{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+body.rv-on [data-reveal]{opacity:0;transform:translateY(26px)}
+body.rv-on [data-reveal].in{opacity:1;transform:none}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1020px){
+  .city .grid,.canals .afterword,.shanyan .grid{grid-template-columns:1fr}
+  .city .visual{order:-1}
+  .shanyan .grid{grid-auto-flow:row}
+  .shanyan .visual-col{order:2}
+  .acts{grid-template-columns:1fr}
+  .fig-band{grid-template-columns:repeat(2,1fr)}
+  .scape-stack{grid-template-columns:1fr}
+  .scape-stack .scape{min-height:280px}
+  .sn.spring{grid-column:1/13;grid-row:auto}
+  .sn.summer{grid-column:1/13;grid-row:auto;min-height:220px}
+  .sn.autumn{grid-column:1/13;grid-row:auto;min-height:220px}
+  .sn.winter{grid-column:1/13;grid-row:auto}
+  .sn.winter .winter-box{flex-direction:column;align-items:flex-start;justify-content:center}
+  .sn.winter .s-d{border-left:none;border-top:1px solid rgba(255,255,255,.3);padding-left:0;padding-top:12px}
+  .flavor .row{grid-template-columns:1fr}
+  .hero-strip .wrap{padding-bottom:72px}
+}
+@media (max-width:720px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav{padding:0 20px}
+  .shanyan .collage{grid-auto-rows:86px}
+  .shanyan .c1{grid-column:1/13;grid-row:auto}
+  .shanyan .c2{grid-column:1/13;grid-row:auto}
+  .shanyan .c3{grid-column:1/13;grid-row:auto}
+  .shanyan .c4{grid-column:1/13;grid-row:auto}
+  .shanyan .c5,.shanyan .c6{grid-column:1/13;grid-row:auto}
+  .shanyan .collage .p{min-height:150px}
+  .warm-strip{grid-template-columns:1fr 1fr}
+  .city .cf b{font-size:19px}
+  .season-grid{grid-auto-rows:minmax(200px,auto)}
+  .sn{min-height:220px}
+  .hero .side-word{display:none}
+  .hero .frame-line{inset:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important;scroll-behavior:auto!important}
+  html.js [data-reveal]{opacity:1;transform:none}
+  .hero .bg,.outro .bg{transform:none!important}
+}
+</style>
+</head>
+<body class="no-js">
+
+<!-- ============ 顶部导航 ============ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="山水林州">
+    <span class="seal" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 19 L8.5 7 L13 15 L16.5 9 L21 19 Z" stroke="#f6f1e7" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8.2" cy="4.8" r="1.6" fill="#f6f1e7"/></svg>
+    </span>
+    <span>山水林州</span>
+  </a>
+  <nav class="nav-links" aria-label="章节导航">
+    <a href="#city">初见林州</a>
+    <a href="#taihang">太行气象</a>
+    <a href="#canals">红旗渠</a>
+    <a href="#shanyan">石板岩</a>
+    <a href="#seasons">四季</a>
+    <a href="#flavor">味道人文</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+</header>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#city">初见林州</a>
+  <a href="#taihang">太行气象</a>
+  <a href="#canals">红旗渠</a>
+  <a href="#shanyan">石板岩</a>
+  <a href="#seasons">四季</a>
+  <a href="#flavor">味道人文</a>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="bg" id="heroBg"></div>
+  <div class="veil"></div>
+  <div class="frame-line"></div>
+  <span class="side-word">太行气魄 · 人工天河 · 山城林州</span>
+  <div class="hero-content">
+    <span class="top-tag">中国 · 河南 · 安阳 · 林州</span>
+    <h1>山水林州</h1>
+    <div class="shui">山 · 水 · 林 · 州</div>
+    <p class="sub">一座生长在太行山下的城市</p>
+  </div>
+  <div class="hero-strip">
+    <div class="wrap">
+      <div class="hs-item"><b>豫北 · 太行东麓</b><span>晋冀豫三省交界</span></div>
+      <div class="hs-item"><b>1500 km</b><span>红旗渠渠系总长</span></div>
+      <div class="hs-item"><b>5A 级景区</b><span>红旗渠 · 太行大峡谷</span></div>
+      <div class="hs-item"><b>一锤一钎一双手</b><span>红旗渠精神发源地</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><i></i>向下</div>
+</section>
+
+<!-- ============ 卷首语 ============ -->
+<section class="credo sec">
+  <div class="wrap" data-reveal>
+    <div class="big-q">「</div>
+    <p class="c-line">
+      <span class="t1">山，给了林州脊梁；</span><br>
+      <span class="t1">水，给了林州血脉；</span><br>
+      <span class="t2">人，给了林州魂魄。</span>
+    </p>
+    <p class="c-note">苍茫太行在此收拢成一座城的轮廓——壁立千仞是它的骨架，蜿蜒红旗渠是它的血脉，而十万双手凿穿岩石的回响，至今仍在山谷间回荡。</p>
+  </div>
+</section>
+
+<!-- ============ 01 初见林州 ============ -->
+<section class="city sec" id="city">
+  <div class="wrap">
+    <div class="grid">
+      <div class="text" data-reveal>
+        <span class="kicker">01 — 初见</span>
+        <h2 class="title">豫北山城，<br>一座<em class="accent">长在太行</em>里的城市</h2>
+        <p class="lede">林州，古称隆虑、林县，地处河南省最北端、<em>太行山东麓</em>，与山西、河北隔山相望。它不像平原城市那样被河流环抱，而是整座城<em>依山而生、向山而长</em>——抬头是山，出门见山，山是林州人最日常的风景，也是最深沉的来处。</p>
+        <p>全境山地、丘陵占八成以上，峰峦从城西拔地而起，如一道沉默的屏障。太行给了林州险峻与闭塞，也给了它石头的性格：坚硬、沉默、不肯低头。读懂林州，要先读懂这座山。</p>
+        <div class="city-facts">
+          <div class="cf"><b>豫晋冀<i>三省交界</i></b><span>河南省西北角</span></div>
+          <div class="cf"><b>2046 km²<i>市域面积</i></b><span>山地丘陵占八成</span></div>
+          <div class="cf"><b>“隆虑”<i>古称</i></b><span>汉置县 · 1994 设市</span></div>
+        </div>
+        <div class="cite">太行苍苍，洹水汤汤——林州的气质，由山石写就</div>
+      </div>
+      <figure class="visual" data-reveal>
+        <div class="ph">
+          <img src="images/cloud-sea.jpg" alt="太行云海环绕林州山间的村落">
+          <figcaption>云海漫过太行山腰，远处即是林州人家</figcaption>
+        </div>
+        <span class="chip">太行 · 林州</span>
+        <span class="corner-txt" aria-hidden="true">山城</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 太行气象 ============ -->
+<section class="taihang sec" id="taihang">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="kicker tone-paper">02 — 太行气象</span>
+      <h2 class="title">壁立千仞处<br>方知<em class="accent-f">太行之雄</em></h2>
+      <p class="head-sub">太行把最险峻的一段留在了林州。峡谷、云海、绝壁、山路——这里的山不是背景，而是主角。</p>
+    </div>
+    <div class="scape-stack">
+      <figure class="scape wide" data-reveal>
+        <img src="images/canyon.jpg" alt="太行大峡谷深谷与盘山公路">
+        <div class="shade"></div>
+        <figcaption class="cap">
+          <span class="no">THE CANYON · 太行大峡谷</span>
+          <h3>百里画廊，雄险奇秀</h3>
+          <p>红岩绝壁与深谷清流相间，被赞为“太行山最精华的一段”</p>
+        </figcaption>
+      </figure>
+      <figure class="scape" data-reveal>
+        <img src="images/mist.jpg" alt="太行云海">
+        <div class="shade"></div>
+        <figcaption class="cap">
+          <span class="no">CLOUD SEA · 云海</span>
+          <h3>云漫太行之巅</h3>
+          <p>雨后初晴，云海在山谷间翻涌成海</p>
+        </figcaption>
+      </figure>
+      <figure class="scape" data-reveal>
+        <img src="images/cliff-road.jpg" alt="太行挂壁公路">
+        <div class="shade"></div>
+        <figcaption class="cap">
+          <span class="no">CLIFF ROAD · 崖壁之路</span>
+          <h3>公路悬于绝壁</h3>
+          <p>挂壁公路在悬崖上凿出山民出山的轨迹</p>
+        </figcaption>
+      </figure>
+      <figure class="scape wide" data-reveal>
+        <img src="images/lake.jpg" alt="太行平湖碧水环山">
+        <div class="shade"></div>
+        <figcaption class="cap">
+          <span class="no">LAKE · 太行平湖</span>
+          <h3>高峡出平湖</h3>
+          <p>群山环抱一泓碧水，太行在水的倒影里柔了下来</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="quote-big" data-reveal>
+      “太行山把最美的一段给了林州”<br>
+      山的陡峭与沉默，最终都化成了林州人的筋骨
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 红旗渠 ============ -->
+<section class="canals sec" id="canals">
+  <div class="wrap">
+    <div class="head-wrap" data-reveal>
+      <div>
+        <span class="kicker tone-paper">03 — 红旗渠</span>
+        <h2 class="title">十年，十万双手，<br>在悬崖上凿出一条<em class="accent">天河</em></h2>
+      </div>
+      <p class="head-sub">红旗渠不只是林州的景点，它是这座城市的<strong>精神原点</strong>——读懂红旗渠，才真正读懂林州人。</p>
+    </div>
+
+    <figure class="canal-hero" data-reveal>
+      <img src="images/hongqiqu.jpg" alt="红旗渠流淌在太行山腰">
+      <div class="cover"></div>
+      <figcaption class="hero-quote">
+        <div class="bq">“引漳入林 · 重新安排林县河山”</div>
+        <div class="bq-eng">RED FLAG CANAL · SPIRIT OF LINZHOU</div>
+        <span class="tag">人工天河 · 世界奇迹 · 民族精神丰碑</span>
+      </figcaption>
+    </figure>
+
+    <div class="acts">
+      <article class="act" data-reveal>
+        <span class="step">壹 · 缘起</span>
+        <h3>十年九旱</h3>
+        <div class="yr">干旱的记忆 · 水贵如油</div>
+        <p>“光岭秃山头，水缺贵如油。”林县土薄石厚，十年九旱，历史上曾出现大旱、连旱百余次，庄稼绝收三十多次。曾有人因打翻一担救命水而抱憾终生——缺水，是刻在林县人骨子里的痛。</p>
+        <div class="quote-line">“挖山泉，打水井，地下不给水；<br>修水渠，修水库，依然蓄不住水。”</div>
+      </article>
+      <article class="act" data-reveal>
+        <span class="step">贰 · 十年</span>
+        <h3>苦战太行</h3>
+        <div class="yr">1960 — 1969 · 绝壁凿渠</div>
+        <p>1960 年 2 月，在极端艰苦的条件下，林县县委带领群众踏上太行山，从山西平顺侯壁断下引浊漳河水入林。没有大型机械，靠的是钢钎、铁锤、绳索与一双手，凌空除险、凿石开洞，整整苦战十个春秋。</p>
+        <div class="quote-line">“宁愿苦干，不愿苦熬。”<br>——修渠人留下的朴素誓言</div>
+      </article>
+      <article class="act" data-reveal>
+        <span class="step">叁 · 回响</span>
+        <h3>精神长流</h3>
+        <div class="yr">今日林州 · 天河依旧</div>
+        <p>红旗渠水至今仍在浇灌林州大地，滋养着数十万人的生活。当年凿山的年轻人已成往事，可“自力更生、艰苦创业、团结协作、无私奉献”的红旗渠精神，却一代代传了下来，成为这座城市的品格底色。</p>
+        <div class="quote-line">“红旗渠就是纪念碑，记载了林县人不认命、不服输的韧劲。”</div>
+      </article>
+    </div>
+
+    <div class="fig-band" data-reveal>
+      <div class="fig"><div class="n" data-count="1500"><span class="cv">0</span><small>公里</small></div><div class="l">渠系总长 · 蜿蜒太行</div></div>
+      <div class="fig"><div class="n" data-count="1250"><span class="cv">0</span><small>座</small></div><div class="l">削平的山头</div></div>
+      <div class="fig"><div class="n" data-count="211"><span class="cv">0</span><small>个</small></div><div class="l">凿通的隧洞</div></div>
+      <div class="fig"><div class="n" data-count="2225"><span class="cv">0</span><small>万 m³</small></div><div class="l">挖砌的土石方</div></div>
+    </div>
+
+    <div class="afterword">
+      <div class="aw-txt" data-reveal>
+        <h3>它不只是一条渠<br>更是一代人的<em>选择</em></h3>
+        <p>在几乎一无所有的年代，林州人没有选择等待。他们选择了相信双手、相信集体、相信自己能重新安排河山。十万人的十年，换来一渠清水——这渠水浇灌的，不只是 54 万亩良田，更是一个民族不肯向命运低头的心气。</p>
+        <div class="spirit">
+          <span>自力更生</span><span>艰苦创业</span><span>团结协作</span><span>无私奉献</span>
+        </div>
+      </div>
+      <figure class="aw-img" data-reveal>
+        <img src="images/spirit.jpg" alt="红旗渠纪念馆中修渠人的群像雕塑">
+        <figcaption>红旗渠纪念馆 · 那些凿穿岩石的双手与面孔</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 石板岩 · 山间烟火 ============ -->
+<section class="shanyan sec" id="shanyan">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="kicker">04 — 石板岩 · 山间烟火</span>
+      <h2 class="title">石头垒起的村庄<br>住着最<em class="accent">温热</em>的日子</h2>
+    </div>
+    <div class="grid">
+      <div class="text-col" data-reveal>
+        <p class="lede">从雄浑的山回到人间，便是<em>石板岩</em>。这里的房屋用石板作瓦、石头垒墙，院落依山就势，层层叠叠错落在太行深处。太行大峡谷穿镇而过，露水河四季清浅。</p>
+        <p>清晨炊烟贴着崖壁升起，午后老人在石阶上晒日头，秋天金黄的玉米挂满屋檐——山里的日子没有宏大的叙事，只有一粥一饭、一瓦一檐的安稳。<br>也正因如此，它格外动人。</p>
+        <div class="collage">
+          <figure class="p c1" data-reveal><img src="images/village-mist.jpg" alt="云雾中的石板岩村落"><figcaption>云下的石板岩</figcaption></figure>
+          <figure class="p c2" data-reveal><img src="images/courtyard.jpg" alt="太行人家院落晒秋"><figcaption>晒秋人家</figcaption></figure>
+          <figure class="p c3" data-reveal><img src="images/harvest.jpg" alt="屋檐下挂满金黄玉米的民居"><figcaption>屋檐下的金黄</figcaption></figure>
+          <figure class="p c4" data-reveal><img src="images/summer.jpg" alt="太行大峡谷溪流与吊桥"><figcaption>峡谷溪声</figcaption></figure>
+          <figure class="p c5" data-reveal><img src="images/mountain-road.jpg" alt="太行山路上骑行者穿行秋色"><figcaption>山道骑行</figcaption></figure>
+          <figure class="p c6" data-reveal><img src="images/cloud-sea.jpg" alt="石板岩云海"><figcaption>云海里的山居</figcaption></figure>
+        </div>
+      </div>
+      <div class="warm-col" data-reveal>
+        <div class="warm-strip">
+          <div class="warm"><div class="ic">石</div><h4>石头会说话</h4><p>石墙、石瓦、石阶，整个村庄就是一座石头博物馆</p></div>
+          <div class="warm"><div class="ic">画</div><h4>写生之乡</h4><p>每年数十万师生来此写生，太行是最好的课堂</p></div>
+          <div class="warm"><div class="ic">宿</div><h4>山居岁月</h4><p>石板房改成的民宿亮起灯火，山里的夜不寂寞</p></div>
+          <div class="warm"><div class="ic">路</div><h4>云端天路</h4><p>太行天路蜿蜒云端，把外面的世界带进深山</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 林州四季 ============ -->
+<section class="seasons sec" id="seasons">
+  <div class="wrap">
+    <div class="head-row" data-reveal>
+      <div>
+        <span class="kicker">05 — 林州四季</span>
+        <h2 class="title">一山有四季，<br>岁岁<em class="accent">不同景</em></h2>
+      </div>
+      <p class="head-note">太行山把一年分成了四种颜色。春是桃花谷的粉，夏是峡谷里的绿，秋是太行平湖映着的斑斓，冬是一夜雪后苍茫的白。同是一座山，四季各有各的心事。</p>
+    </div>
+    <div class="season-grid">
+      <figure class="sn spring" data-reveal>
+        <img src="images/spring.jpg" alt="春天太行大峡谷桃花盛开">
+        <figcaption class="s-cap">
+          <div class="s-t">春</div>
+          <div class="s-en">SPRING · 桃花谷</div>
+          <div class="s-d">峡谷深处的桃花谷，粉白花海沿溪铺开。太行醒了，从一朵桃花的颤动开始。</div>
+        </figcaption>
+      </figure>
+      <figure class="sn summer" data-reveal>
+        <img src="images/summer.jpg" alt="夏季太行大峡谷溪流瀑布">
+        <figcaption class="s-cap">
+          <div class="s-t">夏</div>
+          <div class="s-en">SUMMER · 大峡谷</div>
+          <div class="s-d">绿意漫过红岩，瀑布跌进碧潭。盛夏的太行，是避暑的人间仙境。</div>
+        </figcaption>
+      </figure>
+      <figure class="sn autumn" data-reveal>
+        <img src="images/autumn-lake.jpg" alt="秋天太行平湖层林尽染">
+        <figcaption class="s-cap">
+          <div class="s-t">秋</div>
+          <div class="s-en">AUTUMN · 太行平湖</div>
+          <div class="s-d">一场秋霜后，层林尽染，平湖如镜。斑斓山色倒映水中，是太行一年里最浓烈的一笔。</div>
+        </figcaption>
+      </figure>
+      <figure class="sn winter" data-reveal>
+        <img src="images/winter.jpg" alt="冬季雪后的太行山村">
+        <figcaption class="winter-box">
+          <div class="s-cap">
+            <div class="s-t">冬</div>
+            <div class="s-en">WINTER · 雪落太行</div>
+          </div>
+          <div class="s-d">一夜雪落，苍茫太行变成一幅水墨。崖壁、梯田、村落都安静下来，唯有炊烟还暖着人间。雪后的石板岩，是北国山居最素净的模样——万籁俱寂里，藏着来年春天的伏笔。</div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 味道与人文 ============ -->
+<section class="flavor sec" id="flavor">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="kicker">06 — 味道与人文</span>
+      <h2 class="title">有风景，<br>也有<em class="accent">烟火气</em></h2>
+    </div>
+    <div class="row">
+      <div class="col" data-reveal>
+        <h3><span class="idx">味</span>太行味道</h3>
+        <div class="fitem">
+          <div class="dot">烩</div>
+          <div><h4>林州大烩菜</h4><div class="ph">一锅炖尽山野</div><p>白菜粉条豆腐五花肉，在大铁锅里咕嘟出太行山下的实在滋味，是红白喜事的头道硬菜，也是游子最念的一口。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">饦</div>
+          <div><h4>林州饦饦面</h4><div class="ph">手擀的筋道</div><p>硬面和出，手工擀切，配蒜汁香醋与辣椒油。一碗下肚，山风再凉也不怕——林州人的豪爽都在面里。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">粥</div>
+          <div><h4>小米焖饭</h4><div class="ph">旱地谷香</div><p>太行旱地小米，焖得油润喷香，配菜就咸菜皆是美味。粒粒金黄，都是太阳晒过的味道。</p></div>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <h3><span class="idx">物</span>山里风物</h3>
+        <div class="fitem">
+          <div class="dot">柿</div>
+          <div><h4>太行柿子</h4><div class="ph">秋日枝头灯笼</div><p>十月霜降，柿子树挂满橙红灯笼，晒柿饼、漤柿子，甜得黏牙，是山里最朴素的秋日馈赠。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">椒</div>
+          <div><h4>大红袍花椒</h4><div class="ph">崖畔的辛香</div><p>石板岩一带的花椒粒大油足、麻香浓郁，晒干后一撮入菜，整座山的辛香都在舌尖炸开。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">杂</div>
+          <div><h4>杂粮四季</h4><div class="ph">山地恩赐</div><p>旱地出产的小米、玉米、红薯、杂豆，曾经养活了缺水的林县人，如今成了最健康的山乡味道。</p></div>
+        </div>
+      </div>
+      <div class="col" data-reveal>
+        <h3><span class="idx">人</span>山乡人文</h3>
+        <div class="fitem">
+          <div class="dot">戏</div>
+          <div><h4>地方戏曲与庙会</h4><div class="ph">锣鼓里的乡音</div><p>豫剧与地方小调在山村戏台上唱了几十年。逢年过节、庙会赶集，锣鼓一响，半个村子的人都聚拢过来。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">工</div>
+          <div><h4>工匠与建筑</h4><div class="ph">石头里的技艺</div><p>石匠一锤一凿垒起石板房，也垒出红旗渠。林州的匠人精神，从修渠年代一路传到今天的建筑之乡。</p></div>
+        </div>
+        <div class="fitem">
+          <div class="dot">居</div>
+          <div><h4>山居慢生活</h4><div class="ph">写生与民宿</div><p>太行山水间，画家支起画架，旅人住进石板房。山里的日子慢下来，成了都市人向往的远方。</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="f-note" data-reveal>看山看水看红旗渠，<em>也别忘了</em>坐下来，吃一碗热乎的人间烟火。</p>
+  </div>
+</section>
+
+<!-- ============ 07 结语 ============ -->
+<section class="outro" id="outro">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="inner" data-reveal>
+    <span class="o-kick">山水林州 · 太行气魄 · 红旗渠精神</span>
+    <p class="o-line">山塑造了林州，<br><span class="hl">林州人也改变了山</span>。</p>
+    <p class="o-note">从壁立千仞的太行，到穿崖而过的天河；从石头垒起的老村，到云雾里的新民宿——林州的故事，始终是人如何与一座山相处、相守、相互成就的故事。</p>
+    <p class="o-line2">欢迎来林州<br>看山 · 看水 · 看那条流了六十年的河</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 页脚 ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div>
+        <div class="f-brand">
+          <span class="seal"><svg viewBox="0 0 24 24" fill="none"><path d="M3 19 L8.5 7 L13 15 L16.5 9 L21 19 Z" stroke="#e5b579" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8.2" cy="4.8" r="1.6" fill="#e5b579"/></svg></span>
+          <span>山水林州</span>
+        </div>
+        <p class="f-desc">山水林州 · 太行气魄 · 红旗渠精神<br>一座生长在太行山下的城市，欢迎你来走走。</p>
+      </div>
+      <div class="f-links">
+        <div class="fl">
+          <h5>游山</h5>
+          <a href="#taihang">太行大峡谷</a>
+          <a href="#taihang">太行天路</a>
+          <a href="#taihang">太行平湖</a>
+        </div>
+        <div class="fl">
+          <h5>读史</h5>
+          <a href="#canals">红旗渠 · 青年洞</a>
+          <a href="#canals">红旗渠纪念馆</a>
+          <a href="#canals">红旗渠精神</a>
+        </div>
+        <div class="fl">
+          <h5>寻味</h5>
+          <a href="#shanyan">石板岩民宿</a>
+          <a href="#seasons">林州四季</a>
+          <a href="#flavor">太行味道</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>山水林州 · 城市形象专题页面</span>
+      <span>以 <em>红旗渠精神</em> 致敬每一位奋斗者</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var html=document.documentElement;
+  html.classList.remove('no-js');
+  html.classList.add('js');
+
+  /* ---------- 导航吸顶 ---------- */
+  var nav=document.getElementById('nav');
+  function onScrollNav(){
+    if(window.scrollY>40){nav.classList.add('solid');}
+    else{nav.classList.remove('solid');}
+  }
+  window.addEventListener('scroll',onScrollNav,{passive:true});
+  onScrollNav();
+
+  /* ---------- Hero 视差 ---------- */
+  var heroBg=document.getElementById('heroBg');
+  var hero=document.getElementById('hero');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function onScroll(){
+    var y=window.scrollY;
+    if(heroBg && y<hero.offsetHeight && !reduce){
+      heroBg.style.transform='scale(1.06) translateY('+(y*0.22)+'px)';
+    }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* ---------- 移动端菜单 ---------- */
+  var burger=document.getElementById('burger');
+  function closeMenu(){
+    document.body.classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false');
+  }
+  burger.addEventListener('click',function(){
+    var open=document.body.classList.toggle('menu-open');
+    burger.setAttribute('aria-expanded',open?'true':'false');
+  });
+  document.querySelectorAll('.mobile-nav a').forEach(function(a){
+    a.addEventListener('click',closeMenu);
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){closeMenu();} });
+
+  /* ---------- 滚动显现（含 2.5s 兜底：即使滚动监听失效也保证内容可见） ---------- */
+  var items=document.querySelectorAll('[data-reveal]');
+  function revealAll(){items.forEach(function(el){el.classList.add('in');});}
+  if('IntersectionObserver' in window && !reduce){
+    document.body.classList.add('rv-on');
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+      });
+    },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+    items.forEach(function(el){io.observe(el);});
+    /* 兜底：2.5s 后强制全部显现，防止任何情况下内容停留在隐藏态 */
+    setTimeout(function(){
+      document.body.classList.remove('rv-on');
+      revealAll();
+    },2500);
+  }else{
+    revealAll();
+  }
+
+  /* ---------- 数字滚动 ---------- */
+  var counters=document.querySelectorAll('[data-count]');
+  function numNode(el){return el.querySelector('.cv')||el;}
+  function animateCount(el){
+    var target=parseInt(el.getAttribute('data-count'),10);
+    var node=numNode(el);
+    var dur=1500,t0=null;
+    function step(ts){
+      if(!t0){t0=ts;}
+      var p=Math.min((ts-t0)/dur,1);
+      var eased=1-Math.pow(1-p,3);
+      node.textContent=Math.round(target*eased).toLocaleString('en-US');
+      if(p<1){requestAnimationFrame(step);}
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window && !reduce){
+    var cio=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){animateCount(en.target);cio.unobserve(en.target);}
+      });
+    },{threshold:0.5});
+    counters.forEach(function(el){cio.observe(el);});
+    /* 兜底：2.5s 后仍未触发的计数器直接写入最终值，保证任何场景下数据可见 */
+    setTimeout(function(){
+      counters.forEach(function(el){
+        var node=numNode(el);
+        var raw=node.textContent.replace(/[,，\s]/g,'');
+        if(raw==='0'){
+          node.textContent=parseInt(el.getAttribute('data-count'),10).toLocaleString('en-US');
+        }
+      });
+    },2500);
+  }else{
+    counters.forEach(function(el){el.textContent=parseInt(el.getAttribute('data-count'),10).toLocaleString('en-US');});
+  }
+})();
+</script>
+</body>
+</html>
