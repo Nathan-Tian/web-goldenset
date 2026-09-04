@@ -29,8 +29,8 @@ Build it as a polished, responsive, standalone single-page frontend website with
 
 ## Golden Set 标注
 
-- **Good：** Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/good/
-- **Bad：** Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/bad/
+- **Good：** https://nathan-tian.github.io/web-goldenset/pair-11/good/
+- **Bad：** https://nathan-tian.github.io/web-goldenset/pair-11/bad/
 
 ## Bad Reason
 
