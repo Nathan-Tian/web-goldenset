@@ -28,8 +28,8 @@
 
 ## Golden Set 标注
 
-- **Good：** [AURA ONE · 看见世界，也读懂它](https://nathan-tian.github.io/web-goldenset/pair-09/good/)
-- **Bad：** [AURA ONE 曜镜 · 曜石科技](https://nathan-tian.github.io/web-goldenset/pair-09/bad/)
+- **Good：** https://nathan-tian.github.io/web-goldenset/pair-09/good/
+- **Bad：** https://nathan-tian.github.io/web-goldenset/pair-09/bad/
 
 两版都覆盖了任务要求，**Good 更值得交付**：产品展示更清晰，视觉更精致，交互更完整。
 
@@ -37,4 +37,3 @@
 
 - 首屏标题和装饰抢眼，眼镜主体偏小、偏暗，产品质感不够突出。
 - 发光、网格和边框等元素偏多，信息层级不够清楚，阅读重点容易分散。
-- 预约提示声称成功却未实际保存；演示重复点击会停住，部分页脚链接无响应。
