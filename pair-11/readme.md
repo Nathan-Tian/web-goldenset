@@ -29,14 +29,8 @@ Build it as a polished, responsive, standalone single-page frontend website with
 
 ## Golden Set 标注
 
-- **Good：** [Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/good/)
-- **Bad：** [Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/bad/)
-
-本组用于校准评分刻度的两端：Good 是完整的高分参照，Bad 是按要求刻意制作的近乎空白、明显未完成的低分对照，不是两份完成度接近的方案之间的风格比较。
-
-Good 覆盖活动介绍、日期地点、18 组艺人、三天演出安排、海滩体验、三档门票、访客须知和结尾引导。海岸大图、艺人照片、清楚的文字层级和不同章节布局组成了完整的活动网站；艺人筛选、日程切换、收藏演出、日历下载和选票演示也都有对应行为。购票流程明确说明只是演示，不会实际预订或扣款。
-
-两版均为单个 `index.html`，CSS 和 JavaScript 已内嵌；Good 的图片与字体也已内嵌，不需要额外资源文件、后端或外部 API。Bad 的图片损坏是页面自身的固定缺陷，不依赖网络请求失败来制造差异。
+- **Good：** Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/good/
+- **Bad：** Summer Beach Music Festival](https://nathan-tian.github.io/web-goldenset/pair-11/bad/
 
 ## Bad Reason
 
@@ -46,5 +40,3 @@ Good 覆盖活动介绍、日期地点、18 组艺人、三天演出安排、海
 - 图片使用无效的内嵌数据，显示破损图片或替代文字，不能承担主题展示作用。
 - `Get tickets` 按钮绑定空回调，点击后没有跳转、选票界面或任何反馈，唯一的主要操作也不可用。
 - `Loading...` 始终停留在页面上，没有加载流程或后续内容，使页面持续呈现未完成状态。
-
-低分依据是实际缺失的内容、破损展示和无效操作，而不是白色背景、代码短或没有后端。页面内部没有提示评估器给高分或低分的文字。Good 也不等于毫无不足：单文件约 14.92 MB，资源体积仍有优化空间；本组不预设具体分数，用于检查完整交付与明显失败是否被放在评分刻度的正确两端。
