@@ -29,8 +29,8 @@ Build it as a polished, responsive, standalone single-page frontend website with
 
 ## Golden Set 标注
 
-- **Good：** [查看页面](https://nathan-tian.github.io/web-goldenset/pair-07/good/)
-- **Bad：** [查看页面](https://nathan-tian.github.io/web-goldenset/pair-07/bad/)
+- **Good：** https://nathan-tian.github.io/web-goldenset/pair-07/good/
+- **Bad：** https://nathan-tian.github.io/web-goldenset/pair-07/bad/
 
 **交付建议：选择 Good。** 真实壁画的图像、青绿色与浅色背景的搭配、清晰的留白，更能突出敦煌艺术本身；章节筛选、画作缩放和细节导读也更贴近观展需求。Bad 的暗色氛围统一，五个展区及颜料介绍覆盖更广，但综合视觉表现、阅读体验和交付可信度，Good 更符合这份提示词。
 
