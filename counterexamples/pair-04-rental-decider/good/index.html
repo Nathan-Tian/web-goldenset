@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a2d4f">
+  <title>澄江租房测量所｜三套一居室真实成本比较</title>
+  <style>
+    :root {
+      --paper: #f4f8fb;
+      --paper-deep: #e8f1f7;
+      --ink: #092d4c;
+      --blue: #126bb1;
+      --grid: #b9d2e4;
+      --coral: #ef5f5b;
+      --green: #147a69;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(9, 45, 76, .11);
+      --body: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+      --numbers: "Bahnschrift SemiCondensed", "Arial Narrow", var(--body);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(18, 107, 177, .055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 107, 177, .055) 1px, transparent 1px),
+        var(--paper);
+      background-size: 24px 24px;
+      font-family: var(--body);
+      line-height: 1.65;
+    }
+
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    ::selection { background: #c9e7fb; color: var(--ink); }
+
+    :focus-visible {
+      outline: 3px solid #ffb19f;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 99;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-160%);
+      padding: 10px 14px;
+      background: var(--white);
+      border: 2px solid var(--ink);
+    }
+    .skip-link:focus { transform: none; }
+
+    .site-head {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 4px solid var(--blue);
+    }
+
+    .measure-bar {
+      height: 13px;
+      opacity: .75;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 11px, rgba(255,255,255,.55) 11px 12px),
+        repeating-linear-gradient(90deg, transparent 0 59px, rgba(255,255,255,.9) 59px 61px);
+    }
+
+    .head-inner {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 66px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 31px;
+      height: 31px;
+      border: 1px solid rgba(255,255,255,.7);
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(255,255,255,.65) 49% 51%, transparent 52%),
+        linear-gradient(transparent 48%, rgba(255,255,255,.65) 49% 51%, transparent 52%);
+      font-family: var(--numbers);
+      font-size: 11px;
+    }
+
+    nav { display: flex; gap: 24px; }
+    nav a {
+      color: #d7e7f2;
+      font-size: 13px;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+    nav a:hover { color: var(--white); border-color: currentColor; }
+
+    main { overflow: clip; }
+    .sheet {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      padding: 76px 0 62px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.14fr) minmax(330px, .86fr);
+      gap: 64px;
+      align-items: end;
+    }
+
+    .hero::before {
+      content: "CHJ—R04 / 1:100";
+      position: absolute;
+      top: 24px;
+      right: 0;
+      color: var(--blue);
+      font: 700 12px/1 var(--numbers);
+      letter-spacing: .15em;
+    }
+
+    .hero-copy { position: relative; }
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      left: -23px;
+      top: 7px;
+      bottom: 6px;
+      width: 9px;
+      border-top: 1px solid var(--blue);
+      border-bottom: 1px solid var(--blue);
+      background: repeating-linear-gradient(0deg, transparent 0 9px, var(--grid) 9px 10px);
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .kicker::before { content: ""; width: 38px; height: 2px; background: currentColor; }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 680px;
+      margin-bottom: 24px;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: .98;
+      letter-spacing: -.065em;
+      font-weight: 900;
+    }
+    .hero-lead {
+      max-width: 630px;
+      margin: 0;
+      color: #375874;
+      font-size: 18px;
+    }
+
+    .formula-board {
+      position: relative;
+      padding: 28px 30px 27px;
+      color: var(--white);
+      background: var(--blue);
+      box-shadow: var(--shadow);
+    }
+    .formula-board::before, .formula-board::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: rgba(255,255,255,.65);
+    }
+    .formula-board::before { top: 9px; left: 9px; border-top: 1px solid; border-left: 1px solid; }
+    .formula-board::after { right: 9px; bottom: 9px; border-right: 1px solid; border-bottom: 1px solid; }
+    .formula-board small { display: block; margin-bottom: 12px; color: #d4ebfb; }
+    .formula-board strong {
+      display: block;
+      margin-bottom: 10px;
+      font: 800 clamp(35px, 5vw, 54px)/1 var(--numbers);
+      letter-spacing: -.04em;
+    }
+    .formula-board p { margin: 0; color: #e9f5fc; font-size: 13px; }
+
+    .method-strip {
+      border-top: 1px solid var(--grid);
+      border-bottom: 1px solid var(--grid);
+      background: rgba(255,255,255,.7);
+    }
+    .method-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .method-inner div {
+      min-height: 92px;
+      padding: 21px 28px;
+      border-left: 1px solid var(--grid);
+    }
+    .method-inner div:last-child { border-right: 1px solid var(--grid); }
+    .method-inner span { display: block; color: var(--blue); font-size: 12px; font-weight: 800; }
+    .method-inner strong { display: block; margin-top: 4px; font-size: 16px; }
+
+    .section { padding: 90px 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 1fr) minmax(220px, .55fr);
+      align-items: start;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .section-index {
+      padding-top: 7px;
+      color: var(--blue);
+      font: 800 17px/1 var(--numbers);
+      border-top: 3px solid var(--blue);
+    }
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .section-note { color: #526e84; font-size: 14px; }
+
+    .unit-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 2px solid var(--ink);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .unit-grid::before {
+      content: "3 × 一居室 / 同口径";
+      position: absolute;
+      right: 10px;
+      top: -29px;
+      color: #58758c;
+      font-size: 12px;
+    }
+    .unit {
+      position: relative;
+      padding: 0 26px 28px;
+      min-width: 0;
+      border-right: 1px solid var(--grid);
+    }
+    .unit:last-child { border-right: 0; }
+    .unit.is-match::after {
+      content: "符合当前条件";
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      padding: 4px 7px;
+      color: var(--white);
+      background: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .unit.is-out { background: #f7f8f9; }
+    .unit.is-out::after {
+      content: "超出条件";
+      position: absolute;
+      right: 10px;
+      top: 12px;
+      padding: 4px 7px;
+      color: #6a737b;
+      background: #e4e9ec;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .unit-code {
+      width: max-content;
+      margin: 0 0 24px -26px;
+      padding: 11px 20px;
+      color: var(--white);
+      background: var(--ink);
+      font: 700 12px/1 var(--numbers);
+      letter-spacing: .08em;
+    }
+    .unit h3 { margin-bottom: 5px; padding-right: 75px; font-size: 24px; line-height: 1.25; }
+    .unit .address { min-height: 44px; margin-bottom: 22px; color: #607a90; font-size: 13px; }
+    .monthly {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 18px 0 14px;
+      border-top: 1px solid var(--grid);
+      border-bottom: 1px solid var(--grid);
+    }
+    .monthly strong { color: var(--blue); font: 850 42px/1 var(--numbers); letter-spacing: -.04em; }
+    .monthly span { font-size: 13px; }
+
+    .cost-lines { margin: 18px 0 20px; padding: 0; list-style: none; }
+    .cost-lines li {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 7px 0;
+      border-bottom: 1px dotted var(--grid);
+      font-size: 13px;
+    }
+    .cost-lines b { font: 700 14px/1.5 var(--numbers); }
+    .cash {
+      margin-bottom: 21px;
+      padding: 14px;
+      background: var(--paper-deep);
+      border-left: 4px solid var(--blue);
+    }
+    .cash span { display: block; font-size: 12px; color: #537087; }
+    .cash strong { font: 800 25px/1.3 var(--numbers); }
+    .cash small { display: block; margin-top: 4px; color: #537087; }
+
+    .mini-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 0 0 22px;
+      border-top: 1px solid var(--grid);
+      border-left: 1px solid var(--grid);
+    }
+    .mini-specs div { padding: 11px; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); }
+    .mini-specs dt { color: #688197; font-size: 11px; }
+    .mini-specs dd { margin: 2px 0 0; font-weight: 800; font-size: 14px; }
+
+    .use-home {
+      width: 100%;
+      min-height: 43px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .use-home:hover { color: var(--white); background: var(--ink); }
+
+    .compare-board {
+      margin-top: 36px;
+      border: 1px solid var(--grid);
+      background: rgba(255,255,255,.82);
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 190px repeat(3, minmax(0, 1fr));
+      min-height: 72px;
+      border-bottom: 1px solid var(--grid);
+    }
+    .compare-row:last-child { border-bottom: 0; }
+    .compare-row > * { display: flex; align-items: center; padding: 13px 18px; border-right: 1px solid var(--grid); }
+    .compare-row > *:last-child { border-right: 0; }
+    .compare-head {
+      min-height: 52px;
+      color: var(--white);
+      background: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .compare-head > * { border-color: rgba(255,255,255,.24); }
+    .compare-head .compare-corner { color: #9fd7f8; }
+    .compare-label { color: var(--blue); font-size: 13px; font-weight: 800; background: var(--paper-deep); }
+    .compare-cell { flex-wrap: wrap; align-content: center; gap: 3px 8px; font-size: 13px; }
+    .compare-cell strong { display: block; width: 100%; font-size: 15px; }
+    .risk-high { color: #b13837; font-weight: 800; }
+    .risk-mid { color: #94630a; font-weight: 800; }
+    .risk-low { color: var(--green); font-weight: 800; }
+
+    .commute-line {
+      display: inline-block;
+      position: relative;
+      width: 66px;
+      height: 6px;
+      background: #d8e4ec;
+    }
+    .commute-line i { display: block; height: 100%; background: var(--blue); }
+
+    .recommend-section {
+      color: var(--white);
+      background: var(--ink);
+      border-top: 8px solid var(--blue);
+      border-bottom: 8px solid var(--blue);
+    }
+    .recommend-section .section-head { margin-bottom: 34px; }
+    .recommend-section .section-index { color: #7ec6f4; border-color: #7ec6f4; }
+    .recommend-section .section-note { color: #bdd2e1; }
+    .recommend-lab {
+      display: grid;
+      grid-template-columns: minmax(320px, .86fr) minmax(0, 1.14fr);
+      border: 1px solid rgba(255,255,255,.28);
+    }
+    .control-panel { padding: 34px; border-right: 1px solid rgba(255,255,255,.28); }
+    .control-panel fieldset { margin: 0; padding: 0; border: 0; }
+    .control-panel legend { margin-bottom: 25px; font-size: 21px; font-weight: 800; }
+    .field { margin-bottom: 24px; }
+    .field label { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 8px; color: #dcebf5; font-size: 13px; }
+    .field output { color: #8dd0fa; font: 800 18px/1 var(--numbers); }
+    .field input[type="range"] {
+      width: 100%;
+      height: 28px;
+      accent-color: #79c8f8;
+      cursor: pointer;
+    }
+    .scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: -3px;
+      color: #91acbf;
+      font: 11px/1 var(--numbers);
+    }
+    .primary-button, .secondary-button {
+      min-height: 46px;
+      padding: 10px 18px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .primary-button { color: var(--ink); background: #9bd8fa; }
+    .primary-button:hover { background: var(--white); }
+    .secondary-button { color: inherit; background: transparent; border-color: currentColor; }
+    .secondary-button:hover { color: var(--ink); background: var(--white); }
+
+    .decision {
+      position: relative;
+      padding: 38px 40px 34px;
+      min-height: 310px;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .decision-stamp {
+      display: inline-block;
+      margin-bottom: 25px;
+      padding: 5px 9px;
+      color: #acdafa;
+      border: 1px solid currentColor;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .decision h3 { max-width: 540px; margin-bottom: 13px; font-size: clamp(29px, 4vw, 49px); line-height: 1.08; }
+    .decision p { max-width: 600px; color: #d0e1ed; }
+    .decision-metrics { display: flex; flex-wrap: wrap; gap: 12px 30px; margin: 24px 0 30px; }
+    .decision-metrics span { color: #a9c4d7; font-size: 12px; }
+    .decision-metrics b { display: block; color: var(--white); font: 800 24px/1.2 var(--numbers); }
+    .decision .primary-button { margin-right: 8px; }
+
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+    .route {
+      padding: 24px 0 0;
+      border-top: 5px solid var(--blue);
+    }
+    .route:nth-child(2) { border-color: var(--green); }
+    .route:nth-child(3) { border-color: var(--coral); }
+    .route h3 { margin-bottom: 15px; font-size: 20px; }
+    .stations {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 20px 0;
+    }
+    .station {
+      position: relative;
+      flex: 1;
+      min-height: 35px;
+      padding-top: 20px;
+      color: #567287;
+      font-size: 10px;
+      text-align: center;
+    }
+    .station::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      top: 2px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      transform: translateX(-50%);
+      border: 3px solid var(--white);
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 0 1px var(--blue);
+    }
+    .station::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--grid);
+    }
+    .station:last-child::after { display: none; }
+    .route-meta { color: #4f6c83; font-size: 13px; }
+    .route-meta strong { color: var(--ink); }
+
+    .risk-plan {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--grid);
+      background: var(--white);
+    }
+    .risk-intro { padding: 34px; background: var(--paper-deep); border-right: 1px solid var(--grid); }
+    .risk-intro h3 { font-size: 27px; }
+    .risk-intro p { color: #557187; font-size: 14px; }
+    .risk-list { margin: 0; padding: 0; list-style: none; }
+    .risk-list li {
+      display: grid;
+      grid-template-columns: 104px 1fr;
+      gap: 18px;
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--grid);
+      font-size: 13px;
+    }
+    .risk-list li:last-child { border-bottom: 0; }
+    .risk-list b { color: var(--blue); }
+
+    .checklist-wrap {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      border: 2px solid var(--ink);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+    .checklist-controls {
+      padding: 30px;
+      color: var(--white);
+      background: var(--blue);
+    }
+    .checklist-controls label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 800; }
+    .checklist-controls select {
+      width: 100%;
+      min-height: 46px;
+      margin-bottom: 15px;
+      padding: 8px 11px;
+      color: var(--ink);
+      background: var(--white);
+      border: 0;
+    }
+    .checklist-controls .primary-button { width: 100%; }
+    .check-tip { margin: 17px 0 0; color: #d9effc; font-size: 12px; }
+
+    .checklist-paper { padding: 30px 36px 34px; }
+    .checklist-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: end;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .checklist-top h3 { margin: 0; font-size: 23px; }
+    .progress-text { color: var(--green); font: 800 15px/1 var(--numbers); }
+    .progress-track { height: 5px; margin: 14px 0 18px; background: var(--paper-deep); }
+    .progress-fill { width: 0; height: 100%; background: var(--green); transition: width .2s ease; }
+    .check-items { display: grid; grid-template-columns: 1fr 1fr; column-gap: 26px; }
+    .check-item {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 9px;
+      align-items: start;
+      padding: 14px 0;
+      border-bottom: 1px dotted var(--grid);
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .check-item input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--green); }
+    .check-item:has(input:checked) span { color: #6c7d89; text-decoration: line-through; }
+    .check-actions { display: flex; gap: 10px; margin-top: 23px; }
+    .check-actions .secondary-button { color: var(--ink); }
+    .check-actions .secondary-button:hover { color: var(--white); background: var(--ink); }
+
+    footer {
+      padding: 35px 0 42px;
+      color: #627c90;
+      background: var(--paper-deep);
+      border-top: 1px solid var(--grid);
+      font-size: 12px;
+    }
+    .foot-inner { display: flex; justify-content: space-between; gap: 20px; }
+    .foot-inner strong { color: var(--ink); }
+
+    .toast {
+      position: fixed;
+      z-index: 50;
+      right: 20px;
+      bottom: 20px;
+      max-width: min(370px, calc(100% - 40px));
+      padding: 14px 18px;
+      color: var(--white);
+      background: var(--green);
+      box-shadow: var(--shadow);
+      transform: translateY(140%);
+      transition: transform .25s ease;
+    }
+    .toast.show { transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 34px; }
+      .formula-board { max-width: 580px; }
+      .section-head { grid-template-columns: 56px 1fr; }
+      .section-note { grid-column: 2; }
+      .unit-grid { grid-template-columns: 1fr; }
+      .unit { border-right: 0; border-bottom: 1px solid var(--ink); padding: 0 28px 28px; }
+      .unit:last-child { border-bottom: 0; }
+      .unit-code { margin-left: -28px; }
+      .compare-row { grid-template-columns: 150px repeat(3, minmax(180px, 1fr)); }
+      .compare-board { overflow-x: auto; }
+      .compare-row > :first-child {
+        position: sticky;
+        z-index: 3;
+        left: 0;
+        box-shadow: 7px 0 12px rgba(9, 45, 76, .08);
+      }
+      .compare-head > :first-child { background: var(--ink); }
+      .recommend-lab { grid-template-columns: 1fr; }
+      .control-panel { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.28); }
+      .routes { grid-template-columns: 1fr; }
+      .risk-plan { grid-template-columns: 1fr; }
+      .risk-intro { border-right: 0; border-bottom: 1px solid var(--grid); }
+      .checklist-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .sheet, .head-inner { width: min(100% - 28px, 1180px); }
+      .head-inner { min-height: 60px; }
+      .hero { padding: 60px 0 46px; }
+      .hero::before { top: 18px; }
+      .hero-copy::before { display: none; }
+      h1 { font-size: clamp(43px, 15vw, 62px); }
+      .hero-lead { font-size: 16px; }
+      .formula-board { padding: 23px; }
+      .method-inner { grid-template-columns: 1fr; }
+      .method-inner div, .method-inner div:last-child { min-height: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); }
+      .method-inner div:last-child { border-bottom: 0; }
+      .section { padding: 66px 0; }
+      .section-head { grid-template-columns: 42px 1fr; gap: 14px; margin-bottom: 30px; }
+      .section-index { font-size: 14px; }
+      .section-note { font-size: 13px; }
+      .unit { padding-left: 20px; padding-right: 20px; }
+      .unit-code { margin-left: -20px; }
+      .unit h3 { font-size: 21px; }
+      .compare-row { grid-template-columns: 112px repeat(3, minmax(172px, 1fr)); }
+      .compare-row > * { padding: 12px; }
+      .control-panel, .decision { padding: 26px 22px; }
+      .decision .primary-button, .decision .secondary-button { width: 100%; margin: 0 0 9px; }
+      .risk-list li { grid-template-columns: 1fr; gap: 4px; }
+      .checklist-paper { padding: 25px 20px 28px; }
+      .checklist-top { align-items: start; flex-direction: column; gap: 8px; }
+      .check-items { grid-template-columns: 1fr; }
+      .check-actions { flex-direction: column; }
+      .foot-inner { flex-direction: column; }
+    }
+
+    @media print {
+      .site-head, .hero, .method-strip, #comparison, #recommend, #risks, footer, .checklist-controls, .check-actions { display: none !important; }
+      body { background: white; }
+      #checklist { padding: 0; }
+      #checklist .section-head { display: none; }
+      .checklist-wrap { display: block; border: 0; box-shadow: none; }
+      .checklist-paper { padding: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-head">
+    <div class="measure-bar" aria-hidden="true"></div>
+    <div class="head-inner">
+      <a class="brand" href="#main"><span class="brand-mark">04</span><span>澄江租房测量所</span></a>
+      <nav aria-label="页面导航">
+        <a href="#comparison">成本比较</a>
+        <a href="#recommend">条件推荐</a>
+        <a href="#risks">风险校核</a>
+        <a href="#checklist">看房清单</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="sheet hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="kicker">给刚到澄江市工作的毕业生</p>
+        <h1 id="page-title">先量清楚，<br>再签下去。</h1>
+        <p class="hero-lead">三套一居室用同一把尺比较：不只看挂牌租金，还把管理费、水电网、押付现金和早高峰通勤一起算进去。</p>
+      </div>
+      <aside class="formula-board" aria-label="真实月成本计算口径">
+        <small>本页统一计算口径</small>
+        <strong>租金 + 管理 + 水 + 电 + 网</strong>
+        <p>水电按一人居住的近三月均值估算；入住现金单列，不混进月成本。看房时请用账单复核。</p>
+      </aside>
+    </section>
+
+    <div class="method-strip">
+      <div class="sheet method-inner">
+        <div><span>价格口径</span><strong>5 项费用逐项可查</strong></div>
+        <div><span>通勤口径</span><strong>工作日 08:15 出门</strong></div>
+        <div><span>观察口径</span><strong>晴天 09:00 与 18:30</strong></div>
+      </div>
+    </div>
+
+    <section class="sheet section" id="comparison" aria-labelledby="compare-title">
+      <div class="section-head">
+        <span class="section-index">A—01</span>
+        <h2 id="compare-title">把三间房画在同一张图上</h2>
+        <p class="section-note">金额均为人民币。电费按 0.68 元/度估算，北站青年社区为商业电价 0.92 元/度。</p>
+      </div>
+
+      <div class="unit-grid">
+        <article class="unit" data-home="river">
+          <p class="unit-code">J02 / 46㎡ / 8F</p>
+          <h3>临江里 2 号院</h3>
+          <p class="address">澄江东岸路 18 号 · 朝东南 · 2008 年小区</p>
+          <div class="monthly"><strong>3,605</strong><span>元 / 真实月成本</span></div>
+          <ul class="cost-lines" aria-label="临江里每月费用拆分">
+            <li><span>挂牌月租</span><b>¥3,200</b></li>
+            <li><span>管理费</span><b>¥180</b></li>
+            <li><span>水费估算</span><b>¥45</b></li>
+            <li><span>电费估算</span><b>¥130</b></li>
+            <li><span>宽带</span><b>¥50</b></li>
+          </ul>
+          <div class="cash"><span>入住前需备 · 押一付三</span><strong>¥13,440</strong><small>押金 3,200 + 三月租金 9,600 + 季度管理费 540 + 装机 100</small></div>
+          <dl class="mini-specs">
+            <div><dt>早高峰通勤</dt><dd>38 分钟</dd></div>
+            <div><dt>换乘 / 步行</dt><dd>1 次 / 11 分</dd></div>
+            <div><dt>冬至日照</dt><dd>约 4.1 小时</dd></div>
+            <div><dt>关窗噪音</dt><dd>38 dB</dd></div>
+          </dl>
+          <button class="use-home" type="button" data-check-home="river">用这套生成清单</button>
+        </article>
+
+        <article class="unit" data-home="wutong">
+          <p class="unit-code">WT7 / 42㎡ / 12F</p>
+          <h3>梧桐公寓</h3>
+          <p class="address">青禾街 77 号 · 朝南 · 2021 年集中式公寓</p>
+          <div class="monthly"><strong>3,655</strong><span>元 / 真实月成本</span></div>
+          <ul class="cost-lines" aria-label="梧桐公寓每月费用拆分">
+            <li><span>挂牌月租</span><b>¥3,400</b></li>
+            <li><span>管理费</span><b>¥100</b></li>
+            <li><span>水费估算</span><b>¥40</b></li>
+            <li><span>电费估算</span><b>¥115</b></li>
+            <li><span>宽带</span><b>已含</b></li>
+          </ul>
+          <div class="cash"><span>入住前需备 · 押一付一</span><strong>¥6,900</strong><small>押金 3,400 + 首月租金 3,400 + 首月管理费 100</small></div>
+          <dl class="mini-specs">
+            <div><dt>早高峰通勤</dt><dd>27 分钟</dd></div>
+            <div><dt>换乘 / 步行</dt><dd>0 次 / 9 分</dd></div>
+            <div><dt>冬至日照</dt><dd>约 5.3 小时</dd></div>
+            <div><dt>关窗噪音</dt><dd>42 dB</dd></div>
+          </dl>
+          <button class="use-home" type="button" data-check-home="wutong">用这套生成清单</button>
+        </article>
+
+        <article class="unit" data-home="north">
+          <p class="unit-code">NZ3 / 39㎡ / 6F</p>
+          <h3>北站青年社区</h3>
+          <p class="address">北站前路 3 号 · 朝西北 · 2019 年商住楼</p>
+          <div class="monthly"><strong>3,325</strong><span>元 / 真实月成本</span></div>
+          <ul class="cost-lines" aria-label="北站青年社区每月费用拆分">
+            <li><span>挂牌月租</span><b>¥2,780</b></li>
+            <li><span>管理费</span><b>¥260</b></li>
+            <li><span>水费估算</span><b>¥55</b></li>
+            <li><span>电费估算</span><b>¥150</b></li>
+            <li><span>宽带</span><b>¥80</b></li>
+          </ul>
+          <div class="cash"><span>入住前需备 · 押二付一</span><strong>¥8,700</strong><small>押金 5,560 + 首月租金 2,780 + 管理费 260 + 装机 100</small></div>
+          <dl class="mini-specs">
+            <div><dt>早高峰通勤</dt><dd>49 分钟</dd></div>
+            <div><dt>换乘 / 步行</dt><dd>1 次 / 8 分</dd></div>
+            <div><dt>冬至日照</dt><dd>约 1.8 小时</dd></div>
+            <div><dt>关窗噪音</dt><dd>49 dB</dd></div>
+          </dl>
+          <button class="use-home" type="button" data-check-home="north">用这套生成清单</button>
+        </article>
+      </div>
+
+      <div class="compare-board" role="table" aria-label="三套房源横向比较">
+        <div class="compare-row compare-head" role="row">
+          <div class="compare-corner" role="columnheader">比较指标</div>
+          <div role="columnheader">临江里 2 号院</div>
+          <div role="columnheader">梧桐公寓</div>
+          <div role="columnheader">北站青年社区</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div class="compare-label" role="rowheader">到云谷科技园</div>
+          <div class="compare-cell" role="cell"><strong>38 分</strong><span class="commute-line" aria-hidden="true"><i style="width:63%"></i></span>地铁 2→6 号线</div>
+          <div class="compare-cell" role="cell"><strong>27 分</strong><span class="commute-line" aria-hidden="true"><i style="width:45%"></i></span>6 号线直达</div>
+          <div class="compare-cell" role="cell"><strong>49 分</strong><span class="commute-line" aria-hidden="true"><i style="width:82%"></i></span>公交 K3→6 号线</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div class="compare-label" role="rowheader">采光 / 噪音</div>
+          <div class="compare-cell" role="cell"><strong>东南向，晨光稳定</strong>临江路晚间偶有鸣笛</div>
+          <div class="compare-cell" role="cell"><strong>正南向，日照最佳</strong>楼下商业街 21:30 前较吵</div>
+          <div class="compare-cell" role="cell"><strong>西北向，冬季偏暗</strong>铁路距楼约 210 米</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div class="compare-label" role="rowheader">合同风险</div>
+          <div class="compare-cell" role="cell"><strong class="risk-mid">中</strong>转租方签约，需产权人书面授权</div>
+          <div class="compare-cell" role="cell"><strong class="risk-low">低</strong>机构直签；注意第 13 月调价条款</div>
+          <div class="compare-cell" role="cell"><strong class="risk-high">高</strong>商水商电；提前退租扣两月押金</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="recommend-section" id="recommend" aria-labelledby="recommend-title">
+      <div class="sheet section">
+        <div class="section-head">
+          <span class="section-index">B—02</span>
+          <h2 id="recommend-title">输入你的两条硬线</h2>
+          <p class="section-note">推荐只在同时满足月预算与最长通勤时产生；若无房源满足，会明确指出最小妥协。</p>
+        </div>
+
+        <div class="recommend-lab">
+          <form class="control-panel" id="preferenceForm">
+            <fieldset>
+              <legend>你的通勤预算尺</legend>
+              <div class="field">
+                <label for="budget">真实月成本上限 <output id="budgetValue" for="budget">¥3,700</output></label>
+                <input id="budget" name="budget" type="range" min="3000" max="4200" step="50" value="3700">
+                <span class="scale"><span>¥3,000</span><span>¥4,200</span></span>
+              </div>
+              <div class="field">
+                <label for="commute">单程最长通勤 <output id="commuteValue" for="commute">35 分钟</output></label>
+                <input id="commute" name="commute" type="range" min="20" max="60" step="1" value="35">
+                <span class="scale"><span>20 分</span><span>60 分</span></span>
+              </div>
+              <button class="primary-button" type="submit">按两条条件重新测量</button>
+            </fieldset>
+          </form>
+
+          <div class="decision" aria-live="polite" aria-atomic="true">
+            <span class="decision-stamp" id="decisionStamp">1 套同时通过</span>
+            <h3 id="decisionTitle">推荐：梧桐公寓</h3>
+            <p id="decisionCopy">月成本比你的上限低 45 元，早高峰比最长通勤少 8 分钟；三套中采光最好，合同风险也最低。</p>
+            <div class="decision-metrics" id="decisionMetrics">
+              <span>真实月成本<b>¥3,655</b></span>
+              <span>早高峰通勤<b>27 分钟</b></span>
+              <span>入住现金<b>¥6,900</b></span>
+            </div>
+            <button class="primary-button" type="button" id="makeRecommendedList">生成这套看房清单</button>
+            <button class="secondary-button" type="button" id="jumpCompare">回看三套拆分</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet section" id="risks" aria-labelledby="risk-title">
+      <div class="section-head">
+        <span class="section-index">C—03</span>
+        <h2 id="risk-title">路线与签约，都要现场校核</h2>
+        <p class="section-note">通勤来自周二至周四三次路线记录。天气、排队和电梯等候会使结果上下浮动约 6 分钟。</p>
+      </div>
+
+      <div class="routes" aria-label="三套房源通勤路线">
+        <article class="route">
+          <h3>临江里 2 号院</h3>
+          <div class="stations" aria-hidden="true"><span class="station">步行</span><span class="station">江岸站</span><span class="station">云谷站</span><span class="station">园区</span></div>
+          <p class="route-meta"><strong>08:15—08:53</strong><br>步行 11 分 · 地铁 21 分 · 候车 6 分</p>
+        </article>
+        <article class="route">
+          <h3>梧桐公寓</h3>
+          <div class="stations" aria-hidden="true"><span class="station">步行</span><span class="station">青禾站</span><span class="station">云谷站</span><span class="station">园区</span></div>
+          <p class="route-meta"><strong>08:15—08:42</strong><br>步行 9 分 · 地铁 14 分 · 候车 4 分</p>
+        </article>
+        <article class="route">
+          <h3>北站青年社区</h3>
+          <div class="stations" aria-hidden="true"><span class="station">北站</span><span class="station">枢纽</span><span class="station">云谷站</span><span class="station">园区</span></div>
+          <p class="route-meta"><strong>08:15—09:04</strong><br>公交 15 分 · 换乘 9 分 · 地铁与步行 25 分</p>
+        </article>
+      </div>
+
+      <div class="risk-plan">
+        <div class="risk-intro">
+          <h3>签字前的四个红线</h3>
+          <p>便宜不等于低成本。不能当场出示、不能写入合同、只能口头保证的条件，一律按“不成立”处理。</p>
+        </div>
+        <ul class="risk-list">
+          <li><b>出租权</b><span>产权证姓名应与签约人一致；转租必须附产权人授权及原租约。</span></li>
+          <li><b>收费口径</b><span>写清住宅或商业水电、管理费调整方式、宽带违约金及开票主体。</span></li>
+          <li><b>退租边界</b><span>把提前退租、转租、工作调动的扣款公式写进补充条款。</span></li>
+          <li><b>交付状态</b><span>墙面、家电、水表电表逐项拍照编号，双方签字后作为合同附件。</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sheet section" id="checklist" aria-labelledby="checklist-title">
+      <div class="section-head">
+        <span class="section-index">D—04</span>
+        <h2 id="checklist-title">带走一份能真正勾选的清单</h2>
+        <p class="section-note">先选房源再生成。共用检查项之外，会自动加入这套房最容易遗漏的专项问题。</p>
+      </div>
+
+      <div class="checklist-wrap">
+        <div class="checklist-controls">
+          <label for="homeSelect">准备看哪一套？</label>
+          <select id="homeSelect">
+            <option value="river">临江里 2 号院</option>
+            <option value="wutong" selected>梧桐公寓</option>
+            <option value="north">北站青年社区</option>
+          </select>
+          <button class="primary-button" type="button" id="generateList">生成看房清单</button>
+          <p class="check-tip">到现场逐项点选；打印时只保留右侧清单，适合夹在合同文件里。</p>
+        </div>
+
+        <div class="checklist-paper">
+          <div class="checklist-top">
+            <h3 id="listTitle">梧桐公寓 · 看房校核单</h3>
+            <span class="progress-text" id="progressText">0 / 10 已完成</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="清单完成进度" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="check-items" id="checkItems"></div>
+          <div class="check-actions">
+            <button class="secondary-button" type="button" id="resetList">清空勾选</button>
+            <button class="secondary-button" type="button" id="printList">打印 / 保存清单</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="sheet foot-inner">
+      <span><strong>澄江租房测量所</strong> · 样本测算日期 2026-09-11</span>
+      <span>估算用于缩小选择范围，签约金额以账单与合同为准。</span>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const homes = {
+      river: {
+        name: "临江里 2 号院", cost: 3605, commute: 38, cash: 13440, risk: 2,
+        reason: "江景侧安静、通风不错，但转租授权必须先核实。",
+        checks: ["取得产权人书面转租授权", "22:30 分别开窗、关窗听临江路噪音", "摸窗角与衣柜背板，检查临江湿气", "确认老小区电路能否同时使用空调与电磁炉"]
+      },
+      wutong: {
+        name: "梧桐公寓", cost: 3655, commute: 27, cash: 6900, risk: 1,
+        reason: "通勤最短、冬季采光最好，机构直签让合同边界更清楚。",
+        checks: ["测速确认房租所含宽带不低于 300 Mbps", "18:30 关窗测试楼下商业街噪音", "确认管理费包含保洁、门禁和维修范围", "要求写明第 13 月租金调价上限"]
+      },
+      north: {
+        name: "北站青年社区", cost: 3325, commute: 49, cash: 8700, risk: 3,
+        reason: "月成本最低，但通勤偏长，商水商电与退租条款需要重点谈。",
+        checks: ["拍摄电表并确认商业电价 0.92 元/度", "早晚各听一次铁路运行噪音", "要求把提前退租扣款降至一个月", "确认地址可办理居住登记与快递入户"]
+      }
+    };
+
+    const commonChecks = [
+      "核对产权证、出租人身份证与门牌一致",
+      "开最大水流 3 分钟，检查水压与下水速度",
+      "开启空调、冰箱、热水器，记录设备状态",
+      "拍摄水表、电表、燃气表当前读数",
+      "检查墙角、窗框、厨卫顶部有无渗水",
+      "把押金退还时间与费用扣除公式写入合同"
+    ];
+
+    const budget = document.querySelector("#budget");
+    const commute = document.querySelector("#commute");
+    const budgetValue = document.querySelector("#budgetValue");
+    const commuteValue = document.querySelector("#commuteValue");
+    const decisionStamp = document.querySelector("#decisionStamp");
+    const decisionTitle = document.querySelector("#decisionTitle");
+    const decisionCopy = document.querySelector("#decisionCopy");
+    const decisionMetrics = document.querySelector("#decisionMetrics");
+    const homeSelect = document.querySelector("#homeSelect");
+    const checkItems = document.querySelector("#checkItems");
+    const listTitle = document.querySelector("#listTitle");
+    const progressText = document.querySelector("#progressText");
+    const progressTrack = document.querySelector(".progress-track");
+    const progressFill = document.querySelector("#progressFill");
+    const toast = document.querySelector("#toast");
+    let recommendedKey = "wutong";
+    let toastTimer;
+
+    function money(value) {
+      return new Intl.NumberFormat("zh-CN").format(value);
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function updateDecision() {
+      const budgetLimit = Number(budget.value);
+      const commuteLimit = Number(commute.value);
+      budgetValue.textContent = `¥${money(budgetLimit)}`;
+      commuteValue.textContent = `${commuteLimit} 分钟`;
+
+      const entries = Object.entries(homes);
+      const eligible = entries.filter(([, home]) => home.cost <= budgetLimit && home.commute <= commuteLimit);
+
+      document.querySelectorAll(".unit").forEach((unit) => {
+        const home = homes[unit.dataset.home];
+        const pass = home.cost <= budgetLimit && home.commute <= commuteLimit;
+        unit.classList.toggle("is-match", pass);
+        unit.classList.toggle("is-out", !pass);
+      });
+
+      if (eligible.length) {
+        eligible.sort((a, b) => {
+          const scoreA = a[1].commute * 1.8 + a[1].risk * 12 + a[1].cost / 100;
+          const scoreB = b[1].commute * 1.8 + b[1].risk * 12 + b[1].cost / 100;
+          return scoreA - scoreB;
+        });
+        const [key, home] = eligible[0];
+        recommendedKey = key;
+        decisionStamp.textContent = `${eligible.length} 套同时通过`;
+        decisionTitle.textContent = `推荐：${home.name}`;
+        decisionCopy.textContent = `月成本比你的上限低 ${money(budgetLimit - home.cost)} 元，早高峰比最长通勤少 ${commuteLimit - home.commute} 分钟。${home.reason}`;
+        decisionMetrics.innerHTML = `<span>真实月成本<b>¥${money(home.cost)}</b></span><span>早高峰通勤<b>${home.commute} 分钟</b></span><span>入住现金<b>¥${money(home.cash)}</b></span>`;
+      } else {
+        const closest = entries.map(([key, home]) => ({
+          key, home,
+          budgetGap: Math.max(0, home.cost - budgetLimit),
+          commuteGap: Math.max(0, home.commute - commuteLimit)
+        })).sort((a, b) => (a.budgetGap / 20 + a.commuteGap * 4) - (b.budgetGap / 20 + b.commuteGap * 4))[0];
+        recommendedKey = closest.key;
+        decisionStamp.textContent = "0 套同时通过";
+        decisionTitle.textContent = `最小妥协：${closest.home.name}`;
+        const gaps = [];
+        if (closest.budgetGap) gaps.push(`每月预算再加 ${money(closest.budgetGap)} 元`);
+        if (closest.commuteGap) gaps.push(`最长通勤放宽 ${closest.commuteGap} 分钟`);
+        decisionCopy.textContent = `当前没有房源同时满足两条硬线。选择 ${closest.home.name}，需要${gaps.join("，并")}。页面不会把超标房源伪装成推荐。`;
+        decisionMetrics.innerHTML = `<span>真实月成本<b>¥${money(closest.home.cost)}</b></span><span>早高峰通勤<b>${closest.home.commute} 分钟</b></span><span>合同风险<b>${["", "低", "中", "高"][closest.home.risk]}</b></span>`;
+      }
+    }
+
+    function generateChecklist(key, announce = true) {
+      const home = homes[key];
+      homeSelect.value = key;
+      listTitle.textContent = `${home.name} · 看房校核单`;
+      const all = [...commonChecks, ...home.checks];
+      checkItems.replaceChildren();
+      all.forEach((text, index) => {
+        const label = document.createElement("label");
+        label.className = "check-item";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "viewing-check";
+        checkbox.value = String(index);
+        const span = document.createElement("span");
+        span.textContent = text;
+        label.append(checkbox, span);
+        checkItems.append(label);
+      });
+      progressTrack.setAttribute("aria-valuemax", String(all.length));
+      updateProgress();
+      if (announce) showToast(`已生成 ${home.name} 的 10 项看房清单`);
+    }
+
+    function updateProgress() {
+      const total = checkItems.querySelectorAll("input").length;
+      const done = checkItems.querySelectorAll("input:checked").length;
+      progressText.textContent = `${done} / ${total} 已完成`;
+      progressTrack.setAttribute("aria-valuenow", String(done));
+      progressFill.style.width = total ? `${done / total * 100}%` : "0%";
+    }
+
+    budget.addEventListener("input", updateDecision);
+    commute.addEventListener("input", updateDecision);
+    document.querySelector("#preferenceForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      updateDecision();
+      showToast("已按月预算与最长通勤两条条件重新测量");
+    });
+
+    document.querySelectorAll("[data-check-home]").forEach((button) => {
+      button.addEventListener("click", () => {
+        generateChecklist(button.dataset.checkHome);
+        document.querySelector("#checklist").scrollIntoView({ behavior: "smooth" });
+      });
+    });
+
+    document.querySelector("#makeRecommendedList").addEventListener("click", () => {
+      generateChecklist(recommendedKey);
+      document.querySelector("#checklist").scrollIntoView({ behavior: "smooth" });
+    });
+    document.querySelector("#jumpCompare").addEventListener("click", () => document.querySelector("#comparison").scrollIntoView({ behavior: "smooth" }));
+    document.querySelector("#generateList").addEventListener("click", () => generateChecklist(homeSelect.value));
+    checkItems.addEventListener("change", updateProgress);
+    document.querySelector("#resetList").addEventListener("click", () => {
+      checkItems.querySelectorAll("input").forEach((input) => { input.checked = false; });
+      updateProgress();
+      showToast("已清空全部勾选");
+    });
+    document.querySelector("#printList").addEventListener("click", () => window.print());
+
+    generateChecklist("wutong", false);
+    updateDecision();
+  </script>
+</body>
+</html>

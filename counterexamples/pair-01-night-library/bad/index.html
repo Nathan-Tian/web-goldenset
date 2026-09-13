@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="栖城图书馆夜读计划，城市入夜后的阅读空间。">
+  <title>夜幕之后｜栖城图书馆夜读计划</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #0d1420;
+      --blue: #162437;
+      --blue-soft: #253850;
+      --paper: #e9e9e3;
+      --smoke: #aeb9c2;
+      --copper: #e5a07f;
+      --ice: #a9c8d8;
+      --line: rgba(233, 233, 227, .19);
+      --max: 1280px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    :focus-visible { outline: 3px solid var(--copper); outline-offset: 4px; }
+
+    .site-header {
+      position: absolute;
+      z-index: 20;
+      left: 0;
+      right: 0;
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .24);
+    }
+    .nav {
+      max-width: var(--max);
+      min-height: 76px;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .brand { font-weight: 650; letter-spacing: -.025em; }
+    .brand small { margin-left: 10px; color: rgba(255, 255, 255, .66); font-weight: 400; }
+    .nav-links { display: flex; gap: 30px; color: rgba(255, 255, 255, .78); font-size: 13px; }
+
+    .hero {
+      position: relative;
+      min-height: 760px;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background: #16283a;
+    }
+    .hero > img { position: absolute; inset: 0; height: 100%; object-fit: cover; }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(6, 13, 22, .86) 0%, rgba(6, 13, 22, .26) 67%, rgba(6, 13, 22, .12) 100%);
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 150px 30px 78px;
+    }
+    .season { margin: 0 0 24px; color: #d9e4e8; font-size: 14px; }
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-family: "STSong", "Songti SC", serif;
+      font-size: clamp(56px, 8vw, 112px);
+      font-weight: 400;
+      line-height: 1.02;
+      letter-spacing: -.06em;
+    }
+    .hero-copy > p:not(.season) { max-width: 530px; margin: 28px 0 34px; color: #d4dde1; font-size: 17px; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, .72);
+      font-weight: 650;
+      cursor: pointer;
+      background: none;
+      color: inherit;
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+    }
+    .text-link::after { content: ""; width: 26px; height: 1px; background: currentColor; }
+
+    .floating-note {
+      position: absolute;
+      z-index: 3;
+      right: max(30px, calc((100vw - var(--max)) / 2 + 30px));
+      bottom: 66px;
+      width: 240px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .4);
+      background: rgba(9, 21, 34, .66);
+      backdrop-filter: blur(14px);
+    }
+    .floating-note span { display: block; color: #c9d4da; font-size: 12px; }
+    .floating-note strong { display: block; margin: 8px 0; font-size: 22px; font-weight: 500; }
+    .floating-note small { color: #aebec6; }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--blue);
+    }
+    .ticker-inner {
+      width: max-content;
+      padding: 17px 0;
+      color: #cbd6dd;
+      font-size: 12px;
+      word-spacing: 18px;
+      letter-spacing: .02em;
+    }
+
+    .section { max-width: var(--max); margin: 0 auto; padding: 110px 30px; }
+    .section-title {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 70px;
+      align-items: end;
+      margin-bottom: 48px;
+    }
+    .section-title h2 {
+      margin: 0;
+      font-family: "STSong", "Songti SC", serif;
+      font-size: clamp(40px, 5.6vw, 76px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+    .section-title p { max-width: 560px; margin: 0 0 5px; color: var(--smoke); }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+    }
+    .gallery-main { position: relative; min-height: 660px; margin: 0; overflow: hidden; }
+    .gallery-main img { height: 100%; object-fit: cover; }
+    .gallery-side { display: grid; grid-template-rows: 1fr 1fr; gap: 18px; }
+    .gallery-side figure { position: relative; min-height: 320px; margin: 0; overflow: hidden; }
+    .gallery-side img { height: 100%; object-fit: cover; }
+    figure figcaption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 13px 15px;
+      background: rgba(11, 20, 30, .78);
+      border: 1px solid rgba(255, 255, 255, .18);
+      color: #dbe3e6;
+      font-size: 12px;
+      backdrop-filter: blur(9px);
+    }
+
+    .availability {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr repeat(3, .62fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .availability-intro,
+    .number-cell { padding: 28px 22px 28px 0; }
+    .availability-intro { color: var(--smoke); font-size: 13px; }
+    .availability-intro strong { display: block; margin-bottom: 6px; color: var(--paper); font-size: 17px; }
+    .number-cell { padding-left: 22px; border-left: 1px solid var(--line); }
+    .number-cell span { display: block; color: var(--smoke); font-size: 11px; }
+    .number-cell strong {
+      display: block;
+      margin: 8px 0 1px;
+      font-family: "Baskerville", "Times New Roman", serif;
+      color: var(--ice);
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .schedule-wrap {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      min-height: 620px;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    .schedule-image { min-height: 500px; }
+    .schedule-image img { height: 100%; object-fit: cover; }
+    .schedule-copy { padding: 72px clamp(30px, 7vw, 92px); align-self: center; }
+    .schedule-copy h2 {
+      max-width: 520px;
+      margin: 0 0 26px;
+      font-family: "STSong", "Songti SC", serif;
+      font-size: clamp(42px, 5vw, 68px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.05em;
+    }
+    .schedule-copy > p { color: #4e5c65; }
+    .schedule-notes { margin-top: 44px; border-top: 1px solid #aeb6b5; }
+    .schedule-note { padding: 18px 0; border-bottom: 1px solid #c8cdcb; }
+    .schedule-note strong { display: block; margin-bottom: 4px; font-weight: 650; }
+    .schedule-note span { color: #57656d; font-size: 13px; }
+
+    .spaces { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+    .space {
+      min-height: 280px;
+      padding: 30px 34px 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .space + .space { padding-left: 34px; border-left: 1px solid var(--line); }
+    .space span { color: var(--copper); font-size: 12px; }
+    .space h3 { margin: 23px 0 16px; font-family: "STSong", "Songti SC", serif; font-size: 32px; font-weight: 400; }
+    .space p { color: var(--smoke); font-size: 14px; }
+    .space a { display: inline-block; margin-top: 17px; color: #dce2e5; font-size: 13px; border-bottom: 1px solid var(--blue-soft); }
+
+    .visit-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 70px; }
+    .visit-image { min-height: 520px; }
+    .visit-image img { height: 100%; object-fit: cover; }
+    .visit-copy { align-self: center; }
+    .visit-copy h2 {
+      margin: 0 0 28px;
+      font-family: "STSong", "Songti SC", serif;
+      font-size: clamp(42px, 5.4vw, 72px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -.05em;
+    }
+    .visit-item { padding: 20px 0; border-top: 1px solid var(--line); }
+    .visit-item strong { display: block; margin-bottom: 5px; font-size: 15px; }
+    .visit-item p { margin: 0; color: var(--smoke); font-size: 13px; }
+
+    .closing {
+      padding: 100px 30px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      background: var(--blue);
+    }
+    .closing h2 {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: "STSong", "Songti SC", serif;
+      font-size: clamp(46px, 6vw, 80px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -.05em;
+    }
+    .closing p { max-width: 580px; margin: 22px auto 32px; color: var(--smoke); }
+    .closing .text-link { color: var(--paper); }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 32px 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+      color: #8998a2;
+      font-size: 12px;
+    }
+
+    dialog {
+      width: min(560px, calc(100% - 28px));
+      padding: 0;
+      border: 0;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 0 40px 120px rgba(0, 0, 0, .55);
+    }
+    dialog::backdrop { background: rgba(5, 10, 17, .78); backdrop-filter: blur(5px); }
+    .interest-form, .interest-success { padding: 40px; }
+    .dialog-head { display: flex; justify-content: space-between; align-items: start; gap: 22px; }
+    .dialog-head h2 { margin: 0; font-family: "STSong", "Songti SC", serif; font-size: 36px; font-weight: 400; }
+    .close { border: 1px solid #aeb7b6; background: transparent; width: 38px; height: 38px; cursor: pointer; }
+    .interest-form > p, .interest-success p { color: #55636b; }
+    .field { display: grid; gap: 7px; margin: 24px 0; font-size: 13px; }
+    .field input { width: 100%; padding: 13px 2px; border: 0; border-bottom: 1px solid #8e9a9d; background: transparent; color: var(--ink); }
+    .submit { border: 0; padding: 14px 22px; background: var(--ink); color: var(--paper); cursor: pointer; }
+    .interest-success { display: none; text-align: center; }
+    .interest-success h2 { font-family: "STSong", "Songti SC", serif; font-size: 38px; font-weight: 400; }
+
+    @media (max-width: 900px) {
+      .floating-note { display: none; }
+      .section-title { grid-template-columns: 1fr; gap: 22px; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery-main { min-height: 520px; }
+      .gallery-side { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
+      .schedule-wrap, .visit-grid { grid-template-columns: 1fr; }
+      .schedule-image, .visit-image { min-height: 440px; }
+      .visit-grid { gap: 46px; }
+    }
+
+    @media (max-width: 680px) {
+      .nav { min-height: 64px; padding: 0 18px; }
+      .brand small, .nav-links { display: none; }
+      .hero { min-height: 680px; }
+      .hero-copy { padding: 120px 18px 54px; }
+      .hero::after { background: linear-gradient(0deg, rgba(6, 13, 22, .9), rgba(6, 13, 22, .2)); }
+      .section { padding: 78px 18px; }
+      .gallery-main { min-height: 440px; }
+      .gallery-side { grid-template-columns: 1fr; }
+      .gallery-side figure { min-height: 330px; }
+      .availability { grid-template-columns: repeat(3, 1fr); }
+      .availability-intro { grid-column: 1 / -1; border-bottom: 1px solid var(--line); }
+      .number-cell { padding: 18px 12px; }
+      .number-cell:first-of-type { border-left: 0; }
+      .number-cell strong { font-size: 36px; }
+      .schedule-image, .visit-image { min-height: 360px; }
+      .schedule-copy { padding: 56px 18px; }
+      .spaces { grid-template-columns: 1fr; }
+      .space, .space + .space { min-height: auto; padding: 28px 0; border-left: 0; }
+      .closing { padding: 72px 18px; }
+      footer { flex-direction: column; padding: 26px 18px; }
+      .interest-form, .interest-success { padding: 28px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#top">栖城图书馆 <small>夜读计划</small></a>
+      <div class="nav-links"><a href="#spaces">空间</a><a href="#hours">开放安排</a><a href="#visit">来馆</a><a href="#reserve">预约</a></div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <img alt="夜间图书馆内庭与阅读灯光的建筑插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000'%3E%3Crect width='1600' height='1000' fill='%2315273a'/%3E%3Cpath d='M0 735L1600 480V1000H0Z' fill='%230a1622'/%3E%3Ccircle cx='1260' cy='170' r='105' fill='%23b9ccda' opacity='.82'/%3E%3Cpath d='M580 180h650v590H580z' fill='%232a4155' stroke='%238aa8b9' stroke-width='3'/%3E%3Cpath d='M640 260h530M640 350h530M640 440h530M640 530h530M640 620h530' stroke='%235f7d8e' stroke-width='9'/%3E%3Cg fill='%23e6a585'%3E%3Crect x='680' y='280' width='95' height='12'/%3E%3Crect x='890' y='370' width='125' height='12'/%3E%3Crect x='760' y='460' width='150' height='12'/%3E%3Crect x='995' y='550' width='110' height='12'/%3E%3C/g%3E%3Cpath d='M70 845h510M910 790h530' stroke='%23758e9e' stroke-width='3'/%3E%3Cg fill='%23d9e2e3'%3E%3Ccircle cx='380' cy='655' r='26'/%3E%3Cpath d='M326 754q54-105 108 0z'/%3E%3Ccircle cx='820' cy='690' r='22'/%3E%3Cpath d='M773 775q47-92 94 0z'/%3E%3C/g%3E%3C/svg%3E">
+      <div class="hero-copy">
+        <p class="season">秋季特别企划 · 9 月至 12 月</p>
+        <h1 id="hero-title">城市入夜，阅读继续。</h1>
+        <p>当白天的声音退去，栖城图书馆为仍在前行的人保留一盏灯。来这里写完一页，也为自己留一段安静。</p>
+        <button class="text-link open-interest" type="button">预约我的夜读时光</button>
+      </div>
+      <aside class="floating-note"><span>今晚服务提示</span><strong>开放至深夜</strong><small>具体闭馆时间请见下方开放安排</small></aside>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-inner">静音阅读　夜间自习　同伴讨论　城市书房　深夜陪伴　自由工作　安静角落　静音阅读　夜间自习　同伴讨论　城市书房　深夜陪伴</div></div>
+
+    <section class="section" id="spaces" aria-labelledby="spaces-title">
+      <div class="section-title">
+        <h2 id="spaces-title">找到属于你的那束光</h2>
+        <p>从窗边独桌到多人长桌，不同楼层各有自己的夜晚节奏。你可以独处，也可以和同行的人交换一个想法。</p>
+      </div>
+      <div class="gallery">
+        <figure class="gallery-main">
+          <img alt="临窗的深夜个人阅读区插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1100'%3E%3Crect width='1000' height='1100' fill='%23182b3d'/%3E%3Crect x='90' y='80' width='820' height='620' fill='%230d1d2a' stroke='%23547384' stroke-width='5'/%3E%3Cpath d='M500 80v620M90 395h820' stroke='%23547384' stroke-width='5'/%3E%3Ccircle cx='710' cy='255' r='90' fill='%23b3c9d5'/%3E%3Cpath d='M0 870L1000 690V1100H0Z' fill='%23081420'/%3E%3Cpath d='M150 875h700M210 835l80-170h405l95 170' stroke='%2391a7b1' stroke-width='10' fill='none'/%3E%3Crect x='270' y='650' width='180' height='24' fill='%23e1a080'/%3E%3Ccircle cx='560' cy='735' r='30' fill='%23e1e7e6'/%3E%3Cpath d='M500 860q60-130 120 0z' fill='%23e1e7e6'/%3E%3C/svg%3E">
+          <figcaption>临窗单人席 · 入夜后仍能看到文昌路的灯</figcaption>
+        </figure>
+        <div class="gallery-side">
+          <figure>
+            <img alt="小组围桌讨论的夜读空间插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 620'%3E%3Crect width='800' height='620' fill='%23263b50'/%3E%3Ccircle cx='400' cy='60' r='160' fill='%23e3a07f' opacity='.7'/%3E%3Cpath d='M100 500h600L570 350H230z' fill='%230d1926' stroke='%2389a5b4' stroke-width='5'/%3E%3Cg fill='%23dfe6e7'%3E%3Ccircle cx='225' cy='310' r='28'/%3E%3Cpath d='M175 405q50-110 100 0z'/%3E%3Ccircle cx='560' cy='295' r='28'/%3E%3Cpath d='M510 390q50-110 100 0z'/%3E%3C/g%3E%3Cpath d='M330 390h140' stroke='%23df9e7c' stroke-width='15'/%3E%3C/svg%3E">
+            <figcaption>共同学习 · 与同伴共享一张长桌</figcaption>
+          </figure>
+          <figure>
+            <img alt="书架间的安静阅读席插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 620'%3E%3Crect width='800' height='620' fill='%23101e2d'/%3E%3Cpath d='M70 60h200v470H70zM530 60h200v470H530z' fill='%23273d51' stroke='%2379919f' stroke-width='4'/%3E%3Cg stroke='%23a1b3bb' stroke-width='8'%3E%3Cpath d='M100 150h140M100 245h140M100 340h140M100 435h140M560 150h140M560 245h140M560 340h140M560 435h140'/%3E%3C/g%3E%3Cpath d='M318 520h164L450 350h-100z' fill='%23df9e7c'/%3E%3Ccircle cx='400' cy='305' r='28' fill='%23e1e6e5'/%3E%3C/svg%3E">
+            <figcaption>书架深处 · 适合长时间沉浸阅读</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="availability" aria-label="当前座位概览">
+        <div class="availability-intro"><strong>此刻仍有位置</strong>馆内状态由值班老师不定时更新</div>
+        <div class="number-cell"><span>一楼可用</span><strong>32</strong><span>座</span></div>
+        <div class="number-cell"><span>二楼可用</span><strong>18</strong><span>座</span></div>
+        <div class="number-cell"><span>三楼可用</span><strong>09</strong><span>座</span></div>
+      </div>
+    </section>
+
+    <section class="schedule-wrap" id="hours" aria-labelledby="hours-title">
+      <div class="schedule-image">
+        <img alt="夜读者经过图书馆长廊的插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 1000'%3E%3Crect width='900' height='1000' fill='%23142435'/%3E%3Cpath d='M0 0h210v1000H0zM690 0h210v1000H690z' fill='%232d4355'/%3E%3Cpath d='M210 0l190 1000M690 0L500 1000' stroke='%236a8290' stroke-width='5'/%3E%3Cpath d='M330 0h240L510 1000H390z' fill='%23233748'/%3E%3Ccircle cx='450' cy='730' r='34' fill='%23e9e8e1'/%3E%3Cpath d='M385 900q65-145 130 0z' fill='%23e9e8e1'/%3E%3Ccircle cx='450' cy='110' r='55' fill='%23e3a07f' opacity='.8'/%3E%3C/svg%3E">
+      </div>
+      <div class="schedule-copy">
+        <h2 id="hours-title">晚一点，也来得及。</h2>
+        <p>夜读计划从初秋持续到冬至。大多数夜晚，我们会在日常服务结束后继续点亮阅览区。</p>
+        <div class="schedule-notes">
+          <div class="schedule-note"><strong>工作日</strong><span>18:00 后继续开放，通常延续至次日 00:30</span></div>
+          <div class="schedule-note"><strong>周末</strong><span>周六 17:00 开始；周日会较早结束</span></div>
+          <div class="schedule-note"><strong>节假日</strong><span>请以当日公告和入口提示为准</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="rules-title">
+      <div class="section-title">
+        <h2 id="rules-title">每一种专注，都有自己的位置</h2>
+        <p>空间并不要求所有人保持同一种状态。找到适合自己的区域，也为身边的人留出恰当距离。</p>
+      </div>
+      <div class="spaces">
+        <article class="space"><span>一层北侧</span><h3>静音阅览</h3><p>适合个人阅读与备考。手机保持静音，离开座位时请带好随身物品。</p><a href="#reserve">选择这个区域</a></article>
+        <article class="space"><span>三层东侧</span><h3>共同讨论</h3><p>可以和同伴轻声交流。讨论室数量有限，繁忙时段可能需要等候。</p><a href="#reserve">选择这个区域</a></article>
+        <article class="space"><span>二层露台</span><h3>短暂休息</h3><p>在这里接电话、饮水或补充能量。回到阅览空间前，请收好食物。</p><a href="#reserve">选择这个区域</a></article>
+      </div>
+    </section>
+
+    <section class="section" id="visit" aria-labelledby="visit-title">
+      <div class="visit-grid">
+        <div class="visit-image">
+          <img alt="图书馆夜间入口与街道灯光插画" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 900'%3E%3Crect width='1000' height='900' fill='%23132639'/%3E%3Cpath d='M80 250h680v500H80z' fill='%23283f51' stroke='%237e99a8' stroke-width='5'/%3E%3Cpath d='M160 340h520M160 445h520M160 550h520' stroke='%23687f8b' stroke-width='12'/%3E%3Crect x='675' y='470' width='180' height='280' fill='%23e4a17f'/%3E%3Crect x='718' y='530' width='94' height='220' fill='%230d1c2a'/%3E%3Cpath d='M0 790h1000' stroke='%23a9bdc6' stroke-width='6'/%3E%3Ccircle cx='865' cy='240' r='58' fill='%23b9cdd6'/%3E%3Cpath d='M865 298v470' stroke='%23b9cdd6' stroke-width='9'/%3E%3C/svg%3E">
+        </div>
+        <div class="visit-copy">
+          <h2 id="visit-title">让归途也保持从容</h2>
+          <div class="visit-item"><strong>夜间入口</strong><p>22:00 后部分入口会关闭，请跟随现场发光指示牌，从开放入口进出。</p></div>
+          <div class="visit-item"><strong>公共交通</strong><p>地铁 2 号线文昌路站步行可达，附近另有夜班公交停靠。</p></div>
+          <div class="visit-item"><strong>末班车</strong><p>运营时间可能临时调整，建议离馆前再次查询当日交通信息。</p></div>
+          <div class="visit-item"><strong>需要帮助</strong><p>到达图书馆后，可向夜间服务台询问入口与返程路线。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="reserve" aria-labelledby="reserve-title">
+      <h2 id="reserve-title">为今晚，留一段不被打扰的时间。</h2>
+      <p>告诉我们你的夜读偏好，我们会记录预约意向。座位安排以到馆后的实际情况为准。</p>
+      <button class="text-link open-interest" type="button">登记夜读意向</button>
+    </section>
+  </main>
+
+  <footer><span>栖城图书馆 · 文昌路 18 号</span><span>夜读计划 2026 秋季</span></footer>
+
+  <dialog id="interest" aria-labelledby="interest-title">
+    <form class="interest-form" id="interest-form">
+      <div class="dialog-head"><h2 id="interest-title">预约夜读时光</h2><button class="close" id="close-interest" type="button" aria-label="关闭">×</button></div>
+      <p>留下你的称呼与阅读偏好。提交后请直接到馆，由现场工作人员安排可用座位。</p>
+      <label class="field">你的称呼<input name="name" autocomplete="name" required placeholder="例如：林同学"></label>
+      <label class="field">偏好的空间<input name="preference" required placeholder="例如：安静、临窗、可用电脑"></label>
+      <button class="submit" type="submit">记录预约意向</button>
+    </form>
+    <div class="interest-success" id="interest-success"><h2>意向已记录</h2><p>座位不会提前保留，请到馆后根据现场余量选择。</p><button class="submit" id="done" type="button">知道了</button></div>
+  </dialog>
+
+  <script>
+    const interest = document.querySelector('#interest');
+    const interestForm = document.querySelector('#interest-form');
+    const interestSuccess = document.querySelector('#interest-success');
+    document.querySelectorAll('.open-interest').forEach((button) => button.addEventListener('click', () => {
+      interestForm.style.display = 'block';
+      interestSuccess.style.display = 'none';
+      interest.showModal();
+    }));
+    document.querySelector('#close-interest').addEventListener('click', () => interest.close());
+    document.querySelector('#done').addEventListener('click', () => interest.close());
+    interestForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      interestForm.style.display = 'none';
+      interestSuccess.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

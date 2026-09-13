@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="栖城图书馆夜读计划：查看今晚开放时间、实时座位、分区规则、夜间入口与末班交通，并预约座位。">
+  <title>今晚开放至 00:30｜栖城图书馆夜读计划</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night: #07131f;
+      --deck: #0c1c2a;
+      --deck-2: #122638;
+      --frost: #edf5f5;
+      --mist: #9eb1b8;
+      --cyan: #66e3d2;
+      --amber: #ffd25f;
+      --rail: #2d4658;
+      --danger: #ff987e;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--night);
+      color: var(--frost);
+      font-family: "Microsoft YaHei UI", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: -80px;
+      z-index: 100;
+      padding: 10px 16px;
+      background: var(--frost);
+      color: var(--night);
+    }
+    .skip-link:focus { top: 16px; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(237, 245, 245, .12);
+      background: rgba(7, 19, 31, .92);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      max-width: var(--max);
+      min-height: 70px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 44px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      position: relative;
+      border: 2px solid var(--frost);
+      border-radius: 50%;
+    }
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      width: 13px;
+      height: 2px;
+      background: var(--cyan);
+    }
+    .brand-mark::before { top: 8px; }
+    .brand-mark::after { top: 15px; width: 9px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: var(--mist);
+      font-size: 14px;
+    }
+    .nav-links a:hover { color: var(--frost); }
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      font-variant-numeric: tabular-nums;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 0 5px rgba(102, 227, 210, .11);
+    }
+
+    main { overflow: clip; }
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 72px 28px 48px;
+    }
+    .hero-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+      gap: 70px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+    .programme-date {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 18px;
+      color: var(--mist);
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+    .programme-date::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      background: var(--cyan);
+    }
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-family: "Bahnschrift", "Microsoft YaHei UI", sans-serif;
+      font-size: clamp(50px, 7.4vw, 104px);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: .98;
+    }
+    h1 time { color: var(--amber); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .hero-brief {
+      padding: 2px 0 2px 24px;
+      border-left: 2px solid var(--rail);
+    }
+    .hero-brief strong {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: -.025em;
+    }
+    .hero-brief p { margin: 0; color: var(--mist); font-size: 15px; }
+    .hero-brief a {
+      display: inline-block;
+      margin-top: 19px;
+      color: var(--cyan);
+      border-bottom: 1px solid currentColor;
+      font-size: 14px;
+    }
+
+    .operations-board {
+      border: 1px solid var(--rail);
+      background: var(--deck);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .18);
+    }
+    .board-top {
+      display: grid;
+      grid-template-columns: minmax(235px, .85fr) 1fr 1fr 1fr auto;
+      min-height: 170px;
+    }
+    .board-total,
+    .floor-status,
+    .board-action {
+      padding: 26px 28px;
+      border-right: 1px solid var(--rail);
+    }
+    .board-action { border-right: 0; }
+    .board-label {
+      display: block;
+      color: var(--mist);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .total-number {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      color: var(--cyan);
+      font-family: "Bahnschrift", sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .total-number strong { font-size: 68px; line-height: .85; font-weight: 500; letter-spacing: -.06em; }
+    .total-number span { font-size: 15px; }
+    .floor-status { display: flex; flex-direction: column; }
+    .floor-status header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .floor-status h2 { margin: 0; font-size: 16px; font-weight: 600; }
+    .floor-status output {
+      font-family: "Bahnschrift", sans-serif;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--frost);
+      font-variant-numeric: tabular-nums;
+    }
+    .floor-status p { margin: 8px 0 auto; color: var(--mist); font-size: 12px; }
+    .capacity {
+      height: 3px;
+      margin-top: 20px;
+      background: var(--rail);
+      overflow: hidden;
+    }
+    .capacity i { display: block; height: 100%; background: var(--cyan); }
+    .board-action {
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .primary-action {
+      min-height: 54px;
+      border: 0;
+      padding: 0 23px;
+      background: var(--amber);
+      color: #17202a;
+      font-weight: 750;
+      cursor: pointer;
+      border-radius: 2px;
+    }
+    .primary-action:hover { background: #ffe08b; }
+
+    .night-runway {
+      padding: 24px 28px 22px;
+      border-top: 1px solid var(--rail);
+      background: #091723;
+    }
+    .runway-summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+      color: var(--mist);
+      font-size: 12px;
+    }
+    .runway-summary strong { color: var(--frost); font-weight: 600; }
+    .runway {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      min-height: 80px;
+    }
+    .runway::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 16px;
+      height: 2px;
+      background: var(--rail);
+    }
+    .tick {
+      position: relative;
+      padding-top: 34px;
+      color: var(--mist);
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+    }
+    .tick::before {
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 0;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--deck);
+      border: 2px solid var(--rail);
+    }
+    .tick strong { display: block; color: var(--frost); font-size: 14px; font-weight: 650; }
+    .tick:last-child { text-align: right; }
+    .tick:last-child::before { left: auto; right: 0; }
+    .now-marker {
+      position: absolute;
+      left: 50%;
+      top: 4px;
+      z-index: 2;
+      width: 24px;
+      height: 24px;
+      border: 7px solid var(--amber);
+      border-radius: 50%;
+      background: var(--night);
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 4px rgba(255, 210, 95, .12);
+    }
+    .now-marker span {
+      position: absolute;
+      left: 50%;
+      top: -29px;
+      transform: translateX(-50%);
+      color: var(--amber);
+      white-space: nowrap;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 100px 28px;
+    }
+    .section + .section { border-top: 1px solid rgba(237, 245, 245, .1); }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(220px, .75fr) minmax(0, 1.6fr);
+      gap: 70px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+    .section-index {
+      color: var(--cyan);
+      font-size: 13px;
+    }
+    .section-heading h2 {
+      margin: 0;
+      max-width: 780px;
+      font-family: "Bahnschrift", "Microsoft YaHei UI", sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 550;
+      line-height: 1.08;
+      letter-spacing: -.055em;
+    }
+    .section-heading p { max-width: 680px; margin: 18px 0 0; color: var(--mist); }
+
+    .hours-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, .45fr);
+      border-top: 1px solid var(--rail);
+      border-bottom: 1px solid var(--rail);
+    }
+    .hours-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1.2fr;
+      align-items: baseline;
+      min-height: 78px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--rail);
+    }
+    .hours-row:last-child { border-bottom: 0; }
+    .hours-row strong { font-size: 18px; }
+    .hours-row time {
+      font-family: "Bahnschrift", sans-serif;
+      font-size: 23px;
+      font-variant-numeric: tabular-nums;
+    }
+    .hours-row span { color: var(--mist); font-size: 13px; }
+    .programme-window {
+      padding: 28px 0 28px 36px;
+      border-left: 1px solid var(--rail);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .programme-window span { color: var(--mist); font-size: 13px; }
+    .programme-window strong {
+      display: block;
+      margin: 10px 0;
+      font-family: "Bahnschrift", sans-serif;
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 550;
+      letter-spacing: -.035em;
+    }
+    .programme-window p { margin: 18px 0 0; color: var(--mist); font-size: 13px; }
+
+    .zone-table { border-top: 1px solid var(--rail); }
+    .zone-row {
+      display: grid;
+      grid-template-columns: minmax(180px, .78fr) minmax(180px, .72fr) minmax(320px, 1.5fr);
+      min-height: 155px;
+      border-bottom: 1px solid var(--rail);
+    }
+    .zone-name,
+    .zone-meta,
+    .zone-rules { padding: 24px 24px 24px 0; }
+    .zone-name { display: flex; flex-direction: column; justify-content: space-between; }
+    .zone-name h3 { margin: 0; font-size: 24px; line-height: 1.25; letter-spacing: -.035em; }
+    .zone-name span { color: var(--cyan); font-size: 12px; }
+    .zone-meta {
+      border-left: 1px solid var(--rail);
+      padding-left: 24px;
+      color: var(--mist);
+      font-size: 13px;
+    }
+    .zone-meta strong { display: block; margin-bottom: 7px; color: var(--frost); font-size: 16px; }
+    .zone-rules {
+      border-left: 1px solid var(--rail);
+      padding-left: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 30px;
+      align-content: center;
+      color: #c7d4d8;
+      font-size: 13px;
+    }
+    .rule-item { display: flex; gap: 10px; }
+    .rule-item::before { content: ""; flex: 0 0 6px; width: 6px; height: 6px; margin-top: 7px; background: var(--amber); }
+
+    .journey {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(310px, .75fr);
+      gap: 72px;
+    }
+    .route-line { position: relative; padding-left: 44px; }
+    .route-line::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 12px;
+      width: 3px;
+      background: var(--cyan);
+    }
+    .route-stop { position: relative; padding: 0 0 40px; }
+    .route-stop:last-child { padding-bottom: 0; }
+    .route-stop::before {
+      content: "";
+      position: absolute;
+      left: -41px;
+      top: 5px;
+      width: 13px;
+      height: 13px;
+      border: 3px solid var(--cyan);
+      border-radius: 50%;
+      background: var(--night);
+    }
+    .route-stop strong { display: block; font-size: 20px; line-height: 1.3; }
+    .route-stop span { display: block; margin-top: 7px; color: var(--mist); font-size: 13px; }
+    .departure-board { border: 1px solid var(--rail); background: var(--deck); }
+    .departure-board h3 {
+      margin: 0;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rail);
+      color: var(--mist);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .departure {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rail);
+    }
+    .departure:last-child { border-bottom: 0; }
+    .departure strong { display: block; font-size: 15px; }
+    .departure span { color: var(--mist); font-size: 12px; }
+    .departure time {
+      font-family: "Bahnschrift", sans-serif;
+      color: var(--amber);
+      font-size: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .reserve-band {
+      margin-top: 20px;
+      background: var(--frost);
+      color: var(--night);
+    }
+    .reserve-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 72px 28px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+    .reserve-inner h2 {
+      margin: 0;
+      max-width: 720px;
+      font-family: "Bahnschrift", "Microsoft YaHei UI", sans-serif;
+      font-size: clamp(38px, 5vw, 66px);
+      font-weight: 550;
+      letter-spacing: -.055em;
+      line-height: 1.05;
+    }
+    .reserve-inner p { margin: 15px 0 0; color: #50616a; }
+    .reserve-inner .primary-action { min-width: 210px; background: var(--night); color: var(--frost); }
+    .reserve-inner .primary-action:hover { background: #173145; }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--mist);
+      font-size: 12px;
+    }
+
+    dialog {
+      width: min(620px, calc(100% - 28px));
+      max-height: calc(100dvh - 28px);
+      padding: 0;
+      border: 1px solid var(--rail);
+      background: var(--deck);
+      color: var(--frost);
+      box-shadow: 0 28px 100px rgba(0, 0, 0, .55);
+    }
+    dialog::backdrop { background: rgba(2, 9, 15, .78); backdrop-filter: blur(5px); }
+    .booking-form { padding: 32px; }
+    .dialog-head { display: flex; justify-content: space-between; gap: 20px; align-items: start; }
+    .dialog-head h2 { margin: 0; font-size: 29px; letter-spacing: -.035em; }
+    .dialog-head p { margin: 7px 0 0; color: var(--mist); font-size: 13px; }
+    .icon-button { border: 1px solid var(--rail); background: transparent; width: 38px; height: 38px; cursor: pointer; font-size: 22px; }
+    fieldset { margin: 28px 0 0; padding: 0; border: 0; }
+    legend { margin-bottom: 12px; font-weight: 700; }
+    .floor-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .floor-choice { position: relative; }
+    .floor-choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .floor-choice span {
+      display: block;
+      min-height: 98px;
+      padding: 15px;
+      border: 1px solid var(--rail);
+      cursor: pointer;
+    }
+    .floor-choice b { display: block; margin-bottom: 10px; }
+    .floor-choice small { color: var(--mist); }
+    .floor-choice input:checked + span { border-color: var(--cyan); background: rgba(102, 227, 210, .08); }
+    .floor-choice input:focus-visible + span { outline: 3px solid var(--amber); outline-offset: 3px; }
+    .select-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+    .select-row label { display: grid; gap: 7px; font-size: 13px; color: var(--mist); }
+    select { width: 100%; border: 1px solid var(--rail); background: var(--night); color: var(--frost); padding: 12px; }
+    .dialog-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 28px; }
+    .dialog-actions small { color: var(--mist); max-width: 260px; }
+    .success { display: none; padding: 46px 32px; text-align: center; }
+    .success-mark {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      border: 2px solid var(--cyan);
+      border-radius: 50%;
+      position: relative;
+    }
+    .success-mark::after {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 18px;
+      width: 24px;
+      height: 12px;
+      border-left: 3px solid var(--cyan);
+      border-bottom: 3px solid var(--cyan);
+      transform: rotate(-45deg);
+    }
+    .success h2 { margin: 0; font-size: 32px; }
+    .success p { color: var(--mist); }
+    .success .primary-action { margin-top: 12px; }
+
+    .mobile-dock { display: none; }
+
+    @media (max-width: 980px) {
+      .nav { grid-template-columns: auto 1fr; }
+      .nav-links { display: none; }
+      .header-status { justify-self: end; }
+      .hero-intro { grid-template-columns: 1fr; gap: 28px; }
+      .hero-brief { max-width: 620px; }
+      .board-top { grid-template-columns: 1.2fr repeat(3, 1fr); }
+      .board-action { grid-column: 1 / -1; min-height: 80px; border-top: 1px solid var(--rail); }
+      .floor-status:nth-of-type(4) { border-right: 0; }
+      .section-heading { gap: 35px; }
+      .journey { gap: 38px; }
+    }
+
+    @media (max-width: 720px) {
+      body { padding-bottom: 70px; }
+      .nav { min-height: 60px; padding: 0 18px; }
+      .brand { font-size: 14px; }
+      .header-status span:last-child { display: none; }
+      .hero { padding: 42px 18px 30px; }
+      .programme-date { font-size: 12px; }
+      h1 { font-size: clamp(45px, 14vw, 68px); }
+      .board-top { grid-template-columns: 1fr; }
+      .board-total,
+      .floor-status,
+      .board-action { border-right: 0; border-bottom: 1px solid var(--rail); }
+      .board-total { display: grid; grid-template-columns: 1fr auto; align-items: end; min-height: 120px; }
+      .board-label { margin-bottom: 0; }
+      .floor-status { min-height: 116px; }
+      .board-action { display: none; }
+      .night-runway { overflow-x: auto; }
+      .runway-summary { min-width: 600px; }
+      .runway { min-width: 600px; }
+      .section { padding: 74px 18px; }
+      .section-heading { grid-template-columns: 1fr; gap: 13px; margin-bottom: 34px; }
+      .section-heading p { margin-top: 13px; }
+      .hours-layout { grid-template-columns: 1fr; }
+      .hours-row { grid-template-columns: 1fr 1.2fr; gap: 12px; }
+      .hours-row span { grid-column: 1 / -1; }
+      .programme-window { padding: 26px 0; border-left: 0; border-top: 1px solid var(--rail); }
+      .zone-row { grid-template-columns: 1fr; padding: 26px 0; }
+      .zone-name, .zone-meta, .zone-rules { padding: 0; border-left: 0; }
+      .zone-name { display: block; }
+      .zone-name span { display: block; margin-top: 7px; }
+      .zone-meta { margin: 18px 0; }
+      .zone-rules { grid-template-columns: 1fr; gap: 9px; }
+      .journey { grid-template-columns: 1fr; }
+      .reserve-inner { grid-template-columns: 1fr; padding: 58px 18px; }
+      .reserve-inner .primary-action { width: 100%; }
+      footer { flex-direction: column; padding: 24px 18px; }
+      .floor-options { grid-template-columns: 1fr; }
+      .floor-choice span { min-height: auto; }
+      .select-row { grid-template-columns: 1fr; }
+      .dialog-actions { align-items: stretch; flex-direction: column; }
+      .dialog-actions .primary-action { width: 100%; }
+      .mobile-dock {
+        position: fixed;
+        z-index: 18;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        min-height: 70px;
+        padding: 9px 12px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 14px;
+        border-top: 1px solid var(--rail);
+        background: rgba(7, 19, 31, .96);
+        backdrop-filter: blur(16px);
+      }
+      .mobile-dock span { display: block; color: var(--mist); font-size: 10px; }
+      .mobile-dock strong { font-size: 14px; }
+      .mobile-dock .primary-action { min-height: 45px; padding: 0 15px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#main" aria-label="栖城图书馆夜读计划首页">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>栖城图书馆</span>
+      </a>
+      <div class="nav-links">
+        <a href="#hours">开放安排</a>
+        <a href="#zones">分区规则</a>
+        <a href="#route">入口与交通</a>
+      </div>
+      <div class="header-status"><i class="live-dot" aria-hidden="true"></i><span>夜读服务运行中</span><span>21:18 更新</span></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-intro">
+        <div>
+          <p class="programme-date">2026 年 9 月 1 日至 12 月 22 日 · 今晚为周六</p>
+          <h1 id="hero-title">今晚开放至 <time datetime="00:30">00:30</time></h1>
+        </div>
+        <div class="hero-brief">
+          <strong>东侧银杏门是 22:00 后唯一入口</strong>
+          <p>带读者证或电子二维码。预约保留 20 分钟，最晚可在 23:30 预约今晚座位。</p>
+          <a href="#route">查看入口与末班车</a>
+        </div>
+      </div>
+
+      <div class="operations-board" aria-label="今晚实时服务信息">
+        <div class="board-top">
+          <div class="board-total">
+            <span class="board-label">三层合计可用座位 · 21:18</span>
+            <div class="total-number"><strong>59</strong><span>座可用</span></div>
+          </div>
+          <article class="floor-status">
+            <header><h2>一层</h2><output aria-label="32 个座位">32</output></header>
+            <p>静音阅览 · 共 92 座</p>
+            <div class="capacity" aria-hidden="true"><i style="width:35%"></i></div>
+          </article>
+          <article class="floor-status">
+            <header><h2>二层</h2><output aria-label="18 个座位">18</output></header>
+            <p>综合阅览 · 共 86 座</p>
+            <div class="capacity" aria-hidden="true"><i style="width:21%"></i></div>
+          </article>
+          <article class="floor-status">
+            <header><h2>三层</h2><output aria-label="9 个座位">09</output></header>
+            <p>讨论与协作 · 共 48 座</p>
+            <div class="capacity" aria-hidden="true"><i style="width:19%"></i></div>
+          </article>
+          <div class="board-action"><button class="primary-action open-booking" type="button">预约今晚座位</button></div>
+        </div>
+
+        <div class="night-runway">
+          <div class="runway-summary"><span><strong>今晚服务时间轴</strong> · 从现在到闭馆</span><span>亮点表示当前时段</span></div>
+          <div class="runway" aria-label="夜间服务时间轴">
+            <div class="tick"><strong>18:00</strong>夜读开始</div>
+            <div class="tick"><strong>22:00</strong>切换银杏门</div>
+            <div class="tick"><strong>23:30</strong>停止预约</div>
+            <div class="tick"><strong>00:10</strong>N7 夜班车</div>
+            <div class="tick"><strong>00:30</strong>阅览区闭馆</div>
+            <div class="now-marker" aria-hidden="true"><span>现在 21:18</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hours" aria-labelledby="hours-title">
+      <div class="section-heading">
+        <span class="section-index">开放安排</span>
+        <div>
+          <h2 id="hours-title">不同日期，不用猜闭馆时间。</h2>
+          <p>夜读计划覆盖整个秋季。白天开放安排不变，以下时间为夜间阅览区的连续开放时段。</p>
+        </div>
+      </div>
+      <div class="hours-layout">
+        <div>
+          <div class="hours-row"><strong>周一至周五</strong><time>18:00—00:30</time><span>三层全部开放</span></div>
+          <div class="hours-row"><strong>周六</strong><time>17:00—00:30</time><span>提前一小时开放</span></div>
+          <div class="hours-row"><strong>周日</strong><time>17:00—23:00</time><span>22:30 停止入馆</span></div>
+          <div class="hours-row"><strong>法定节假日</strong><time>另行公告</time><span>至少提前三天发布</span></div>
+        </div>
+        <aside class="programme-window">
+          <span>本期计划</span>
+          <strong>9 月 1 日<br>至 12 月 22 日</strong>
+          <p>若遇设备维护或极端天气，变更会同步显示在入口电子屏与图书馆公众号。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="zones" aria-labelledby="zones-title">
+      <div class="section-heading">
+        <span class="section-index">空间使用</span>
+        <div>
+          <h2 id="zones-title">先选适合你的声音，再选座位。</h2>
+          <p>楼层标识使用三种声音等级。预约前确认用途，到了馆内就不必临时换区。</p>
+        </div>
+      </div>
+      <div class="zone-table">
+        <article class="zone-row">
+          <div class="zone-name"><h3>静音阅览室</h3><span>声音等级 0 · 一层北侧</span></div>
+          <div class="zone-meta"><strong>92 个座位</strong>适合备考、写作和个人阅读</div>
+          <div class="zone-rules"><span class="rule-item">手机全程静音，通话请离开</span><span class="rule-item">键盘需关闭提示音</span><span class="rule-item">离座超过 30 分钟自动释放</span><span class="rule-item">只可携带带盖饮品</span></div>
+        </article>
+        <article class="zone-row">
+          <div class="zone-name"><h3>综合阅览区</h3><span>声音等级 1 · 二层西侧</span></div>
+          <div class="zone-meta"><strong>86 个座位</strong>适合轻声答疑与资料查阅</div>
+          <div class="zone-rules"><span class="rule-item">短时交流控制在 50 分贝内</span><span class="rule-item">公共电脑使用耳机</span><span class="rule-item">打印服务开放至 23:40</span><span class="rule-item">大件行李存放入口柜</span></div>
+        </article>
+        <article class="zone-row">
+          <div class="zone-name"><h3>小组讨论区</h3><span>声音等级 2 · 三层东侧</span></div>
+          <div class="zone-meta"><strong>8 间讨论室</strong>每间供 2 至 6 人使用</div>
+          <div class="zone-rules"><span class="rule-item">讨论室必须提前预约</span><span class="rule-item">单次最多使用 2 小时</span><span class="rule-item">关门后音量不可外溢</span><span class="rule-item">23:45 前归还白板笔</span></div>
+        </article>
+        <article class="zone-row">
+          <div class="zone-name"><h3>补给与休息区</h3><span>非学习区 · 二层露台</span></div>
+          <div class="zone-meta"><strong>开放至 00:10</strong>可进食、接水和接打电话</div>
+          <div class="zone-rules"><span class="rule-item">微波炉 23:30 停止使用</span><span class="rule-item">热食不可带入阅览区</span><span class="rule-item">离开时带走个人垃圾</span><span class="rule-item">夜间请降低交谈音量</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="route" aria-labelledby="route-title">
+      <div class="section-heading">
+        <span class="section-index">入口与返程</span>
+        <div>
+          <h2 id="route-title">从座位到末班车，最快六分钟。</h2>
+          <p>22:00 后，南门和地下车库通道关闭。请从文昌路一侧的东侧银杏门进出。</p>
+        </div>
+      </div>
+      <div class="journey">
+        <div class="route-line">
+          <div class="route-stop"><strong>阅览区服务台</strong><span>离馆前在一层归还临时储物柜钥匙</span></div>
+          <div class="route-stop"><strong>东侧银杏门</strong><span>22:00 后唯一出入口 · 夜间值班电话 6208 1190</span></div>
+          <div class="route-stop"><strong>文昌路站 B2 口</strong><span>沿照明步道向东 320 米 · 正常步行约 4 分钟</span></div>
+          <div class="route-stop"><strong>N7 夜班公交站</strong><span>银杏门对街向南 120 米 · 正常步行约 2 分钟</span></div>
+        </div>
+        <aside class="departure-board" aria-label="末班交通时间">
+          <h3>今晚末班交通</h3>
+          <div class="departure"><div><strong>地铁 2 号线</strong><span>文昌路 → 南站方向</span></div><time>00:48</time></div>
+          <div class="departure"><div><strong>地铁 2 号线</strong><span>文昌路 → 北城方向</span></div><time>00:36</time></div>
+          <div class="departure"><div><strong>N7 夜班公交</strong><span>银杏门站</span></div><time>00:10</time></div>
+          <div class="departure"><div><strong>N7 下一班</strong><span>错过后间隔 30 分钟</span></div><time>00:40</time></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="reserve-band" id="reserve" aria-labelledby="reserve-title">
+      <div class="reserve-inner">
+        <div>
+          <h2 id="reserve-title">今晚还有 59 张桌子等你。</h2>
+          <p>选择楼层和时长后立即获得座位号；无需付款，座位保留 20 分钟。</p>
+        </div>
+        <button class="primary-action open-booking" type="button">预约今晚座位</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>栖城图书馆 · 文昌路 18 号</span>
+    <span>夜读值班 6208 1190 · 服务至闭馆后 15 分钟</span>
+  </footer>
+
+  <div class="mobile-dock" aria-label="移动端快速信息">
+    <div><span>今晚至 00:30 · 东侧银杏门</span><strong>当前剩余 59 座</strong></div>
+    <button class="primary-action open-booking" type="button">预约</button>
+  </div>
+
+  <dialog id="booking" aria-labelledby="booking-title">
+    <form class="booking-form" id="booking-form">
+      <div class="dialog-head">
+        <div><h2 id="booking-title">预约今晚座位</h2><p>请在 23:30 前到馆签到，预约后保留 20 分钟。</p></div>
+        <button class="icon-button" id="close-dialog" type="button" aria-label="关闭预约窗口">×</button>
+      </div>
+      <fieldset>
+        <legend>选择楼层</legend>
+        <div class="floor-options">
+          <label class="floor-choice"><input type="radio" name="floor" value="一层 A1-047" checked><span><b>一层静音区</b><small>剩余 32 座</small></span></label>
+          <label class="floor-choice"><input type="radio" name="floor" value="二层 B2-026"><span><b>二层综合区</b><small>剩余 18 座</small></span></label>
+          <label class="floor-choice"><input type="radio" name="floor" value="三层 C3-012"><span><b>三层讨论区</b><small>剩余 9 座</small></span></label>
+        </div>
+      </fieldset>
+      <div class="select-row">
+        <label>预计到馆时间<select name="arrival"><option>21:30 前</option><option>22:00 前</option><option>22:30 前</option><option>23:00 前</option></select></label>
+        <label>使用时长<select name="duration"><option>至 23:00</option><option selected>至 00:00</option><option>至闭馆 00:30</option></select></label>
+      </div>
+      <div class="dialog-actions"><small>确认即同意按所选分区的声音规则使用座位。</small><button class="primary-action" type="submit">确认并获取座位号</button></div>
+    </form>
+    <div class="success" id="booking-success" aria-live="polite">
+      <div class="success-mark" aria-hidden="true"></div>
+      <h2>座位已为你保留</h2>
+      <p id="seat-result">一层 A1-047 · 请在 21:30 前从银杏门入馆。</p>
+      <button class="primary-action" id="finish-booking" type="button">完成</button>
+    </div>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector('#booking');
+    const form = document.querySelector('#booking-form');
+    const success = document.querySelector('#booking-success');
+    const actionButtons = document.querySelectorAll('.open-booking');
+
+    actionButtons.forEach((button) => button.addEventListener('click', () => {
+      form.style.display = 'block';
+      success.style.display = 'none';
+      dialog.showModal();
+    }));
+
+    document.querySelector('#close-dialog').addEventListener('click', () => dialog.close());
+    document.querySelector('#finish-booking').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const seat = data.get('floor');
+      const arrival = data.get('arrival');
+      document.querySelector('#seat-result').textContent = `${seat} · 请在 ${arrival.replace('前', '')} 前从银杏门入馆。`;
+      form.style.display = 'none';
+      success.style.display = 'block';
+      actionButtons.forEach((button) => { button.textContent = '已预约 · 查看座位'; });
+    });
+  </script>
+</body>
+</html>
